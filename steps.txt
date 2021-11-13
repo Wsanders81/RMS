@@ -1,0 +1,25 @@
+Backend: 
+    npm i: 
+        pg 
+        dotenv
+        bcrypt
+        cors
+        express
+        body-parser
+        morgan
+        jsonschema
+        jsonwebtoken
+        --save-dev supertest
+
+Frontend: 
+    npm i react-redux redux axios @mui/material @emotion/react @emotion/styled formik yup react-router-dom react-toastify
+Get started: 
+    npm i 
+    server runs on port 3001
+
+
+
+possible todos: 
+    update an order (need to add id PK first)
+    
+    

@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "name": "chicken",
+            "unit": "case",
+            "qty_per_unit": 1,
+            "price": 15.99,
+            "supplier_id": 1,
+            "category_id": 1
+        }
+    ],
+    "required": [
+        "name",
+        "unit",
+        "qty_per_unit",
+        "price",
+        "supplier_id",
+        "category_id"
+    ],
+    "properties": {
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "chicken"
+            ]
+        },
+        "unit": {
+            "$id": "#/properties/unit",
+            "type": "string",
+            "title": "The unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "case"
+            ]
+        },
+        "qty_per_unit": {
+            "$id": "#/properties/qty_per_unit",
+            "type": "integer",
+            "title": "The qty_per_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                1
+            ]
+        },
+        "price": {
+            "$id": "#/properties/price",
+            "type": "number",
+            "title": "The price schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+                15.99
+            ]
+        },
+        "supplier_id": {
+            "$id": "#/properties/supplier_id",
+            "type": "integer",
+            "title": "The supplier_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                1
+            ]
+        },
+        "category_id": {
+            "$id": "#/properties/category_id",
+            "type": "integer",
+            "title": "The category_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                1
+            ]
+        }
+    },
+    "additionalProperties": true
+}
