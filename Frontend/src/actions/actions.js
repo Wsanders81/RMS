@@ -28,12 +28,29 @@ export function getTokenFromAPI(username, password) {
                     username: `${username}`, 
                     password: `${password}`
                 }
+                
             })
             
             return dispatch(getUser(response.data, username))
         }   
 }
 
+export function registerUser(data){
+    return async function(dispatch){
+        const response = await axios({
+            method: 'post', 
+            url: `${BASE_URL}/auth/register`, 
+            data: {
+                username: data.username, 
+                password: data.password, 
+                firstName: data.firstName, 
+                lastName: data.lastName, 
+                email: data.email
+            }
+        })
+            return dispatch(getUser(response.data, data.username))
+    }
+}
 
 // function getPost(post) {
 //     return {

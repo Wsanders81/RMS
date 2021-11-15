@@ -6,6 +6,6 @@
   }
   
   
-.Navbar-links {
-  
+.Navbar-link:hover {
+  cursor: pointer;
 }

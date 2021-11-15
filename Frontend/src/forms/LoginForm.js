@@ -4,11 +4,10 @@ import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useEffect } from 'react'
 import {getTokenFromAPI} from '../actions/actions'
 import { useDispatch, useSelector } from 'react-redux';
 
-function LoginForm({ login }) {
+function LoginForm({toggle}) {
     const initialValues = {
         username: "", 
         password: ""
@@ -19,7 +18,7 @@ function LoginForm({ login }) {
     
     const navigate = useNavigate()
     const notify = () => toast.error("Sorry, incorrect login information",{
-        position: toast.POSITION.TOP_CENTER 
+        position: toast.POSITION.TOP_RIGHT
         
       })
     
@@ -40,13 +39,17 @@ function LoginForm({ login }) {
                     })
                 }
                 initialValues={initialValues} onSubmit={async(values)=> {
+                    try{
                     let res = await dispatch(getTokenFromAPI(values.username, values.password))
+                    
                     if(res.token) {
+                        toggle()
                         navigate('/dashboard')
-                    } else (
-                        notify()
-                        
-                    )
+                    }
+                } catch(err){
+                    console.log(err)
+                    notify()
+                }
                 }}>
                     {({ values, errors }) => (
                         <Form >
@@ -62,7 +65,7 @@ function LoginForm({ login }) {
                             <ErrorMessage name="password" render={ msg => <div style={{ color: 'red'}}>{msg}</div>}/>
                             </Box>
                             </FormGroup>
-                            <Button style={{backgroundColor: '#81c784'}} variant="contained" type="submit" color="success" >beg for a job</Button>
+                            <Button style={{backgroundColor: '#81c784'}} variant="contained" type="submit" color="success" >Login</Button>
                            
                         </Form>
                     )}

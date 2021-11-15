@@ -9,7 +9,9 @@ import {getTokenFromAPI} from './actions/actions'
 function App() {
     
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenTwo, setIsOpenTwo] = useState(false)
     const toggleModal = () => setIsOpen(isOpen => !isOpen)
+    const toggleModalTwo = () => setIsOpenTwo(isOpenTwo => !isOpenTwo)
   $(document).ready(function() {
     $(window).scroll(function() {
       if($(this).scrollTop() < $("#green").height()){
@@ -20,19 +22,23 @@ function App() {
       }
     });
   });
-    const dispatch = useDispatch()
-    useEffect(() => {
-      const getToken = async function(username, password){
-          dispatch(getTokenFromAPI(username, password))
-        } 
-        // getToken('testuser', 'password')
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //   const getToken = async function(username, password){
+    //       dispatch(getTokenFromAPI(username, password))
+    //     } 
+    //     // getToken('testuser', 'password')
           
-    }, [dispatch])
+    // }, [dispatch])
 
   return (
     <div className="App">
-      <Navbar toggleModal={toggleModal}/>
-      <UserRoutes toggleModal={toggleModal} open={isOpen}/>
+      <Navbar toggleModal={toggleModal} toggleModalTwo={toggleModalTwo}/>
+      <UserRoutes 
+        toggleModal={toggleModal} 
+        open={isOpen}
+        toggleModalTwo={toggleModalTwo}
+        openTwo={isOpenTwo}/>
     </div>
   );
 }
