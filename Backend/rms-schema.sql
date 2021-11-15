@@ -36,6 +36,7 @@ CREATE TABLE suppliers (
 );
 
 -- thinking of adding state to this table (active, inactive)
+-- ** Add quantity? to validate against inventory and track discrepancies / usage
 CREATE TABLE products (
     id SERIAL PRIMARY KEY, 
     name TEXT UNIQUE NOT NULL,
