@@ -1,11 +1,11 @@
-.navbar{
+.Navbar{
     position: fixed;
     width:100%;
-    transition: background-color 1s;
+    background-color: rgb(133, 184, 228); 
   
   }
   
-  
+
 .Navbar-link:hover {
   cursor: pointer;
 }

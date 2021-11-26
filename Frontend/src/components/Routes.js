@@ -1,17 +1,41 @@
-import { Routes, Route } from 'react-router-dom'
-import FourOhFour from './FourOhFour'
-import { useSelector } from 'react-redux'
-import LandingPage from './LandingPage'
-export default function UserRoutes({toggleModal, open, toggleModalTwo, openTwo}){
-    const token = useSelector(store => store.userReducer.token)
-    
-
-
-    return (
-        <Routes>
-            <Route path="*" element={<FourOhFour/>}/>
-            <Route path="/" element={ <LandingPage toggleModal={toggleModal} open={open} toggleModalTwo={toggleModalTwo} openTwo={openTwo}/> }/>
-            <Route path="/dashboard" element={ <h1>DASHBOARD</h1> }/>
-        </Routes>
-    )
+import { Routes, Route } from 'react-router-dom';
+import FourOhFour from './FourOhFour';
+import { useSelector } from 'react-redux';
+import LandingPage from './LandingPage';
+import Dashboard from './Dashboard';
+import Sales from './Sales';
+import POS from './POS'
+import Inventories from './Inventories'
+import Orders from './Orders'
+import MenuItems from './MenuItems'
+import Suppliers from './Suppliers'
+export default function UserRoutes({
+	toggleModal,
+	open,
+	toggleModalTwo,
+	openTwo
+}) {
+	return (
+		<Routes>
+			<Route path="*" element={<FourOhFour />} />
+			<Route
+				path="/"
+				element={
+					<LandingPage
+						toggleModal={toggleModal}
+						open={open}
+						toggleModalTwo={toggleModalTwo}
+						openTwo={openTwo}
+					/>
+				}
+			/>
+			<Route path="/dashboard" element={<Dashboard />} />
+			<Route path="/sales" element={<Sales />} />
+            <Route path ="/pos" element={<POS/>}/>
+            <Route path ="/inventory" element={<Inventories/>}/>
+            <Route path ="/orders" element={<Orders/>}/>
+            <Route path ="/menu-items" element={<MenuItems/>}/>
+            <Route path ="/suppliers" element={<Suppliers/>}/>
+		</Routes>
+	);
 }

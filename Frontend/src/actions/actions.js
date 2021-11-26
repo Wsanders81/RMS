@@ -8,9 +8,7 @@ import {
     LOGOUT
 
 } from './types'
-
 const BASE_URL = 'http://localhost:3001'
-
 function getUser(token, username) {
     return {
         type: GET_USER, 
@@ -51,6 +49,19 @@ export function registerUser(data){
             return dispatch(getUser(response.data, data.username))
     }
 }
+
+export async function getSales(begDate, endDate){
+    const response = await axios({
+        method: 'get',
+        url: `${BASE_URL}/sales`, 
+        data: {
+            begDate:begDate, 
+            endDate:endDate
+        }
+    })
+    return response
+}
+
 
 // function getPost(post) {
 //     return {
