@@ -5,8 +5,7 @@ export function CheckLocalStorage() {
 	const user = window.localStorage.getItem('user') || null;
 	const token = window.localStorage.getItem('token') || null;
 	if (user && token)
-		dispatch({ type: GET_USER, token: token, username: user });
-	return;
+		dispatch({ type: GET_USER, token:{token: token}, username: user });
 }
 
 export function SetUserLocalStorage(username, token) {
@@ -16,6 +15,8 @@ export function SetUserLocalStorage(username, token) {
 }
 
 export function deleteUserLocalStorage() {
+
 	window.localStorage.removeItem('user');
 	window.localStorage.removeItem('token');
+
 }

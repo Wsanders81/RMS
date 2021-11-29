@@ -1,4 +1,4 @@
-const db = require('../db')
+const db = require('../db');
 
 class Product {
 	//** Create product */
@@ -24,26 +24,37 @@ class Product {
 				data.category_id
 			]
 		);
-        let product = res.rows[0]; 
-        return product; 
+		let product = res.rows[0];
+		return product;
 	}
 
-	static async getAllProducts(){
+	static async getAllProducts() {
 		const res = await db.query(`
-		SELECT * FROM PRODUCTS`)
-		const products = res.rows
-		return products; 
+		SELECT * FROM PRODUCTS`);
+		const products = res.rows;
+		return products;
 	}
 
-	static async deleteProduct(product_id){
+	static async getProductsBySupplier(supplierId) {
 		const res = await db.query(`
-		DELETE FROM products WHERE id = $1 RETURNING id, name`, 
-		[product_id])
-		if(!res.rows[0]) return ("error")
-		return ("Successfully deleted")
+		SELECT 
+		p.id, p.name, p.unit, p.qty_per_unit, p.price 
+		FROM products AS p
+		WHERE supplier_id = $1`, [supplierId]);
+
+		if(!res.rows) return 'error'
+		return res.rows; 
 	}
 
-    
+	static async deleteProduct(product_id) {
+		const res = await db.query(
+			`
+		DELETE FROM products WHERE id = $1 RETURNING id, name`,
+			[ product_id ]
+		);
+		if (!res.rows[0]) return 'error';
+		return 'Successfully deleted';
+	}
 }
 
-module.exports = Product
+module.exports = Product;

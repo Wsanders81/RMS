@@ -3,7 +3,7 @@ const express = require('express');
 const router = new express.Router();
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin, ensureLoggedIn } = require('../middleware/auth');
-router.get('/',ensureLoggedIn, async function(req, res, next) {
+router.post('/',ensureLoggedIn, async function(req, res, next) {
 	try {
 		const sales = await Sales.getSales(req.body);
 		if (sales === 500) {

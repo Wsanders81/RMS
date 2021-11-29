@@ -42,6 +42,7 @@ export default function RegistrationForm({ toggle }) {
                 initialValues={initialValues} onSubmit={async(values) => {
                     try {
                         let res = await dispatch(registerUser(values))
+                        
                         if(res.token) {
                             toggle()
                             navigate('/dashboard')

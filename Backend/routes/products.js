@@ -27,8 +27,7 @@ router.post('/',ensureAdmin,  async function(req, res, next){
 
 //** Get all products */
 router.get("/", ensureLoggedIn, async function(req, res, next){
-    console.log("*********************")
-    console.log(req.user)
+    
     try {
         const products = await Product.getAllProducts()
         return res.status(200).json({ products })
@@ -37,8 +36,18 @@ router.get("/", ensureLoggedIn, async function(req, res, next){
     }
 })
 
+router.post("/:supplier_id",  async function(req, res, next){
+    try {
+        
+        const products = await Product.getProductsBySupplier(req.params.supplier_id)
+        return res.json({products})
+    } catch(err) {
+        return next(err)
+    }
+})
+
 //** Delete product */
-router.delete('/:productId', ensureAdmin,  async function(req, res, next){
+router.delete('/:productId', async function(req, res, next){
     try {
         const message = await Product.deleteProduct(req.params.productId)
         if(message === "error") 

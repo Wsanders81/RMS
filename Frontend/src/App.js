@@ -21,18 +21,6 @@ function App() {
     const toggleModalTwo = () => setIsOpenTwo(isOpenTwo => !isOpenTwo)
 
 
-  // $(document).ready(function() {
-  //   $(window).scroll(function() {
-  //     if($(this).scrollTop() < $("#green").height()){
-  //        $(".navbar").removeClass("bg-dark");
-  //     }
-  //     else{
-  //        $(".navbar").addClass("bg-dark");
-  //     }
-  //   });
-  // });
-    
-
   return (
     <div className="App">
       <Navbar toggleDrawer={toggleDrawer} toggleModal={toggleModal} toggleModalTwo={toggleModalTwo}/>

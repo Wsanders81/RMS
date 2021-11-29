@@ -19,12 +19,14 @@ const salesRoutes = require('./routes/sales')
 const inventoryRoutes = require('./routes/inventories')
 const orderRoutes = require('./routes/orders')
 const menuItemRoutes = require('./routes/menuItems')
+const supplierRoutes = require('./routes/suppliers')
 app.use('/auth', authRoutes)
 app.use('/products', productRoutes)
 app.use('/sales', salesRoutes)
 app.use('/inventories', inventoryRoutes)
 app.use('/orders', orderRoutes)
 app.use('/menuItems', menuItemRoutes)
+app.use('/suppliers', supplierRoutes)
  
 
 /** Handle 404 errors -- this matches everything */

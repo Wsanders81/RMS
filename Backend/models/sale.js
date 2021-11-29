@@ -4,11 +4,15 @@ class Sale {
     //** GET sales within specified dates */
     static async getSales({begDate, endDate}){
         const res = await db.query(`
-        SELECT * FROM sales 
+        SELECT s.id, s.date, s.sales, c.category_name FROM sales AS s
+        JOIN categories AS c
+        ON s.category_id = c.id 
         WHERE date >= $1 
-        AND date <= $2`,  
+        AND date <= $2
+        ORDER BY s.date, c.category_name`,  
         [begDate, endDate]); 
         if(!res) return (500); 
+        console.log(begDate,endDate, "SALES FROM DB")
         return res.rows; 
     }
 

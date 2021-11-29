@@ -9,6 +9,7 @@ import Inventories from './Inventories'
 import Orders from './Orders'
 import MenuItems from './MenuItems'
 import Suppliers from './Suppliers'
+import Supplier from './Supplier'
 export default function UserRoutes({
 	toggleModal,
 	open,
@@ -36,6 +37,7 @@ export default function UserRoutes({
             <Route path ="/orders" element={<Orders/>}/>
             <Route path ="/menu-items" element={<MenuItems/>}/>
             <Route path ="/suppliers" element={<Suppliers/>}/>
+            <Route path ="/suppliers/:id" element={<Supplier/>}/>
 		</Routes>
 	);
 }
