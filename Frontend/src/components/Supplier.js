@@ -8,6 +8,7 @@ export default function Supplier() {
 	const { id } = useParams('id');
 	const [ products, setProducts ] = useState(null);
 	const supplier = useSelector((store) => store.supplierReducer)[id];
+	//TODO: Add suppliers to local state. App crashing on refresh
 	useEffect(
 		() => {
 			const getProducts = async function() {
@@ -18,11 +19,14 @@ export default function Supplier() {
 		},
 		[ id ]
 	);
+	
 	return (
 		<Box className="Suppliers">
 			<h1>Supplier Page</h1>
 			<h3>{supplier.name}</h3>
+			<p>address: {supplier.address} / phone: {supplier.phone} / email: {supplier.email}</p>
 			<table>
+				<thead>
 				<tr>
 					<th>Product id</th>
 					<th>Name</th>
@@ -30,11 +34,12 @@ export default function Supplier() {
 					<th>Qty per unit</th>
 					<th>Price</th>
 				</tr>
+				</thead>
                 <tbody>
 				{products ? (
 					products.products.map((product) => {
 						return (
-							<tr>
+							<tr key={product.id}>
 								<td>{product.id}</td>
 								<td>{product.name}</td>
 								<td>{product.unit}</td>

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { groupSales, dailySales } from '../helpers/groupSales';
 import { getSales } from '../actions/actions';
+import '../styles/Sales.css'
 export default function Sales() {
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
 	const [ endDate, setEndDate ] = useState({ endDate: new Date() });
@@ -91,9 +92,10 @@ export default function Sales() {
 	);
 
 	return (
-		<Box>
+		<Box className="Sales">
 			<Box>
 				<h3>Sales</h3>
+				<p>current dates with sales: 11/7 - 11/9</p>
 				<UserDatePicker
 					begDate={begDate}
 					endDate={endDate}
