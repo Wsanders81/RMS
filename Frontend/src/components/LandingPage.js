@@ -12,8 +12,9 @@ export default function LandingPage({toggleModal, open, toggleModalTwo, openTwo}
     const navigate = useNavigate()
     const handleClick = async function(){
       const token = await dispatch(getTokenFromAPI("testuser", "password"))
+      dispatch({type:"ALERT", typeOfNotify:"success", message: "Welcome back Demo User!"})
       navigate("/dashboard")
-      console.log("click", token)
+      
     }
     return (
       <Box sx={{paddingTop: '5rem'}}>
@@ -23,8 +24,8 @@ export default function LandingPage({toggleModal, open, toggleModalTwo, openTwo}
        <Modal
         open={open}
         onClose={toggleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-Login"
+        aria-describedby="modal-Login"
       >
         <Box className="LandingPage-modal-login">
           <LoginForm toggle={toggleModal}/>
@@ -33,8 +34,8 @@ export default function LandingPage({toggleModal, open, toggleModalTwo, openTwo}
        <Modal
         open={openTwo}
         onClose={toggleModalTwo}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-Register"
+        aria-describedby="modal-Register"
       >
         <Box className="LandingPage-modal-register">
           <RegistrationForm toggle={toggleModalTwo}/>

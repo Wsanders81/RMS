@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Drawer, Button, List, Divider, ListItem } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { ALERT, LOGOUT} from '../actions/types'
 export default function TempDrawer({ toggleDrawer, state }) {
 	const user = useSelector((store) => store.userReducer.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {
-		dispatch({ type: 'LOGOUT' });
+		dispatch({ type: LOGOUT });
+		dispatch({type: ALERT, typeOfNotify: "success", message: "You have been successfully logged out"})
 		toggleDrawer();
 		navigate('/');
 	};

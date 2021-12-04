@@ -6,13 +6,26 @@ import { CheckLocalStorage } from './helpers/checkLocalStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import {getTokenFromAPI} from './actions/actions'
+import {toast, ToastContainer} from 'react-toastify'
 import TempDrawer from './components/Drawer';
 function App() {
     CheckLocalStorage()
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenTwo, setIsOpenTwo] = useState(false)
     const [state, setState] = useState(false)
+    const toastNotify = useSelector(store => store.toastifyReducer)
     
+    useEffect(()=>{
+      const toastNotification = () => {
+        const notifyType = toastNotify.typeOfNotify
+        const message = toastNotify.message
+        const options = {
+          type: notifyType === "success" ? toast.TYPE.SUCCESS : toast.TYPE.ERROR
+        }
+        return toast(message, options)
+      }
+      toastNotification()
+    }, [toastNotify])
 
     const toggleDrawer = () =>  {
       setState(state => state = !state)
@@ -25,6 +38,7 @@ function App() {
     <div className="App">
       <Navbar toggleDrawer={toggleDrawer} toggleModal={toggleModal} toggleModalTwo={toggleModalTwo}/>
       <TempDrawer state={state} toggleDrawer={toggleDrawer}/>
+      <ToastContainer/>
       <UserRoutes 
         toggleModal={toggleModal} 
         open={isOpen}

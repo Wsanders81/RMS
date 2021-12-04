@@ -26,7 +26,7 @@ router.post('/',ensureAdmin,  async function(req, res, next){
 });
 
 //** Get all products */
-router.get("/", ensureLoggedIn, async function(req, res, next){
+router.post("/all", ensureLoggedIn, async function(req, res, next){
     
     try {
         const products = await Product.getAllProducts()

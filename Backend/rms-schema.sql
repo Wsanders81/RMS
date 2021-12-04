@@ -43,6 +43,7 @@ CREATE TABLE products (
     unit TEXT NOT NULL, 
     qty_per_unit INTEGER NOT NULL, 
     price FLOAT NOT NULL, 
+    quantity INTEGER DEFAULT 0,
     supplier_id INTEGER REFERENCES suppliers
         ON DELETE CASCADE, 
     category_id INTEGER REFERENCES categories

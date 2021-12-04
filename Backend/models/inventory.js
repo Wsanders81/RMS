@@ -1,16 +1,26 @@
 const db = require('../db')
 
 class Inventory {
+    //** Get all inventories within specific dates */
+    static async getAllInventories({begDate, endDate}){
+        const res = await db.query(`
+        SELECT * FROM inventories WHERE date >= $1 AND date <= $2`, 
+        [begDate, endDate]); 
+        if(!res.rows) return ('error')
+        return res.rows; 
+    }
+
+
     //** Get inventory by date */
-    static async getInventory({date}){
+    static async getInventory(inv_id){
         const res = await db.query(`
         SELECT * FROM inventories 
-        WHERE date = $1`, 
-        [date])
+        WHERE id = $1`, 
+        [inv_id])
         const id = res.rows[0].id
         //** Not getting category name with this query..? */
         const items = await db.query(`
-        SELECT p.name, p.price, p.unit, c.category_name, s.name, i.quantity
+        SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
             FROM products AS p
             JOIN inventory_items AS i
             ON i.product_id = p.id
@@ -19,7 +29,7 @@ class Inventory {
             JOIN suppliers AS s
             ON p.supplier_id = s.id
             WHERE i.inventory_id = ${id}
-            ORDER BY s.name`)
+            ORDER BY c.category_name`)
         res.rows[0].items = items.rows
         if(!res.rows[0]) return ("error")
         return res.rows[0]

@@ -2,9 +2,9 @@ import { Form, Formik, Field, ErrorMessage } from 'formik'
 import { Card, CardContent, Typography, TextField, FormGroup, Box, Button } from '@mui/material'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
 import { registerUser } from '../actions/actions'
 import { useDispatch } from 'react-redux'
+import {ALERT} from '../actions/types'
 export default function RegistrationForm({ toggle }) {
     const initialValues = {
         username: "", 
@@ -14,17 +14,11 @@ export default function RegistrationForm({ toggle }) {
         password: ""
 
     }
-    const notify = () => toast.error("Username already taken",{
-        position: toast.POSITION.TOP_CENTER 
-        
-      })
     const navigate = useNavigate()
     const dispatch = useDispatch()
     return (
         <div style={{textAlign:"center"}}>
-            <ToastContainer 
-            autoClose={2000}
-            hideProgressBar={true}/>
+            
         <Card sx={{margin: 'auto'}}>
             
             <CardContent>
@@ -45,10 +39,12 @@ export default function RegistrationForm({ toggle }) {
                         
                         if(res.token) {
                             toggle()
+                            dispatch({type: ALERT, typeOfNotify: "success", message: `Welcome, ${res.username}!`})
                             navigate('/dashboard')
                         } 
                     } catch(err) {
-                        notify()
+                        dispatch({type: ALERT, typeOfNotify: "error", message: "Username already taken" })
+
                         console.log(err)
                     }
                     

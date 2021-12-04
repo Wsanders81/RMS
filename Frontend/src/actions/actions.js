@@ -8,6 +8,8 @@ import {
 	LOGOUT
 } from './types';
 import { useSelector } from 'react-redux';
+import { ConstructionSharp } from '@mui/icons-material';
+import moment from 'moment';
 const BASE_URL = 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
 
@@ -89,4 +91,69 @@ export async function getSupplierProducts(id) {
 		}
 	});
 	return response.data;
+}
+
+export async function getProductsForInventory(){
+	const response = await axios({
+		method: "post", 
+		url: `${BASE_URL}/products/all`, 
+		data: {
+			token: myToken
+		}
+	})
+	return response.data
+}
+
+export async function getAllInventories(begDate, endDate){
+	const response = await axios({
+		method : "post", 
+		url: `${BASE_URL}/inventories/all`, 
+		data: {
+			begDate, 
+			endDate, 
+			token: myToken
+		}
+	})
+	// console.log(response.data)
+	return response.data
+}
+
+export async function getInventory(id) {
+	const response = await axios({
+		method: "post", 
+		url: `${BASE_URL}/inventories`, 
+		data: {
+			id, 
+			token: myToken
+		}
+	})
+	return response.data
+}
+
+
+
+export async function addInventory(data) {
+	if(data.Food === "" || data.Alcohol === "") return 'error'
+	const items = data.Food.concat(data.Beer, data.Alcohol, data.NABev)
+	const food_sales = data.Sales.Food
+	const alcohol_sales = data.Sales.Alcohol
+	const beer_sales = data.Sales.Beer
+	const na_bev_sales = data.Sales.NABev
+	const date = moment(new Date()).format("YYYY-MM-DD")
+	
+	
+	const response = await axios({
+		method: "post", 
+		url: `${BASE_URL}/inventories/add`, 
+		data: {
+			date,
+			food_sales, 
+			alcohol_sales, 
+			beer_sales, 
+			na_bev_sales,
+			items, 
+			token: myToken
+		}
+	})
+	return response.data
 }

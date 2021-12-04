@@ -30,9 +30,26 @@ class Product {
 
 	static async getAllProducts() {
 		const res = await db.query(`
-		SELECT * FROM PRODUCTS`);
-		const products = res.rows;
-		return products;
+		SELECT p.id AS product_id, p.name, p.unit, p.qty_per_unit, 
+		p.price, c.category_name
+		FROM products AS p
+		JOIN categories AS c
+		ON c.id = p.category_id`);
+		let foodProd = await db.query(`
+		SELECT p.id AS product_id, name, unit, price, supplier_id, quantity FROM products AS p WHERE category_id = 1` )
+		let beerProd = await db.query(`
+		SELECT p.id AS product_id, name, unit, price, supplier_id, quantity FROM products AS p WHERE category_id = 3`)
+		let alcoholProd = await db.query(`
+		SELECT p.id AS product_id, name, unit, price, supplier_id, quantity FROM products AS p WHERE category_id = 2`)
+		let NABevProd = await db.query(`
+		SELECT p.id AS product_id, name, unit, price, supplier_id, quantity FROM products AS p WHERE category_id = 4`)
+		
+		return {
+			food: foodProd.rows, 
+			alcohol: alcoholProd.rows, 
+			beer: beerProd.rows, 
+			NABev: NABevProd.rows
+		}
 	}
 
 	static async getProductsBySupplier(supplierId) {

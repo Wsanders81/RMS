@@ -78,7 +78,7 @@ export default function Sales() {
 			{daySales ? (
 				daySales.map(day => {
 					return (
-						<Box>
+						<Box key={day.id}>
 							<h5>{moment(day[0]).format("ddd MMM DD YYYY") }</h5>
 							<p>{day[1].food ? <p>Food Sales: {day[1].food}</p> : null}</p>
 							<p>{day[1].alcohol ? <p>Alcohol Sales: {day[1].alcohol}</p> : null}</p>
