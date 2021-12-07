@@ -9,7 +9,7 @@
         {
             "name": "chicken",
             "unit": "case",
-            "qty_per_unit": 1,
+            "quantity_per_unit": 1,
             "price": 15.99,
             "supplier_id": 1,
             "category_id": 1
@@ -18,7 +18,7 @@
     "required": [
         "name",
         "unit",
-        "qty_per_unit",
+        "quantity_per_unit",
         "price",
         "supplier_id",
         "category_id"
@@ -44,10 +44,10 @@
                 "case"
             ]
         },
-        "qty_per_unit": {
+        "quantity_per_unit": {
             "$id": "#/properties/qty_per_unit",
-            "type": "integer",
-            "title": "The qty_per_unit schema",
+            "type": "number",
+            "title": "The quantity_per_unit schema",
             "description": "An explanation about the purpose of this instance.",
             "default": 0,
             "examples": [

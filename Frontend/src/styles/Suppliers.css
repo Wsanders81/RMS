@@ -1,19 +1,29 @@
-
 .Suppliers {
-    padding-top: 5rem;
+	padding-top: 5rem;
 }
 
 table {
-    margin: auto; 
-    border-collapse: collapse;
-    width: 75%; 
+	margin: auto;
+	border-collapse: collapse;
+	width: 75%;
 }
-/* td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  } */
+
+.Supplier-modal {
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5px;
+	text-align: center;
+}
+
+.Supplier-delete {
+	color: rgb(218, 40, 40);
+}
+
+.Supplier-delete:hover {
+	cursor: pointer;
+}

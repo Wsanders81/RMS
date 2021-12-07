@@ -1,11 +1,11 @@
 import { Box, Button, Paper } from '@mui/material';
 import '../styles/Inventories.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserDatePicker from './UserDatePicker';
 import { getAllInventories, getInventory, deleteInventory } from '../actions/actions';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import {ALERT} from '../actions/types'
+import {ALERT, SET_LOCATION} from '../actions/types'
 import NewInventoryForm from './NewInventoryForm';
 import InventoryTable from './InventoryTable';
 export default function Inventories() {
@@ -15,7 +15,13 @@ export default function Inventories() {
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
     const [ showInvForm, setShowInvForm] = useState(false)
-	const dispatch = useDispatch()	
+	const dispatch = useDispatch()
+	useEffect(()=>{
+		const setLocation = ()=> {
+			dispatch({type: SET_LOCATION, location: "Inventory"})
+		}
+		setLocation()
+	},[dispatch])	
 	const handleChange = (e) => {
 		if (e.target.name === 'begDate') {
 			setBegDate((prevState) => ({

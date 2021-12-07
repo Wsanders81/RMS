@@ -1,11 +1,17 @@
-.Navbar{
-    position: fixed;
-    width:100%;
-    background-color: rgb(133, 184, 228); 
-    z-index: 2;
-  }
-  
+.Navbar {
+	position: fixed;
+	width: 100%;
+	background-color: rgb(133, 184, 228);
+	z-index: 2;
+}
 
 .Navbar-link:hover {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+.Navbar-location {
+	position: fixed;
+	top: 5;
+	left: 50%;
+	transform: translateX(-50%);
 }

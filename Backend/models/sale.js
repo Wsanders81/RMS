@@ -12,20 +12,28 @@ class Sale {
         ORDER BY s.date, c.category_name`,  
         [begDate, endDate]); 
         if(!res) return (500); 
-        console.log(begDate,endDate, "SALES FROM DB")
+        
         return res.rows; 
     }
 
 
     //** Add sales */
     static async addSales({date, categoryId, sales}){
+        //** check if sales already exist for that day */
+        const dateObject = {
+            begDate: date, 
+            endDate: date
+        } 
+        const check = await this.getSales(dateObject)
+        
+        if(check.length > 1) return {error: "Sales already exist for that day"}
         const res = await db.query(`
         INSERT INTO sales(date, category_id, sales)
         VALUES ($1, $2, $3)
         RETURNING id, date, category_id, sales`, 
         [date, categoryId, sales])
-        console.log(res.rows[0])
-        return res.rows[0]; 
+        // return res.rows[0]; 
+        return res.rows[0]
     }
 
     //** delete sales */

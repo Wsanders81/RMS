@@ -200,7 +200,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 			aria-labelledby="modal-Register"
         	aria-describedby="modal-Register"
 			>
-			<InventoryModal submit={submitInventory}/>
+			<InventoryModal message={"Are you sure you want to submit?"} buttonText={"Submit"} color={"success"} submit={submitInventory}/>
 			</Modal>
 		</>
 	);

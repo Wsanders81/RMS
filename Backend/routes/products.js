@@ -10,54 +10,57 @@ const createProductSchema = require('../schemas/productCreate.json');
 const router = new express.Router();
 
 //** Create new product */
-router.post('/',ensureAdmin,  async function(req, res, next){
-    
-    try {
-        const validator = jsonschema.validate(req.body, createProductSchema)
-        if(!validator.valid){
-            const errs = validator.errors.map(e => e.stack)
-            throw new BadRequestError(errs)
-        }
-        const product = await Product.create(req.body)
-        return res.status(201).json({ product })
-    } catch(err) {
-        return next(err)
-    }
+router.post('/', ensureAdmin, async function(req, res, next) {
+	const {
+		name,
+		unit,
+		supplier_id,
+		category_id
+	} = req.body.data;
+    const price = parseInt(req.body.data.price)
+    const quantity_per_unit = parseInt(req.body.data.quantity_per_unit)
+	
+	try {
+		
+		const product = await Product.create(name, unit, quantity_per_unit, price, supplier_id, category_id);
+		return res.status(201).json({ product });
+	} catch (err) {
+		return next(err);
+	}
 });
 
 //** Get all products */
-router.post("/all", ensureLoggedIn, async function(req, res, next){
-    
-    try {
-        const products = await Product.getAllProducts()
-        return res.status(200).json({ products })
-    } catch(err) {
-        return next(err)
-    }
-})
+router.post('/all', ensureLoggedIn, async function(req, res, next) {
+	try {
+		const products = await Product.getAllProducts();
+		return res.status(200).json({ products });
+	} catch (err) {
+		return next(err);
+	}
+});
 
-router.post("/:supplier_id",  async function(req, res, next){
-    try {
-        
-        const products = await Product.getProductsBySupplier(req.params.supplier_id)
-        return res.json({products})
-    } catch(err) {
-        return next(err)
-    }
-})
+router.post('/:supplier_id', async function(req, res, next) {
+	try {
+		const products = await Product.getProductsBySupplier(
+			req.params.supplier_id
+		);
+		return res.json({ products });
+	} catch (err) {
+		return next(err);
+	}
+});
 
 //** Delete product */
-router.delete('/:productId', async function(req, res, next){
-    try {
-        const message = await Product.deleteProduct(req.params.productId)
-        if(message === "error") 
-        {
-            throw new BadRequestError("Item not found")
-        }
-        return res.status(200).json({ message })
-    } catch(err) {
-        return next(err)
-    }
-})
+router.delete('/:productId', async function(req, res, next) {
+	try {
+		const message = await Product.deleteProduct(req.params.productId);
+		if (message === 'error') {
+			throw new BadRequestError('Item not found');
+		}
+		return res.status(200).json({ message });
+	} catch (err) {
+		return next(err);
+	}
+});
 
-module.exports = router; 
+module.exports = router;

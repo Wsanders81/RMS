@@ -10,12 +10,11 @@ const BASE_URL = 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
 
 function getUser(token, username, isAdmin) {
-	console.log(isAdmin)
 	return {
 		type     : GET_USER,
 		token,
 		username,
-		isAdmin : isAdmin
+		isAdmin  : isAdmin
 	};
 }
 
@@ -29,7 +28,7 @@ export function getTokenFromAPI(username, password) {
 				password : `${password}`
 			}
 		});
-		
+
 		return dispatch(
 			getUser(response.data, username, response.data.isAdmin)
 		);
@@ -66,37 +65,33 @@ export async function getSales(begDate, endDate) {
 		}
 	});
 	return response.data;
-}; 
-const categories = {
-	Food: 1, 
-	Alcohol: 2, 
-	Beer: 3, 
-	NABev: 4
 }
+const categories = {
+	Food    : 1,
+	Alcohol : 2,
+	Beer    : 3,
+	NABev   : 4
+};
 export async function addSales(sales, date) {
-	
-	const salesArr = Array.from(Object.entries(sales))
-	
-	let promises = []; 
-	for(let i =0; i < salesArr.length; i++){
-		console.log(categories[salesArr[i][0]],parseInt(salesArr[i][1]))
+	const salesArr = Array.from(Object.entries(sales));
+
+	let promises = [];
+	for (let i = 0; i < salesArr.length; i++) {
 		promises.push(
 			axios({
-				method: 'post', 
-				url: `${BASE_URL}/sales/add`, 
-				data: {
-					date, 
-					categoryId: categories[salesArr[i][0]], 
-					sales: parseInt(salesArr[i][1]), 
-					token: myToken
+				method : 'post',
+				url    : `${BASE_URL}/sales/add`,
+				data   : {
+					date,
+					categoryId : categories[salesArr[i][0]],
+					sales      : parseInt(salesArr[i][1]),
+					token      : myToken
 				}
 			})
-		)
+		);
 	}
-	const outputSales = await Promise.all(promises)
-	console.log(outputSales)
-	
-	
+	const outputSales = await Promise.all(promises);
+	return outputSales;
 }
 
 export async function getSuppliers() {
@@ -110,6 +105,19 @@ export async function getSuppliers() {
 	return response.data;
 }
 
+export async function addSupplier(data) {
+	const response = await axios({
+		method : 'post',
+		url    : `${BASE_URL}/suppliers/new`,
+		data   : {
+			data,
+			token : myToken
+		}
+	});
+
+	return response.data;
+}
+
 export async function getSupplierProducts(id) {
 	const response = await axios({
 		method : 'post',
@@ -120,6 +128,29 @@ export async function getSupplierProducts(id) {
 		}
 	});
 	return response.data;
+}
+
+export async function addSupplierProduct(data) {
+	const response = await axios({
+		method : 'post',
+		url    : `${BASE_URL}/products`,
+		data   : {
+			token : myToken,
+			data
+		}
+	});
+	return response.data;
+}
+
+export async function deleteSupplierProduct(id) {
+	const res = await axios({
+		method : 'delete',
+		url    : `${BASE_URL}/products/${id}`,
+		data   : {
+			token : myToken
+		}
+	});
+	return res.data;
 }
 
 export async function getProductsForInventory() {
@@ -143,7 +174,6 @@ export async function getAllInventories(begDate, endDate) {
 			token   : myToken
 		}
 	});
-	// console.log(response.data)
 	return response.data;
 }
 
@@ -193,13 +223,13 @@ export async function addInventory(data, date) {
 	return response;
 }
 
-export async function deleteInventory(id){
+export async function deleteInventory(id) {
 	const response = await axios({
-		method: "delete", 
-		url: `${BASE_URL}/inventories/${id}`,
-		data: {
-			token: myToken
+		method : 'delete',
+		url    : `${BASE_URL}/inventories/${id}`,
+		data   : {
+			token : myToken
 		}
-	})
-	return response.data.message
+	});
+	return response.data.message;
 }
