@@ -18,7 +18,6 @@ class Inventory {
         WHERE id = $1`, 
         [inv_id])
         const id = res.rows[0].id
-        //** Not getting category name with this query..? */
         const items = await db.query(`
         SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
             FROM products AS p
@@ -30,7 +29,56 @@ class Inventory {
             ON p.supplier_id = s.id
             WHERE i.inventory_id = ${id}
             ORDER BY c.category_name`)
+        const food = await db.query(`SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
+        FROM products AS p
+        JOIN inventory_items AS i
+        ON i.product_id = p.id
+        JOIN categories AS c
+        ON p.category_id = c.id
+        JOIN suppliers AS s
+        ON p.supplier_id = s.id
+        WHERE i.inventory_id = ${id}
+        AND c.category_name = 'food'
+        ORDER BY p.name`)
+        const alcohol = await db.query(`SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
+        FROM products AS p
+        JOIN inventory_items AS i
+        ON i.product_id = p.id
+        JOIN categories AS c
+        ON p.category_id = c.id
+        JOIN suppliers AS s
+        ON p.supplier_id = s.id
+        WHERE i.inventory_id = ${id}
+        AND c.category_name = 'alcohol'
+        ORDER BY p.name`)
+        const beer = await db.query(`SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
+        FROM products AS p
+        JOIN inventory_items AS i
+        ON i.product_id = p.id
+        JOIN categories AS c
+        ON p.category_id = c.id
+        JOIN suppliers AS s
+        ON p.supplier_id = s.id
+        WHERE i.inventory_id = ${id}
+        AND c.category_name = 'beer'
+        ORDER BY p.name`)
+
+        const NABev = await db.query(`SELECT p.name AS product_name, p.price, p.id,  p.unit, c.category_name, s.name AS supplier_name, i.quantity
+        FROM products AS p
+        JOIN inventory_items AS i
+        ON i.product_id = p.id
+        JOIN categories AS c
+        ON p.category_id = c.id
+        JOIN suppliers AS s
+        ON p.supplier_id = s.id
+        WHERE i.inventory_id = ${id}
+        AND c.category_name = 'NA Beverage'
+        ORDER BY p.name`)
         res.rows[0].items = items.rows
+        res.rows[0].food = food.rows
+        res.rows[0].alcohol = alcohol.rows
+        res.rows[0].beer = beer.rows
+        res.rows[0].NABev = NABev.rows
         if(!res.rows[0]) return ("error")
         return res.rows[0]
     }

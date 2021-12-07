@@ -45,3 +45,7 @@
 .Inventory-modal-button {
     transform: translateY(2rem) 
 }
+
+.InventoryTable-category {
+    height: 2rem; 
+}

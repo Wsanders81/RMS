@@ -45,7 +45,7 @@ router.post('/add', ensureLoggedIn, async function(req, res, next) {
 router.delete('/:id', ensureAdmin, async function(req, res, next) {
 	try {
 		const message = await Inventory.deleteInventory(req.params.id);
-		console.log(message);
+		
 		if (message === 'error')
 			throw new BadRequestError(
 				`Inventory with id: ${req.params.id} does not exist`

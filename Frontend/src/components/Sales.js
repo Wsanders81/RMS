@@ -1,17 +1,23 @@
 import UserDatePicker from './UserDatePicker';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button, Modal } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { groupSales, dailySales } from '../helpers/groupSales';
-import { getSales } from '../actions/actions';
+import { getSales, addSales } from '../actions/actions';
+import SalesModal from './SalesModal';
 import '../styles/Sales.css'
 export default function Sales() {
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
 	const [ endDate, setEndDate ] = useState({ endDate: new Date() });
+	const [adminBegDate, setAdminBegDate] = useState({begDate: new Date()})
 	const [ sales, setSales ] = useState(null);
 	const [ daySales, setDaySales ] = useState(null);
-	const token = useSelector((store) => store.userReducer.token);
+	const [isOpen, setIsOpen] = useState(false)
+	const user = useSelector((store) => store.userReducer);
+	const toggleModal = () => {
+		setIsOpen(isOpen=> !isOpen)
+	}
 	const handleChange = (e) => {
 		if (e.target.name === 'begDate') {
 			setBegDate((prevState) => ({
@@ -26,9 +32,15 @@ export default function Sales() {
 			}));
 		}
 	};
+	const handleAdminDateChange = (e) => {
+		setAdminBegDate((prevState) => ({
+			...prevState, 
+			[e.target.name]: e.target.value
+		}))
+	}
 	const handleSubmit = async () => {
 		const response = await getSales(
-			token,
+			
 			begDate.begDate,
 			endDate.endDate
 		);
@@ -38,6 +50,12 @@ export default function Sales() {
 		setSales(groupedSales);
 		setDaySales(getDailySales);
 	};
+	const handleSalesSubmit = async(e, category, sales, {begDate}) => {
+		
+		
+		const response = await addSales(sales, begDate)
+		console.log(response)
+	}
 	const totalSales = `Total Sales ${moment(begDate.begDate).format(
 		'MM-DD-YYYY'
 	)} to ${moment(endDate.endDate).format('MM-DD-YYYY')}`;
@@ -101,10 +119,21 @@ export default function Sales() {
 					endDate={endDate}
 					handleChange={handleChange}
 					handleSubmit={handleSubmit}
+					showSubmit={true}
 				/>
+				{user.isAdmin === "true" ? <Button onClick={toggleModal} variant="outlined">Add Sales</Button> : null}
+
 				{sales ? displaySales : null}
 				{daySales ? displayDailySales : null}
 			</Box>
+			<Modal
+			open={isOpen}
+			onClose={toggleModal}
+			aria-labelledby="modal-Register"
+        	aria-describedby="modal-Register"
+			>
+				<SalesModal handleSalesSubmit={handleSalesSubmit} handleChange={handleAdminDateChange} begDate={adminBegDate}/> 
+			</Modal>
 		</Box>
 	);
 }

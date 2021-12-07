@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <Navbar toggleDrawer={toggleDrawer} toggleModal={toggleModal} toggleModalTwo={toggleModalTwo}/>
       <TempDrawer state={state} toggleDrawer={toggleDrawer}/>
-      <ToastContainer/>
+      <ToastContainer position="top-left" />
       <UserRoutes 
         toggleModal={toggleModal} 
         open={isOpen}

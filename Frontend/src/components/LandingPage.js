@@ -12,8 +12,10 @@ export default function LandingPage({toggleModal, open, toggleModalTwo, openTwo}
     const navigate = useNavigate()
     const handleClick = async function(){
       const token = await dispatch(getTokenFromAPI("testuser", "password"))
+      if(token){
       dispatch({type:"ALERT", typeOfNotify:"success", message: "Welcome back Demo User!"})
       navigate("/dashboard")
+    }
       
     }
     return (

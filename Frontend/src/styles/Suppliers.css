@@ -8,7 +8,7 @@ table {
     border-collapse: collapse;
     width: 75%; 
 }
-td, th {
+/* td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -16,4 +16,4 @@ td, th {
   
   tr:nth-child(even) {
     background-color: #dddddd;
-  }
+  } */

@@ -1,11 +1,13 @@
-import { Box, Button, Modal, Paper } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 import '../styles/Inventories.css';
 import { useState } from 'react';
 import UserDatePicker from './UserDatePicker';
-import { getAllInventories, getInventory, addInventory } from '../actions/actions';
+import { getAllInventories, getInventory, deleteInventory } from '../actions/actions';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import {ALERT} from '../actions/types'
 import NewInventoryForm from './NewInventoryForm';
-import InventoryModal from './InventoryModal';
+import InventoryTable from './InventoryTable';
 export default function Inventories() {
 	const [ showDates, setShowDates ] = useState(false);
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
@@ -13,6 +15,7 @@ export default function Inventories() {
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
     const [ showInvForm, setShowInvForm] = useState(false)
+	const dispatch = useDispatch()	
 	const handleChange = (e) => {
 		if (e.target.name === 'begDate') {
 			setBegDate((prevState) => ({
@@ -42,16 +45,30 @@ export default function Inventories() {
 		}
 	};
 
-    const toggleInvForm = () => {
+    const toggleInvForm = (reset) => {
         setShowInvForm(prevState => !prevState)
-		setSelectedInv(null);
+		
 		setInventories(null);
+		if(reset === false) {
+			return 
+		} else {
+			setSelectedInv(null);
+		}
     }
 	const handleSelect = async (id) => {
 		const res = await getInventory(id);
+		
 		setSelectedInv(res);
 		toggleDatePicker();
 	};
+	const handleDelete = async()=> {
+		const res = await deleteInventory(selectedInv.inventory.id)
+		if(res === "Inventory successfully deleted") {
+			setSelectedInv(null)
+			toggleDatePicker()
+			dispatch({type:ALERT, typeOfNotify: 'success', message: "Inventory successfully deleted"})
+		}
+	}
 
 	const inventoryButtons = (
 		<Box>
@@ -63,71 +80,17 @@ export default function Inventories() {
 			</Button>
 		</Box>
 	);
-
-	const inventoryTable = selectedInv ? (
-		<table>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Food Sales</th>
-					<th>Beer Sales</th>
-					<th>Alcohol Sales</th>
-					<th>NA Bev Sales</th>
-					<th>Total Sales</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						{moment(selectedInv.inventory.date).format(
-							'ddd MMM DD YY'
-						)}
-					</td>
-					<td>${selectedInv.inventory.food_sales}</td>
-					<td>${selectedInv.inventory.beer_sales}</td>
-					<td>${selectedInv.inventory.alcohol_sales}</td>
-					<td>${selectedInv.inventory.na_bev_sales}</td>
-					<td>
-						{selectedInv.inventory.food_sales +
-							selectedInv.inventory.beer_sales +
-							selectedInv.inventory.alcohol_sales +
-							selectedInv.inventory.na_bev_sales}
-					</td>
-				</tr>
-			</tbody>
-			<thead>
-				<tr>
-					<th>Product Name</th>
-					<th>Unit</th>
-					<th>Price</th>
-					<th>Qty On Hand</th>
-					<th>Extended Cost</th>
-				</tr>
-			</thead>
-			<tbody>
-				{selectedInv.inventory.items.map((item) => {
-					return (
-						<tr key={item.id}>
-							<td>{item.product_name}</td>
-							<td>{item.unit}</td>
-							<td>{item.price}</td>
-							<td>{item.quantity}</td>
-							<td>{item.quantity * item.price}</td>
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
-	) : null;
+	
 	return (
 		<Box className="Inventories">
 			<h1>Inventories</h1>
-            
+			{showInvForm ? <UserDatePicker begDate={begDate} showSubmit={false} handleChange={handleChange}/>  : null}
             
 			{!showDates && !showInvForm ? inventoryButtons : null}
 			{showDates ? (
 				<Box>
 					<UserDatePicker
+						showSubmit={true}
 						begDate={begDate}
 						endDate={endDate}
 						handleChange={handleChange}
@@ -167,8 +130,8 @@ export default function Inventories() {
 					</Button>
 				</Box>
 			) : null}
-			{selectedInv ? inventoryTable : null}
-            {showInvForm ? <NewInventoryForm toggle={toggleInvForm}/> : null}
+			{selectedInv ? <InventoryTable inventory={selectedInv} removeInv={handleDelete}/> : null}
+            {showInvForm ? <NewInventoryForm setInv={setSelectedInv} date={begDate.begDate} toggle={toggleInvForm}/> : null}
 			
 		</Box>
 	);

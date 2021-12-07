@@ -34,15 +34,13 @@ const SUBMIT_INITIAL_STATE = {
 	NABev   : false, 
     Sales: false
 };
-function NewInventoryForm({toggle}) {
+function NewInventoryForm({toggle, date, setInv}) {
 	const [ submitted, setSubmitted ] = useState(SUBMIT_INITIAL_STATE);
 	const [isOpen, setIsOpen] = useState(false)
-	
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ products, setProducts ] = useState(null);
 	const [ value, setValue ] = useState(0);
 	const [ invVals, setInvVals ] = useState(INV_INITIAL_STATE);
-    const navigate = useNavigate()
 	const dispatch = useDispatch()
 	useEffect(() => {
 		const getAllProducts = async () => {
@@ -56,6 +54,7 @@ function NewInventoryForm({toggle}) {
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
+	
 	const handleSubmit = (e, category, values) => {
         e.preventDefault()
 		setInvVals((state) => {
@@ -77,14 +76,16 @@ function NewInventoryForm({toggle}) {
 	}
     const submitInventory = async() => {
 		
-        const res = await addInventory(invVals)
+        const res = await addInventory(invVals, date)
 		if(res === "error"){ 
-			dispatch({type:ALERT, typeOfNotify: "error", message: "No Inventory Entered!"})
+			dispatch({type:ALERT, typeOfNotify: "error", message: "Please submit all categories"})
 			return
 		}
         dispatch({type:ALERT, typeOfNotify: 'success', message: "Your inventory was successfully posted"})
-		
-        navigate("/dashboard")
+		await setSubmitted(SUBMIT_INITIAL_STATE)
+		setInv(res)
+		const reset = false
+        toggle(reset)
     }
 	const handleUnsubmit = (category) => {
 		setSubmitted((state) => {
@@ -122,7 +123,7 @@ function NewInventoryForm({toggle}) {
 		};
 	}
 	if (isLoading) return <h1>Loading</h1>;
-
+	
 	
 	return (
 		<>
@@ -191,6 +192,7 @@ function NewInventoryForm({toggle}) {
                     invVals={invVals}/>
                     
             </TabPanel>
+            
 		</Box>
 		<Modal
 			open={isOpen}

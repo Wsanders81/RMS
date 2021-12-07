@@ -1,7 +1,16 @@
 import { useState } from "react";
-import {Box, FormGroup, FormControl, InputAdornment, TextField, Button} from '@mui/material'
-export default function SalesForm({category, submit, submitted, unsubmit, invVals}){
-    const [sales, setSales] = useState(invVals.Sales)
+import {Box,  FormControl, InputAdornment, TextField, Button} from '@mui/material'
+export default function SalesForm({category, submit, submitted, unsubmit, invVals, date}){
+    const SALES_INITIAL_STATE = {
+        
+            Food: "", 
+            Alcohol: "", 
+            Beer: "", 
+            NABev: ""
+        
+    }
+    const salesDate = date ? date : null
+    const [sales, setSales] = useState(invVals ? invVals.Sales : SALES_INITIAL_STATE)
     const handleChange = (e) => {
         const {name, value} = e.target; 
         setSales(state => {
@@ -12,9 +21,10 @@ export default function SalesForm({category, submit, submitted, unsubmit, invVal
         })
         
     }
+   
     
     return (
-        <Box>
+        <Box >
            
             <FormControl>
             <TextField 
@@ -80,7 +90,7 @@ export default function SalesForm({category, submit, submitted, unsubmit, invVal
                 />
                 {submitted[category] === false ? (
 					<Button
-						onClick={(e) => submit(e,category, sales)}
+						onClick={(e) => submit(e,category, sales, salesDate)}
 						variant="contained"
 					>
 						{`Submit ${category}`}
