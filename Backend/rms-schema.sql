@@ -113,4 +113,13 @@ CREATE TABLE orders (
     date DATE NOT NULL DEFAULT CURRENT_DATE
 ); 
 
+CREATE TABLE purchases (
+    id SERIAL PRIMARY KEY, 
+    inventory_id INTEGER REFERENCES inventories
+        ON DELETE CASCADE, 
+    category_id INTEGER REFERENCES categories
+        ON DELETE CASCADE,
+    amount FLOAT NOT NULL
+)
+
 

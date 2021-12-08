@@ -25,6 +25,7 @@ export default function TempDrawer({ toggleDrawer, state }) {
 			onKeyDown={toggleDrawer()}
 		>
 			<List className="Drawer-items">
+				<ListItem onClick={()=>handleClick('dashboard')} button>Dashboard</ListItem>
 				<ListItem onClick={()=>handleClick('pos')} button>POS</ListItem>
 				<ListItem onClick={()=>handleClick('orders')} button>Orders</ListItem>
 				<ListItem onClick={()=>handleClick('inventory')} button>Inventory</ListItem>

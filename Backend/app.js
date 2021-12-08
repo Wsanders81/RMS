@@ -1,33 +1,33 @@
+const express = require('express');
+const cors = require('cors');
+const { NotFoundError } = require('./expressError');
 
-const express = require("express")
-const cors = require('cors')
-const { NotFoundError } = require('./expressError')
+const morgan = require('morgan');
+const { authenticateJWT } = require('./middleware/auth');
 
-const morgan = require('morgan')
-const { authenticateJWT } = require('./middleware/auth')
+const app = express();
 
-const app = express(); 
-
-app.use(cors())
-app.use(express.json())
-app.use(morgan('tiny'))
-app.use(authenticateJWT)
+app.use(cors());
+app.use(express.json());
+app.use(morgan('tiny'));
+app.use(authenticateJWT);
 //routes
-const authRoutes = require('./routes/auth')
-const productRoutes = require('./routes/products')
-const salesRoutes = require('./routes/sales')
-const inventoryRoutes = require('./routes/inventories')
-const orderRoutes = require('./routes/orders')
-const menuItemRoutes = require('./routes/menuItems')
-const supplierRoutes = require('./routes/suppliers')
-app.use('/auth', authRoutes)
-app.use('/products', productRoutes)
-app.use('/sales', salesRoutes)
-app.use('/inventories', inventoryRoutes)
-app.use('/orders', orderRoutes)
-app.use('/menuItems', menuItemRoutes)
-app.use('/suppliers', supplierRoutes)
- 
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+const salesRoutes = require('./routes/sales');
+const inventoryRoutes = require('./routes/inventories');
+const orderRoutes = require('./routes/orders');
+const menuItemRoutes = require('./routes/menuItems');
+const supplierRoutes = require('./routes/suppliers');
+const purchaseRoutes = require('./routes/purchases');
+app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
+app.use('/sales', salesRoutes);
+app.use('/inventories', inventoryRoutes);
+app.use('/orders', orderRoutes);
+app.use('/menuItems', menuItemRoutes);
+app.use('/suppliers', supplierRoutes);
+app.use('/purchases', purchaseRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function(req, res, next) {
@@ -45,4 +45,4 @@ app.use(function(err, req, res, next) {
 	});
 });
 
-module.exports = app; 
+module.exports = app;

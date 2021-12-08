@@ -23,6 +23,7 @@ export default function MenuItemIngredientForm({
 		product_id : '',
 		quantity   : ''
 	};
+	
 	return (
 		<div className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>

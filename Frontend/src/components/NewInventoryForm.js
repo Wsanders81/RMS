@@ -24,6 +24,12 @@ const INV_INITIAL_STATE = {
         Alcohol: "", 
         Beer: "", 
         NABev: ""
+    }, 
+	Purchases : {
+        Food: "", 
+        Alcohol: "", 
+        Beer: "", 
+        NABev: ""
     }
 };
 const SUBMIT_INITIAL_STATE = {
@@ -31,7 +37,8 @@ const SUBMIT_INITIAL_STATE = {
 	Alcohol : false,
 	Beer    : false,
 	NABev   : false, 
-    Sales: false
+    Sales: false, 
+	Purchases: false
 };
 function NewInventoryForm({toggle, date, setInv}) {
 	const [ submitted, setSubmitted ] = useState(SUBMIT_INITIAL_STATE);
@@ -95,7 +102,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 			return { ...state };
 		});
 	};
-    
+    console.log(invVals)
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
 
@@ -140,6 +147,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 					<Tab label="Beer" {...a11yProps(2)} />
 					<Tab label="NA Bev" {...a11yProps(3)} />
 					<Tab label="Sales" {...a11yProps(4)} />
+					<Tab label="Purchases" {...a11yProps(5)} />
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
@@ -187,6 +195,15 @@ function NewInventoryForm({toggle, date, setInv}) {
                     unsubmit={handleUnsubmit}
                     submitted={submitted}
                     category={'Sales'}
+                    submit={handleSubmit}
+                    invVals={invVals}/>
+                    
+            </TabPanel>
+            <TabPanel value={value} index={5}>
+                <SalesForm 
+                    unsubmit={handleUnsubmit}
+                    submitted={submitted}
+                    category={'Purchases'}
                     submit={handleSubmit}
                     invVals={invVals}/>
                     
