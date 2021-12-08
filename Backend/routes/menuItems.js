@@ -1,27 +1,46 @@
+const express = require('express');
+const router = new express.Router();
+const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth');
+const MenuItem = require('../models/menuItem');
 
-const express = require('express')
-const router = new express.Router()
-const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth')
-const MenuItem = require('../models/menuItem')
+router.post('/', ensureLoggedIn, async function(req, res, next) {
+	try {
+		const items = await MenuItem.getAll();
+		
+		return res.json({ items });
+	} catch (err) {
+		return next(err);
+	}
+});
+router.post('/ingredients', ensureLoggedIn, async function(req, res, next) {
+	try {
+		const items = await MenuItem.getMenuItemIngredients(req.body.id);
+		
+		return res.json({ items });
+	} catch (err) {
+		return next(err);
+	}
+});
 
-router.get('/', ensureLoggedIn, async function(req, res, next){
+router.post('/new', ensureAdmin, async function(req, res, next) {
+	try {
+		const item = await MenuItem.createItem(req.body.item);
+		return res.json({ item });
+	} catch (err) {
+		return next(err);
+	}
+});
+
+router.delete('/:id', ensureAdmin, async function(req, res, next){
     try {
-        const items = await MenuItem.getAll()
-        return res.json({items}); 
+        const deleteItem = await MenuItem.deleteMenuItem(req.params.id)
+        if(deleteItem === 'success') {
+            return res.json({message: "Item has been deleted"})
+        }
+        else return res.json({message: "Error, item does not exist"})
     } catch(err) {
         return next(err)
     }
 })
 
-router.post('/', ensureAdmin, async function(req, res, next){
-    try {
-        const item = await MenuItem.createItem(req.body)
-        return res.json({item})
-    } catch(err) {
-        return next(err)
-    }
-})
-
-
-
-module.exports = router; 
+module.exports = router;

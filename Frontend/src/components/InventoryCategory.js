@@ -1,6 +1,5 @@
 import {
 	Box,
-	FormGroup,
 	FormControl,
 	TextField,
 	InputAdornment,

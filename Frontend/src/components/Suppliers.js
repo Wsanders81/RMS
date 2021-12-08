@@ -40,7 +40,7 @@ export default function Suppliers() {
 		const res = await addSupplier(values);
 		console.log(res);
 	};
-
+	console.log(suppliers)
 	return (
 		<Box className="Suppliers">
 			{user.isAdmin === 'true' ? (

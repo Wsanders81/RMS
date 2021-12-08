@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { getProductsForInventory } from '../actions/actions';
-import { useNavigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {
 	Box,
@@ -134,7 +133,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 				<Tabs
 					value={value}
 					onChange={handleChange}
-					aria-label="basic tabs example"
+					aria-label="Inventory Categories"
 				>
 					<Tab label="Food" {...a11yProps(0)} />
 					<Tab label="Alcohol" {...a11yProps(1)} />

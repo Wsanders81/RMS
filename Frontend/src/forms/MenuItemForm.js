@@ -11,51 +11,33 @@ import {
 	MenuItem
 } from '@mui/material';
 import { object, string, number } from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-export default function ProductForm({ submit, supplierId }) {
+export default function MenuItemForm({ submit, newItem }) {
 	const initialValues = {
-		name              : '',
-		unit              : '',
-		quantity_per_unit : '',
-		price             : '',
-		supplier_id       : supplierId,
-		category_id       : ''
+		name        : newItem.name !== '' ? newItem.name : '',
+		price       : newItem.price !== '' ? newItem.price : '',
+		category_id : ''
 	};
-	const dispatch = useDispatch();
 
 	return (
 		<div className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>
 				<CardContent>
 					<Typography variant="h4" mb={2}>
-						Add New Product
+						Add New Menu Item
 					</Typography>
+					
 					<Formik
 						validationSchema={object({
-							name              : string()
+							name        : string()
 								.required('Required')
 								.min(2, 'Too Short!')
 								.max(15),
-							unit              : string()
-								.required('Required')
-								.min(2, 'Too Short!')
-								.max(20),
-							quantity_per_unit : number().required('Required'),
-							price             : number().required('Required'),
-							category_id       : string().required('Required')
+							price       : number().required('Required'),
+							category_id : string().required('Required')
 						})}
 						initialValues={initialValues}
-						onSubmit={async (values) => {
-							try {
-								let res = await submit(values);
-							} catch (err) {
-								dispatch({
-									type         : 'ALERT',
-									typeOfNotify : 'error',
-									message      :
-										'That product name is already taken'
-								});
-							}
+						onSubmit={(values) => {
+							submit(values);
 						}}
 					>
 						{({ values, errors }) => (
@@ -72,36 +54,6 @@ export default function ProductForm({ submit, supplierId }) {
 											render={(msg) => (
 												<div style={{ color: 'red' }}>
 													{msg}
-												</div>
-											)}
-										/>
-									</Box>
-									<Box mb={2}>
-										<Field
-											name="unit"
-											as={TextField}
-											label="Unit"
-										/>
-										<ErrorMessage
-											name="unit"
-											render={(msg) => (
-												<div style={{ color: 'red' }}>
-													{msg}
-												</div>
-											)}
-										/>
-									</Box>
-									<Box mb={2}>
-										<Field
-											name="quantity_per_unit"
-											as={TextField}
-											label="Quantity per unit"
-										/>
-										<ErrorMessage
-											name="quantity_per_unit"
-											render={(msg) => (
-												<div style={{ color: 'red' }}>
-													{'Must be a valid number'}
 												</div>
 											)}
 										/>
@@ -125,9 +77,14 @@ export default function ProductForm({ submit, supplierId }) {
 										Category
 									</label>
 									<Field
+										id="category_id"
 										name="category_id"
 										as={Select}
 										label="Category"
+										style={{
+											width  : '10rem',
+											margin : 'auto'
+										}}
 									>
 										<MenuItem value={1}>Food</MenuItem>
 										<MenuItem value={2}>Alcohol</MenuItem>
@@ -150,7 +107,7 @@ export default function ProductForm({ submit, supplierId }) {
 									type="submit"
 									style={{ backgroundColor: '#81c784' }}
 								>
-									Submit
+									Save and enter ingredients
 								</Button>
 							</Form>
 						)}

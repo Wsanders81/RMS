@@ -130,6 +130,17 @@ export async function getSupplierProducts(id) {
 	return response.data;
 }
 
+export async function getAllProducts(){
+	const response = await axios({
+		method: 'post', 
+		url: `${BASE_URL}/products/all`, 
+		data: {
+			token: myToken
+		}
+	})
+	return response.data.products
+}
+
 export async function addSupplierProduct(data) {
 	const response = await axios({
 		method : 'post',
@@ -233,3 +244,59 @@ export async function deleteInventory(id) {
 	});
 	return response.data.message;
 }
+
+export async function getMenuItems() {
+	const response = await axios({
+		method : 'post',
+		url    : `${BASE_URL}/menuItems`,
+		data   : {
+			token : myToken
+		}
+	});
+	let promises = [];
+	for (let i = 0; i < response.data.items.length; i++) {
+		promises.push(
+			axios({
+				method : 'post',
+				url    : `${BASE_URL}/menuItems/ingredients`,
+				data   : {
+					token : myToken,
+					id    : response.data.items[i].id
+				}
+			})
+		);
+	}
+	const ingredients = await Promise.all(promises);
+
+	for (let i = 0; i < response.data.items.length; i++) {
+		response.data.items[i].ingredients = ingredients[i].data.items;
+	}
+	return response.data;
+}
+
+export async function createMenuItem(item) {
+	const response = await axios({
+		method: "post", 
+		url: `${BASE_URL}/menuItems/new`, 
+		data: {
+			token: myToken, 
+			item: item
+
+		}
+
+	})
+	return response.data
+}
+
+export async function deleteMenuItem(id){
+	const response = await axios({
+		method: "delete", 
+		url: `${BASE_URL}/menuItems/${id}`, 
+		data: {
+			token: myToken
+		}
+	})
+	return response.data
+}
+
+

@@ -48,9 +48,9 @@ export default function Supplier() {
 		if (res.product) {
 			toggleModal();
 			dispatch({
-				type: ALERT,
-				typeOfNotify: 'success',
-				message: 'Product successfully added'
+				type         : ALERT,
+				typeOfNotify : 'success',
+				message      : 'Product successfully added'
 			});
 		}
 	};
@@ -103,12 +103,14 @@ export default function Supplier() {
 									<td>{product.qty_per_unit}</td>
 									<td>${product.price}</td>
 									<td>
-										<FontAwesomeIcon
-											onClick={(e) =>
-												toggleModal2(e, product.id)}
-											className="Supplier-delete"
-											icon={faTrashAlt}
-										/>
+										{user.isAdmin === 'true' ? (
+											<FontAwesomeIcon
+												onClick={(e) =>
+													toggleModal2(e, product.id)}
+												className="Supplier-delete"
+												icon={faTrashAlt}
+											/>
+										) : null}
 									</td>
 								</tr>
 							);
