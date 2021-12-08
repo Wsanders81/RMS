@@ -87,15 +87,19 @@ class Inventory {
     static async addInventory(data){
          const res = await db.query(`
          INSERT INTO inventories
-         (date, food_sales, alcohol_sales, beer_sales, na_bev_sales)
-         VALUES ($1, $2, $3, $4, $5)
-         RETURNING id, date, food_sales, alcohol_sales, beer_sales, na_bev_sales`, 
+         (date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+         RETURNING id, date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev`, 
          [
              data.date, 
              data.food_sales, 
              data.alcohol_sales, 
              data.beer_sales, 
-             data.na_bev_sales
+             data.na_bev_sales, 
+             data.beg_food, 
+             data.beg_alcohol, 
+             data.beg_beer, 
+             data.beg_na_bev
          ])
          return res.rows[0]; 
     }

@@ -86,7 +86,7 @@ VALUES
 ('Jack Daniels', 2, 7.99), 
 ('Tanqueray', 2, 7.99),
 ('Budweiser', 3, 7.99), 
-('Elysian Space Dust', 3, 9.99) ;
+('Elysian Space Dust', 3, 9.99);
 
 
 INSERT INTO menu_item_ingredients (menu_item_id, product_id, quantity)
@@ -106,8 +106,8 @@ VALUES
 (2, 17, 1)
 ;
 
-INSERT INTO inventories ( date, food_sales, alcohol_sales, beer_sales, na_bev_sales )
-VALUES ('2021-11-10', 50000, 5000, 10000, 1500); 
+INSERT INTO inventories ( date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev )
+VALUES ('2021-11-10', 50000, 5000, 10000, 1500, 500, 500, 500, 500); 
 
 INSERT INTO inventory_items 
 (inventory_id, supplier_id, product_id, quantity)
