@@ -22,7 +22,7 @@ export default function Sales() {
 			dispatch({ type: SET_LOCATION, location: 'Sales' });
 		};
 		setLocation();
-	}, []);
+	}, [dispatch]);
 	const toggleModal = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};

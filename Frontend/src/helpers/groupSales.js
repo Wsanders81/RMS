@@ -5,9 +5,9 @@ export const groupSales = (salesArr) => {
 	let alcoholSales = 0;
 	let beerSales = 0;
 	let NAbevSales = 0;
-	const groupedSales = salesArr.map((saleItem) => {
+	salesArr.map((saleItem) => {
 		if (saleItem.category_name === "food") {
-			foodSales += saleItem.sales;
+			 foodSales += saleItem.sales;
 		}
 		if (saleItem.category_name === "alcohol") {
 			alcoholSales += saleItem.sales;
@@ -18,6 +18,7 @@ export const groupSales = (salesArr) => {
 		if (saleItem.category_name === "NA Beverage") {
 			NAbevSales += saleItem.sales;
 		}
+		return null; 
 	});
     
 	return {

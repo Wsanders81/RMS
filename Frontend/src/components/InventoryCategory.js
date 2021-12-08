@@ -22,6 +22,7 @@ function InventoryCategory({
 			state[i].quantity = value;
 			return state;
 		});
+		return name; 
 	};
 
 	return (
@@ -30,7 +31,7 @@ function InventoryCategory({
 				{products.map((item, i) => {
 					return (
 						<TextField
-							key={item.id}
+							key={item.product_id}
 							type="number"
 							label={item.name}
 							defaultValue={item.quantity}

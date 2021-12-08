@@ -49,3 +49,7 @@
 .InventoryTable-category {
     height: 2rem; 
 }
+
+.InventoryTable-list:nth-child(even) {
+    background-color: #dddd; 
+}

@@ -19,7 +19,8 @@ export default function Suppliers() {
 				const allSuppliers = await getSuppliers();
 				setSuppliers(allSuppliers.suppliers);
 				allSuppliers.suppliers.map((supplier) => {
-					dispatch({ type: 'GET_SUPPLIERS', supplier });
+					return dispatch({ type: 'GET_SUPPLIERS', supplier });
+					
 				});
 			};
 			const setLocation = () => {

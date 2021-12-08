@@ -10,7 +10,7 @@ export default function Orders() {
 			dispatch({ type: SET_LOCATION, location: 'Orders' });
 		};
 		setLocation();
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Box className="Orders">

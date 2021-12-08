@@ -1,11 +1,9 @@
 import './App.css';
-import $ from 'jquery'
 import UserRoutes from './components/Routes';
 import Navbar from './components/Navbar'
 import { CheckLocalStorage } from './helpers/checkLocalStorage';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import {getTokenFromAPI} from './actions/actions'
 import {toast, ToastContainer} from 'react-toastify'
 import TempDrawer from './components/Drawer';
 function App() {

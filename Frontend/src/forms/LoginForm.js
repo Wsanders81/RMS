@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {getTokenFromAPI} from '../actions/actions'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function LoginForm({toggle}) {
     const initialValues = {
@@ -13,7 +13,6 @@ function LoginForm({toggle}) {
         password: ""
 
     }
-    const user = useSelector(store => store.userReducer.user)
     const dispatch = useDispatch()
     
     const navigate = useNavigate()

@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import FourOhFour from './FourOhFour';
-import { useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
 import Dashboard from './Dashboard';
 import Sales from './Sales';

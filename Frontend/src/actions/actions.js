@@ -1,10 +1,6 @@
 import axios from 'axios';
 import {
 	GET_USER,
-	GET_PRODUCTS,
-	GET_INVENTORY,
-	CREATE_PRODUCT,
-	DELETE_INVENTORY
 } from './types';
 const BASE_URL = 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
@@ -130,15 +126,15 @@ export async function getSupplierProducts(id) {
 	return response.data;
 }
 
-export async function getAllProducts(){
+export async function getAllProducts() {
 	const response = await axios({
-		method: 'post', 
-		url: `${BASE_URL}/products/all`, 
-		data: {
-			token: myToken
+		method : 'post',
+		url    : `${BASE_URL}/products/all`,
+		data   : {
+			token : myToken
 		}
-	})
-	return response.data.products
+	});
+	return response.data.products;
 }
 
 export async function addSupplierProduct(data) {
@@ -185,7 +181,37 @@ export async function getAllInventories(begDate, endDate) {
 			token   : myToken
 		}
 	});
+
 	return response.data;
+}
+
+function getKeyByValue(object, value) {
+	return Object.keys(object).find((key) => object[key] === value);
+}
+async function getPurchases(inventoryId) {
+	const response = await axios({
+		method : 'post',
+		url    : `${BASE_URL}/purchases/${inventoryId}`,
+		data   : {
+			token : myToken
+		}
+	});
+	const purchaseArr = Array.from(Object.values(response.data.purchases));
+
+	let outputObj = {
+		Purchases : ''
+	};
+	purchaseArr.map((purchase) => {
+		const categoryId = purchase.category_id;
+		const category = getKeyByValue(categories, categoryId);
+		outputObj.Purchases = {
+			...outputObj.Purchases,
+			[category] : purchase
+		};
+		return purchase; 
+	});
+
+	return outputObj;
 }
 
 export async function getInventory(id) {
@@ -197,16 +223,55 @@ export async function getInventory(id) {
 			token : myToken
 		}
 	});
+	const purchases = await getPurchases(id);
+	response.data.inventory.Purchases = purchases.Purchases;
+
 	return response.data;
 }
 
+async function addPurchasesToInventory(purchases, inventoryId) {
+	const purchaseArr = Array.from(Object.entries(purchases));
+	let promises = [];
+	for (let i = 0; i < purchaseArr.length; i++) {
+		promises.push(
+			axios({
+				method : 'post',
+				url    : `${BASE_URL}/purchases`,
+				data   : {
+					token        : myToken,
+					inventory_id : inventoryId,
+					category_id  : categories[purchaseArr[i][0]],
+					amount       : parseInt(purchaseArr[i][1])
+				}
+			})
+		);
+	}
+	const response = await Promise.all(promises);
+	let outputObj = {
+		Purchases : ''
+	};
+	response.map((purchase) => {
+		const categoryId = purchase.data.purchase.category_id;
+		const category = getKeyByValue(categories, categoryId);
+		outputObj.Purchases = {
+			...outputObj.Purchases,
+			[category] : purchase.data.purchase
+		};
+		return purchase; 
+	});
+	return outputObj;
+}
+
 export async function addInventory(data, date) {
+	console.log(data.Purchases);
 	if (
 		data.Food === '' ||
 		data.Alcohol === '' ||
 		data.NABev === '' ||
 		data.beer === '' ||
-		data.sales === ''
+		data.sales === '' ||
+		data.Purchases.Food === '' ||
+		data.BegInv.Food === ''
 	)
 		return 'error';
 	const items = data.Food.concat(data.Beer, data.Alcohol, data.NABev);
@@ -214,7 +279,11 @@ export async function addInventory(data, date) {
 	const alcohol_sales = data.Sales.Alcohol;
 	const beer_sales = data.Sales.Beer;
 	const na_bev_sales = data.Sales.NABev;
-
+	const inventoryPurchases = data.Purchases;
+	const beg_food = data.BegInv.Food;
+	const beg_alcohol = data.BegInv.Alcohol;
+	const beg_beer = data.BegInv.Beer;
+	const beg_na_bev = data.BegInv.NABev;
 	const inventory = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/inventories/add`,
@@ -224,12 +293,22 @@ export async function addInventory(data, date) {
 			alcohol_sales,
 			beer_sales,
 			na_bev_sales,
+			beg_food,
+			beg_alcohol,
+			beg_beer,
+			beg_na_bev,
 			items,
 			token         : myToken
 		}
 	});
 	const invId = inventory.data.inventory.id;
 	const response = await getInventory(invId);
+	const inventoryId = response.inventory.id;
+	const purchases = await addPurchasesToInventory(
+		inventoryPurchases,
+		inventoryId
+	);
+	response.inventory.Purchases = purchases.Purchases;
 
 	return response;
 }
@@ -276,27 +355,23 @@ export async function getMenuItems() {
 
 export async function createMenuItem(item) {
 	const response = await axios({
-		method: "post", 
-		url: `${BASE_URL}/menuItems/new`, 
-		data: {
-			token: myToken, 
-			item: item
-
+		method : 'post',
+		url    : `${BASE_URL}/menuItems/new`,
+		data   : {
+			token : myToken,
+			item  : item
 		}
-
-	})
-	return response.data
+	});
+	return response.data;
 }
 
-export async function deleteMenuItem(id){
+export async function deleteMenuItem(id) {
 	const response = await axios({
-		method: "delete", 
-		url: `${BASE_URL}/menuItems/${id}`, 
-		data: {
-			token: myToken
+		method : 'delete',
+		url    : `${BASE_URL}/menuItems/${id}`,
+		data   : {
+			token : myToken
 		}
-	})
-	return response.data
+	});
+	return response.data;
 }
-
-

@@ -11,7 +11,7 @@ import {
 	MenuItem
 } from '@mui/material';
 import { object, string, number } from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 export default function ProductForm({ submit, supplierId }) {
 	const initialValues = {
 		name              : '',
@@ -48,6 +48,7 @@ export default function ProductForm({ submit, supplierId }) {
 						onSubmit={async (values) => {
 							try {
 								let res = await submit(values);
+								return res; 
 							} catch (err) {
 								dispatch({
 									type         : 'ALERT',

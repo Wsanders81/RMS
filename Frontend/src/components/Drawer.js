@@ -1,22 +1,24 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Drawer, Button, List, Divider, ListItem } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { ALERT, LOGOUT} from '../actions/types'
+import { Box, Drawer, List, ListItem } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { ALERT, LOGOUT } from '../actions/types';
 export default function TempDrawer({ toggleDrawer, state }) {
-	const user = useSelector((store) => store.userReducer.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {
 		dispatch({ type: LOGOUT });
-		dispatch({type: ALERT, typeOfNotify: "success", message: "You have been successfully logged out"})
+		dispatch({
+			type: ALERT,
+			typeOfNotify: 'success',
+			message: 'You have been successfully logged out'
+		});
 		toggleDrawer();
 		navigate('/');
 	};
 	const handleClick = (page) => {
-		toggleDrawer()
-		navigate(`${page}`)
-	}
+		toggleDrawer();
+		navigate(`${page}`);
+	};
 	const list = (anchor) => (
 		<Box
 			sx={{ width: '20rem' }}
@@ -25,13 +27,27 @@ export default function TempDrawer({ toggleDrawer, state }) {
 			onKeyDown={toggleDrawer()}
 		>
 			<List className="Drawer-items">
-				<ListItem onClick={()=>handleClick('dashboard')} button>Dashboard</ListItem>
-				<ListItem onClick={()=>handleClick('pos')} button>POS</ListItem>
-				<ListItem onClick={()=>handleClick('orders')} button>Orders</ListItem>
-				<ListItem onClick={()=>handleClick('inventory')} button>Inventory</ListItem>
-				<ListItem onClick={()=>handleClick('menu-items')} button>Menu Items</ListItem>
-				<ListItem onClick={()=>handleClick('sales')} button>Sales</ListItem>
-				<ListItem onClick={()=>handleClick('suppliers')} button>Suppliers</ListItem>
+				<ListItem onClick={() => handleClick('dashboard')} button>
+					Dashboard
+				</ListItem>
+				<ListItem onClick={() => handleClick('pos')} button>
+					POS
+				</ListItem>
+				<ListItem onClick={() => handleClick('orders')} button>
+					Orders
+				</ListItem>
+				<ListItem onClick={() => handleClick('inventory')} button>
+					Inventory
+				</ListItem>
+				<ListItem onClick={() => handleClick('menu-items')} button>
+					Menu Items
+				</ListItem>
+				<ListItem onClick={() => handleClick('sales')} button>
+					Sales
+				</ListItem>
+				<ListItem onClick={() => handleClick('suppliers')} button>
+					Suppliers
+				</ListItem>
 				<ListItem onClick={logout} button>
 					Logout
 				</ListItem>

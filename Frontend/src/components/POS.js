@@ -8,7 +8,7 @@ export default function POS() {
 			dispatch({ type: SET_LOCATION, location: 'POS' });
 		};
 		setLocation();
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div>

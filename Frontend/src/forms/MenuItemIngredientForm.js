@@ -10,7 +10,6 @@ import {
 	Select,
 	MenuItem
 } from '@mui/material';
-import { useState } from 'react';
 
 export default function MenuItemIngredientForm({
 	addIngredient,

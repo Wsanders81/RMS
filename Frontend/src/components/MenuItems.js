@@ -29,7 +29,8 @@ export default function MenuItems() {
 	const [ showMenuItemTwo, setShowMenuItemTwo ] = useState(false);
 	const [ products, setProducts ] = useState(null);
 	const [ ingredients, addIngredients ] = useState([]);
-
+	
+		
 	const dispatch = useDispatch();
 	const user = useSelector((store) => store.userReducer);
 	useEffect(
@@ -45,7 +46,7 @@ export default function MenuItems() {
 				const allSuppliers = await getSuppliers();
 				setSuppliers(allSuppliers.suppliers);
 				allSuppliers.suppliers.map((supplier) => {
-					dispatch({ type: 'GET_SUPPLIERS', supplier });
+					return dispatch({ type: 'GET_SUPPLIERS', supplier });
 				});
 			};
 			const getProducts = async function() {
@@ -206,14 +207,14 @@ export default function MenuItems() {
 					/>
 				) : null}
 			</TabPanel>
-			<TabPanel value={value} index={4}>
+			<TabPanel value={value} index={3}>
 				{menuItems ? (
 					<MenuItemTable
 						items={menuItems.items.filter(
 							(item) => item.category_id === 4
 						)}
 						suppliers={suppliers}
-						category={'NA Bev'}
+						category={'NABev'}
 						toggleRefresh={toggleRefresh}
 					/>
 				) : null}
@@ -230,6 +231,7 @@ export default function MenuItems() {
 						toggle={toggleModal}
 						submit={handleFirstSubmit}
 						newItem={newItem}
+						showMenu={showMenuItemTwo}
 					/>
 				) : (
 					<MenuItemIngredientForm

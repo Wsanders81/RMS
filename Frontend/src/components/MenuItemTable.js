@@ -24,7 +24,6 @@ function Row(props) {
   const {suppliers} = props; 
   const {user} = props; 
   const {toggle} = props; 
-  const {setId} = props; 
   return (
     <>
       <TableRow >
@@ -104,6 +103,7 @@ export default function MenuItemTable({category, items, suppliers, toggleRefresh
         setId(id)
         
     }
+    console.log(items)
     const handleDelete = async(id)=> {
         const res = await deleteMenuItem(id); 
         

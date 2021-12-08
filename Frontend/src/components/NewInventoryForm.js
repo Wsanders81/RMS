@@ -30,7 +30,13 @@ const INV_INITIAL_STATE = {
         Alcohol: "", 
         Beer: "", 
         NABev: ""
-    }
+    }, 
+	BegInv : {
+		Food: "", 
+		Alcohol: "", 
+		Beer: "", 
+		NABev: ""
+	}
 };
 const SUBMIT_INITIAL_STATE = {
 	Food    : false,
@@ -38,7 +44,8 @@ const SUBMIT_INITIAL_STATE = {
 	Beer    : false,
 	NABev   : false, 
     Sales: false, 
-	Purchases: false
+	Purchases: false, 
+	BegInv: false
 };
 function NewInventoryForm({toggle, date, setInv}) {
 	const [ submitted, setSubmitted ] = useState(SUBMIT_INITIAL_STATE);
@@ -102,12 +109,12 @@ function NewInventoryForm({toggle, date, setInv}) {
 			return { ...state };
 		});
 	};
-    console.log(invVals)
+    
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
 
 		return (
-			<div
+			<Box
 				role="tabpanel"
 				hidden={value !== index}
 				id={`simple-tabpanel-${index}`}
@@ -119,7 +126,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 						<Typography>{children}</Typography>
 					</Box>
 				)}
-			</div>
+			</Box>
 		);
 	}
 	function a11yProps(index) {
@@ -148,6 +155,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 					<Tab label="NA Bev" {...a11yProps(3)} />
 					<Tab label="Sales" {...a11yProps(4)} />
 					<Tab label="Purchases" {...a11yProps(5)} />
+					<Tab label="Beginning Inventory" {...a11yProps(6)} />
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
@@ -196,7 +204,7 @@ function NewInventoryForm({toggle, date, setInv}) {
                     submitted={submitted}
                     category={'Sales'}
                     submit={handleSubmit}
-                    invVals={invVals}/>
+                    invVals={invVals.Sales}/>
                     
             </TabPanel>
             <TabPanel value={value} index={5}>
@@ -205,7 +213,16 @@ function NewInventoryForm({toggle, date, setInv}) {
                     submitted={submitted}
                     category={'Purchases'}
                     submit={handleSubmit}
-                    invVals={invVals}/>
+                    invVals={invVals.Purchases}/>
+                    
+            </TabPanel>
+            <TabPanel value={value} index={6}>
+                <SalesForm 
+                    unsubmit={handleUnsubmit}
+                    submitted={submitted}
+                    category={'BegInv'}
+                    submit={handleSubmit}
+                    invVals={invVals.BegInv}/>
                     
             </TabPanel>
             

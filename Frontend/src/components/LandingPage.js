@@ -1,4 +1,4 @@
-import { Modal, Box, Typography, Button } from '@mui/material';
+import { Modal, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../forms/LoginForm';
 import RegistrationForm from '../forms/RegistrationForm';
@@ -21,7 +21,7 @@ export default function LandingPage({
 			dispatch({ type: SET_LOCATION, location: 'Welcome to RMS!' });
 		};
 		setLocation();
-	}, []);
+	}, [dispatch]);
 	const handleClick = async function() {
 		const token = await dispatch(getTokenFromAPI('testuser', 'password'));
 		if (token) {

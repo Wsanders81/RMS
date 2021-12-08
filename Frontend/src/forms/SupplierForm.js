@@ -33,6 +33,7 @@ export default function SupplierForm({ submit }) {
                 initialValues={initialValues} onSubmit={async(values) => {
                     try {
                         let res = await submit(values)
+                        return res; 
                     
                     } catch(err) {
                         dispatch({type: "ALERT", typeOfNotify: "error", message: "That supplier name is already taken"})
