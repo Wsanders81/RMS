@@ -29,8 +29,7 @@ export default function MenuItems() {
 	const [ showMenuItemTwo, setShowMenuItemTwo ] = useState(false);
 	const [ products, setProducts ] = useState(null);
 	const [ ingredients, addIngredients ] = useState([]);
-	
-		
+
 	const dispatch = useDispatch();
 	const user = useSelector((store) => store.userReducer);
 	useEffect(
@@ -100,7 +99,7 @@ export default function MenuItems() {
 		setShowMenuItemOne((show) => !show);
 		setShowMenuItemTwo((show) => !show);
 	};
-	
+
 	const handleSubmitToAPI = async () => {
 		newItem.ingredients = ingredients;
 		const res = await createMenuItem(newItem);
@@ -113,20 +112,19 @@ export default function MenuItems() {
 			return;
 		}
 		else {
-			 
 			dispatch({
 				type         : ALERT,
 				typeOfNotify : 'success',
 				message      : 'Item successfully added'
 			});
-			window.location.reload()
+			window.location.reload();
 		}
 	};
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
 
 		return (
-			<div
+			<Box
 				role="tabpanel"
 				hidden={value !== index}
 				id={`simple-tabpanel-${index}`}
@@ -138,7 +136,7 @@ export default function MenuItems() {
 						<Typography>{children}</Typography>
 					</Box>
 				)}
-			</div>
+			</Box>
 		);
 	}
 	function a11yProps(index) {
@@ -173,6 +171,7 @@ export default function MenuItems() {
 			</Box>
 			<TabPanel value={value} index={0}>
 				{menuItems ? (
+					
 					<MenuItemTable
 						items={menuItems.items.filter(
 							(item) => item.category_id === 1

@@ -1,8 +1,7 @@
 import axios from 'axios';
-import {
-	GET_USER,
-} from './types';
-const BASE_URL = 'http://localhost:3001';
+import { GET_USER } from './types';
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
 
 function getUser(token, username, isAdmin) {
@@ -101,6 +100,17 @@ export async function getSuppliers() {
 	return response.data;
 }
 
+export async function getSupplier(id) {
+	const response = await axios({
+		method : 'post',
+		url    : `${BASE_URL}/suppliers/${id}`,
+		data   : {
+			token : myToken
+		}
+	});
+	return response.data;
+}
+
 export async function addSupplier(data) {
 	const response = await axios({
 		method : 'post',
@@ -111,6 +121,17 @@ export async function addSupplier(data) {
 		}
 	});
 
+	return response.data;
+}
+
+export async function deleteSupplier(id) {
+	const response = await axios({
+		method : 'delete',
+		url    : `${BASE_URL}/suppliers/${id}`,
+		data   : {
+			token : myToken
+		}
+	});
 	return response.data;
 }
 
@@ -208,7 +229,7 @@ async function getPurchases(inventoryId) {
 			...outputObj.Purchases,
 			[category] : purchase
 		};
-		return purchase; 
+		return purchase;
 	});
 
 	return outputObj;
@@ -257,13 +278,12 @@ async function addPurchasesToInventory(purchases, inventoryId) {
 			...outputObj.Purchases,
 			[category] : purchase.data.purchase
 		};
-		return purchase; 
+		return purchase;
 	});
 	return outputObj;
 }
 
 export async function addInventory(data, date) {
-	console.log(data.Purchases);
 	if (
 		data.Food === '' ||
 		data.Alcohol === '' ||

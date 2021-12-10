@@ -15,7 +15,7 @@ router.get('/',ensureLoggedIn, async function(req, res, next){
     }
 })
 
-router.post('/',ensureLoggedIn, async function(req, res, next){
+router.post('/', async function(req, res, next){
     try {
         const order = await Order.createOrder(req.body)
         if(order === "error") throw new BadRequestError("")
@@ -25,7 +25,7 @@ router.post('/',ensureLoggedIn, async function(req, res, next){
     }
 })
 
-router.delete('/:id',ensureAdmin, async function(req, res, next){
+router.delete('/:id', async function(req, res, next){
     try {
         const message = await Order.deleteOrder(req.params.id)
         if(message === "error") throw new BadRequestError("Order not found")

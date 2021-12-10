@@ -4,12 +4,12 @@ import { getSuppliers, addSupplier } from '../actions/actions';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_LOCATION } from '../actions/types';
+import { SET_LOCATION, ALERT } from '../actions/types';
 import SupplierForm from '../forms/SupplierForm';
 export default function Suppliers() {
 	const [ suppliers, setSuppliers ] = useState(null);
 	const [ isOpen, setIsOpen ] = useState(false);
-
+	const [ refresh, setRefresh ] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const user = useSelector((store) => store.userReducer);
@@ -20,7 +20,6 @@ export default function Suppliers() {
 				setSuppliers(allSuppliers.suppliers);
 				allSuppliers.suppliers.map((supplier) => {
 					return dispatch({ type: 'GET_SUPPLIERS', supplier });
-					
 				});
 			};
 			const setLocation = () => {
@@ -29,7 +28,7 @@ export default function Suppliers() {
 			setLocation();
 			getAllSuppliers();
 		},
-		[ dispatch ]
+		[ dispatch, refresh ]
 	);
 	const toggleModal = () => {
 		setIsOpen((isOpen) => !isOpen);
@@ -39,9 +38,18 @@ export default function Suppliers() {
 	};
 	const handleSubmit = async (values) => {
 		const res = await addSupplier(values);
-		console.log(res);
+		if (res.newSupplier) {
+			dispatch({
+				type         : ALERT,
+				typeOfNotify : 'success',
+				message      : 'Supplier successfully added'
+			});
+			setRefresh((state) => !state);
+			toggleModal();
+		}
+		return res;
 	};
-	console.log(suppliers)
+
 	return (
 		<Box className="Suppliers">
 			{user.isAdmin === 'true' ? (

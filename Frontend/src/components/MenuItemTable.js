@@ -103,7 +103,7 @@ export default function MenuItemTable({category, items, suppliers, toggleRefresh
         setId(id)
         
     }
-    console.log(items)
+    
     const handleDelete = async(id)=> {
         const res = await deleteMenuItem(id); 
         

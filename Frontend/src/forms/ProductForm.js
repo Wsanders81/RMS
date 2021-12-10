@@ -12,7 +12,8 @@ import {
 } from '@mui/material';
 import { object, string, number } from 'yup';
 import { useDispatch } from 'react-redux';
-export default function ProductForm({ submit, supplierId }) {
+import { forwardRef } from 'react';
+const ProductForm = forwardRef((props, ref) => {
 	const initialValues = {
 		name              : '',
 		unit              : '',
@@ -22,7 +23,7 @@ export default function ProductForm({ submit, supplierId }) {
 		category_id       : ''
 	};
 	const dispatch = useDispatch();
-
+	const { submit, supplierId } = props;
 	return (
 		<div className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>
@@ -48,7 +49,7 @@ export default function ProductForm({ submit, supplierId }) {
 						onSubmit={async (values) => {
 							try {
 								let res = await submit(values);
-								return res; 
+								return res;
 							} catch (err) {
 								dispatch({
 									type         : 'ALERT',
@@ -128,7 +129,6 @@ export default function ProductForm({ submit, supplierId }) {
 									<Field
 										name="category_id"
 										as={Select}
-										label="Category"
 									>
 										<MenuItem value={1}>Food</MenuItem>
 										<MenuItem value={2}>Alcohol</MenuItem>
@@ -160,4 +160,5 @@ export default function ProductForm({ submit, supplierId }) {
 			</Card>
 		</div>
 	);
-}
+});
+export default ProductForm;

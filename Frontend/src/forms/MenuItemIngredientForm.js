@@ -10,21 +10,16 @@ import {
 	Select,
 	MenuItem
 } from '@mui/material';
-
-export default function MenuItemIngredientForm({
-	addIngredient,
-	ingredients,
-	products,
-	submit,
-	toggleForm
-}) {
+import { forwardRef } from 'react';
+const MenuItemIngredientForm = forwardRef((props, ref) => {
+	const { addIngredient, ingredients, products, submit, toggleForm } = props;
 	const initialValues = {
 		product_id : '',
 		quantity   : ''
 	};
-	
+
 	return (
-		<div className="Supplier-modal">
+		<Box className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>
 				<CardContent>
 					<Typography variant="h4" mb={2}>
@@ -168,6 +163,8 @@ export default function MenuItemIngredientForm({
 					) : null}
 				</CardContent>
 			</Card>
-		</div>
+		</Box>
 	);
-}
+});
+
+export default MenuItemIngredientForm;

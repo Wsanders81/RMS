@@ -43,7 +43,7 @@ export default function InventoryTable ({inventory, removeInv}) {
 					<th>Unit</th>
 					<th>Price</th>
 					<th>Qty On Hand</th>
-					<th colspan="2">Extended Value</th>
+					<th colSpan="2">Extended Value</th>
 				</tr>
 			</thead>
 			<tbody >
@@ -56,12 +56,12 @@ export default function InventoryTable ({inventory, removeInv}) {
 							<td>{item.unit}</td>
 							<td>{item.price}</td>
 							<td>{item.quantity}</td>
-							<td colspan="2">{item.quantity * item.price}</td>
+							<td colSpan="2">{item.quantity * item.price}</td>
 						</tr>
 					);
 				})}
                 <tr>
-                    <th colspan="6">{`Total ${catName.charAt(0).toUpperCase() + catName.slice(1)} inventory : $${totals[catName]}`}</th>
+                    <th colSpan="6">{`Total ${catName.charAt(0).toUpperCase() + catName.slice(1)} inventory : $${totals[catName]}`}</th>
                 </tr>
 			</tbody>
             </>
@@ -74,7 +74,7 @@ export default function InventoryTable ({inventory, removeInv}) {
         <table className="table ">
 			<thead className="table-light">
             <tr>
-                    <th  colspan="6" >Sales</th>
+                    <th  colSpan="6" >Sales</th>
                 </tr>
 				<tr>
 					<th>Date</th>
@@ -106,7 +106,7 @@ export default function InventoryTable ({inventory, removeInv}) {
 			</tbody>
 			<thead className="table-light">
             <tr>
-                    <th  colspan="6" >Purchases</th>
+                    <th  colSpan="6" >Purchases</th>
                 </tr>
 				<tr>
 					<th></th>
@@ -137,7 +137,7 @@ export default function InventoryTable ({inventory, removeInv}) {
 			</tbody>
 			<thead className="table-light">
             <tr>
-                    <th  colspan="6" >Beginning Inventory</th>
+                    <th  colSpan="6" >Beginning Inventory</th>
                 </tr>
 				<tr>
 					<th></th>
@@ -168,7 +168,7 @@ export default function InventoryTable ({inventory, removeInv}) {
 			</tbody>
 			<thead className="table-light">
             <tr>
-                    <th  colspan="6" >Cost of Goods</th>
+                    <th  colSpan="6" >Cost of Goods</th>
                 </tr>
 				<tr>
 					<th></th>

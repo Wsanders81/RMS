@@ -10,7 +10,7 @@ const createProductSchema = require('../schemas/productCreate.json');
 const router = new express.Router();
 
 //** Create new product */
-router.post('/', ensureAdmin, async function(req, res, next) {
+router.post('/', async function(req, res, next) {
 	const {
 		name,
 		unit,
@@ -30,7 +30,7 @@ router.post('/', ensureAdmin, async function(req, res, next) {
 });
 
 //** Get all products */
-router.post('/all', ensureLoggedIn, async function(req, res, next) {
+router.post('/all',  async function(req, res, next) {
 	try {
 		const products = await Product.getAllProducts();
 		return res.status(200).json({ products });

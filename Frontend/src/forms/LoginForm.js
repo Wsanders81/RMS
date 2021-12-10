@@ -2,12 +2,12 @@ import { Form, Formik, Field, ErrorMessage } from 'formik'
 import { Card, CardContent, Typography, TextField, FormGroup, Box, Button } from '@mui/material'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import {getTokenFromAPI} from '../actions/actions'
 import { useDispatch } from 'react-redux';
+import {forwardRef} from 'react'
+import {ALERT} from '../actions/types'
 
-function LoginForm({toggle}) {
+const LoginForm = forwardRef((props, ref) => {
     const initialValues = {
         username: "", 
         password: ""
@@ -16,16 +16,11 @@ function LoginForm({toggle}) {
     const dispatch = useDispatch()
     
     const navigate = useNavigate()
-    const notify = () => toast.error("Sorry, incorrect login information",{
-        position: toast.POSITION.TOP_RIGHT
-        
-      })
+    
     
     return (
         <div style={{textAlign:"center"}}>
-            <ToastContainer 
-            autoClose={2000}
-            hideProgressBar={true}/>
+            
         <Card sx={{margin: 'auto'}}>
             
             <CardContent>
@@ -42,12 +37,14 @@ function LoginForm({toggle}) {
                     let res = await dispatch(getTokenFromAPI(values.username, values.password))
                     
                     if(res.token) {
-                        toggle()
+                        props.toggle()
+                        dispatch({type:ALERT, typeOfNotify:"success", message: `Welcome back, ${values.username}!`})
                         navigate('/dashboard')
                     }
                 } catch(err){
                     console.log(err)
-                    notify()
+                    dispatch({type:ALERT, typeOfNotify:"error", message: `Invalid username / password`})
+
                 }
                 }}>
                     {({ values, errors }) => (
@@ -73,6 +70,6 @@ function LoginForm({toggle}) {
         </Card>
         </div>
     )
-}
+})
 
 export default LoginForm; 

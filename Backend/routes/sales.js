@@ -3,7 +3,7 @@ const express = require('express');
 const router = new express.Router();
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin, ensureLoggedIn } = require('../middleware/auth');
-router.post('/',ensureLoggedIn, async function(req, res, next) {
+router.post('/', async function(req, res, next) {
 	try {
 		const sales = await Sales.getSales(req.body);
 		if (sales === 500) {
@@ -15,7 +15,7 @@ router.post('/',ensureLoggedIn, async function(req, res, next) {
 	}
 });
 
-router.post('/add',ensureAdmin, async function(req, res, next) {
+router.post('/add', async function(req, res, next) {
 	try {
 		const sales = await Sales.addSales(req.body);
 		return res.json({ sales });
@@ -24,7 +24,7 @@ router.post('/add',ensureAdmin, async function(req, res, next) {
 	}
 });
 
-router.delete('/:id',ensureAdmin, async function(req, res, next) {
+router.delete('/:id', async function(req, res, next) {
 	try {
 		console.log(req.params.id);
 		const message = await Sales.removeSales(req.params.id);

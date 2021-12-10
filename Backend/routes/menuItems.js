@@ -3,7 +3,7 @@ const router = new express.Router();
 const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth');
 const MenuItem = require('../models/menuItem');
 
-router.post('/', ensureLoggedIn, async function(req, res, next) {
+router.post('/',  async function(req, res, next) {
 	try {
 		const items = await MenuItem.getAll();
 		
@@ -12,7 +12,7 @@ router.post('/', ensureLoggedIn, async function(req, res, next) {
 		return next(err);
 	}
 });
-router.post('/ingredients', ensureLoggedIn, async function(req, res, next) {
+router.post('/ingredients',  async function(req, res, next) {
 	try {
 		const items = await MenuItem.getMenuItemIngredients(req.body.id);
 		
@@ -22,7 +22,7 @@ router.post('/ingredients', ensureLoggedIn, async function(req, res, next) {
 	}
 });
 
-router.post('/new', ensureAdmin, async function(req, res, next) {
+router.post('/new',  async function(req, res, next) {
 	try {
 		const item = await MenuItem.createItem(req.body.item);
 		return res.json({ item });
@@ -31,7 +31,7 @@ router.post('/new', ensureAdmin, async function(req, res, next) {
 	}
 });
 
-router.delete('/:id', ensureAdmin, async function(req, res, next){
+router.delete('/:id', async function(req, res, next){
     try {
         const deleteItem = await MenuItem.deleteMenuItem(req.params.id)
         if(deleteItem === 'success') {

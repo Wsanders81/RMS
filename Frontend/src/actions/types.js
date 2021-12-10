@@ -9,3 +9,4 @@ export const LOGOUT = 'LOGOUT';
 export const GET_SUPPLIERS = 'GET_SUPPLIERS';
 export const ALERT = 'ALERT';
 export const SET_LOCATION = 'SET_LOCATION';
+export const CLOSE_DRAWER = "CLOSE_DRAWER"

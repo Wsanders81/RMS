@@ -21,6 +21,11 @@ export default function SalesForm({
 		Beer: "", 
 		NABev: ""
 	}
+	const categoryLabels = {
+		Sales: "Sales", 
+		Purchases: "Purchases", 
+		BegInv: "Beginning Inventory"
+	}
 	const salesDate = date ? date : null;
 	const [ sales, setSales ] = useState(invVals ? invVals : SALES_INITIAL_STATE);
 	
@@ -42,7 +47,7 @@ export default function SalesForm({
 			<FormControl>
 				<TextField
 					type="number"
-					label={category === "BegInv" ? "Food Inventory": "Food Sales"}
+					label={"Food " + categoryLabels[category]}
 					value={sales.Food}
 					onChange={handleChange}
 					name="Food"
@@ -55,7 +60,7 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={category === "BegInv" ? "Alcohol Inventory": "Alcohol Sales"}
+					label={"Alcohol " + categoryLabels[category]}
 					value={
 						sales.Alcohol
 					}
@@ -70,7 +75,7 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={category === "BegInv" ? "Beer Inventory": "Beer Sales"}
+					label={"Beer " + categoryLabels[category]}
 					value={sales.Beer}
 					onChange={handleChange}
 					name="Beer"
@@ -83,7 +88,7 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={category === "BegInv" ? "NABev Inventory": "NABev Sales"}
+					label={"NA Bev " + categoryLabels[category]}
 					value={sales.NABev }
 					onChange={handleChange}
 					name="NABev"

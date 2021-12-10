@@ -10,14 +10,15 @@ import {
 	Select,
 	MenuItem
 } from '@mui/material';
+import { forwardRef } from 'react';
 import { object, string, number } from 'yup';
-export default function MenuItemForm({ submit, newItem }) {
+const MenuItemForm = forwardRef((props, ref) => {
+	const { submit, newItem } = props;
 	const initialValues = {
 		name        : newItem.name !== '' ? newItem.name : '',
 		price       : newItem.price !== '' ? newItem.price : '',
 		category_id : ''
 	};
-
 	return (
 		<div className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>
@@ -25,7 +26,7 @@ export default function MenuItemForm({ submit, newItem }) {
 					<Typography variant="h4" mb={2}>
 						Add New Menu Item
 					</Typography>
-					
+
 					<Formik
 						validationSchema={object({
 							name        : string()
@@ -116,4 +117,5 @@ export default function MenuItemForm({ submit, newItem }) {
 			</Card>
 		</div>
 	);
-}
+});
+export default MenuItemForm;

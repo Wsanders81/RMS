@@ -3,7 +3,8 @@ import { Form, Formik, Field, ErrorMessage } from 'formik'
 import { Card, CardContent, Typography, TextField, FormGroup, Box, Button } from '@mui/material'
 import { object, string } from 'yup'
 import { useDispatch } from 'react-redux'
-export default function SupplierForm({ submit }) {
+import { forwardRef } from 'react'
+const SupplierForm = forwardRef((props, ref) => {
     const initialValues = {
         name: "", 
         address: "", 
@@ -13,7 +14,7 @@ export default function SupplierForm({ submit }) {
 
     }
     const dispatch = useDispatch()
-    
+    const {submit} = props; 
     return (
         <div className="Supplier-modal">
            
@@ -76,4 +77,6 @@ export default function SupplierForm({ submit }) {
         </Card>
         </div>
     )
-}
+})
+
+export default SupplierForm;

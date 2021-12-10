@@ -3,7 +3,7 @@ const router = new express.Router();
 const Inventory = require('../models/inventory');
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin, ensureLoggedIn } = require('../middleware/auth');
-router.post('/', ensureLoggedIn, async function(req, res, next) {
+router.post('/',  async function(req, res, next) {
 	try {
 		const inventory = await Inventory.getInventory(req.body.id);
 		if (inventory === 'error')
@@ -16,7 +16,7 @@ router.post('/', ensureLoggedIn, async function(req, res, next) {
 	}
 });
 
-router.post('/all', ensureLoggedIn, async function(req, res, next){
+router.post('/all', async function(req, res, next){
 	try {
 		const inventories = await Inventory.getAllInventories(req.body)
 		if(inventories === 'error') {
@@ -28,7 +28,7 @@ router.post('/all', ensureLoggedIn, async function(req, res, next){
 	}
 })
 
-router.post('/add', ensureLoggedIn, async function(req, res, next) {
+router.post('/add',  async function(req, res, next) {
 	try {
 		const inventory = await Inventory.addInventory(req.body);
 		const inventoryId = inventory.id;
@@ -42,7 +42,7 @@ router.post('/add', ensureLoggedIn, async function(req, res, next) {
 	}
 });
 
-router.delete('/:id', ensureAdmin, async function(req, res, next) {
+router.delete('/:id',  async function(req, res, next) {
 	try {
 		const message = await Inventory.deleteInventory(req.params.id);
 		

@@ -9,6 +9,7 @@ import Orders from './Orders'
 import MenuItems from './MenuItems'
 import Suppliers from './Suppliers'
 import Supplier from './Supplier'
+import PrivateRoute from './ProtectedRoutes';
 export default function UserRoutes({
 	toggleModal,
 	open,
@@ -29,14 +30,16 @@ export default function UserRoutes({
 					/>
 				}
 			/>
-			<Route path="/dashboard" element={<Dashboard />} />
-			<Route path="/sales" element={<Sales />} />
-            <Route path ="/pos" element={<POS/>}/>
-            <Route path ="/inventory" element={<Inventories/>}/>
-            <Route path ="/orders" element={<Orders/>}/>
-            <Route path ="/menu-items" element={<MenuItems/>}/>
-            <Route path ="/suppliers" element={<Suppliers/>}/>
-            <Route path ="/suppliers/:id" element={<Supplier/>}/>
+
+			<Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+
+			<Route path="/sales" element={<PrivateRoute><Sales/></PrivateRoute>} />
+            <Route path ="/pos" element={<PrivateRoute><POS/></PrivateRoute>}/>
+            <Route path ="/inventory" element={<PrivateRoute><Inventories/></PrivateRoute>}/>
+            <Route path ="/orders" element={<PrivateRoute><Orders/></PrivateRoute>}/>
+            <Route path ="/menu-items" element={<PrivateRoute><MenuItems/></PrivateRoute>}/>
+            <Route path ="/suppliers" element={<PrivateRoute><Suppliers/></PrivateRoute>}/>
+            <Route path ="/suppliers/:id" element={<PrivateRoute><Supplier/></PrivateRoute>}/>
 		</Routes>
 	);
 }

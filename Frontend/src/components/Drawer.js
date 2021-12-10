@@ -1,30 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Drawer, List, ListItem } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { ALERT, LOGOUT } from '../actions/types';
-export default function TempDrawer({ toggleDrawer, state }) {
+import { ALERT, LOGOUT, CLOSE_DRAWER } from '../actions/types';
+export default function TempDrawer({ toggleDrawer, drawerOpen }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {
 		dispatch({ type: LOGOUT });
 		dispatch({
-			type: ALERT,
-			typeOfNotify: 'success',
-			message: 'You have been successfully logged out'
+			type         : ALERT,
+			typeOfNotify : 'success',
+			message      : 'You have been successfully logged out'
 		});
-		toggleDrawer();
 		navigate('/');
 	};
 	const handleClick = (page) => {
-		toggleDrawer();
+		dispatch({ type: CLOSE_DRAWER, open: 'false' });
 		navigate(`${page}`);
 	};
 	const list = (anchor) => (
 		<Box
 			sx={{ width: '20rem' }}
 			role="presentation"
-			onClick={toggleDrawer()}
-			onKeyDown={toggleDrawer()}
+			onClick={toggleDrawer}
+			onKeyDown={toggleDrawer}
 		>
 			<List className="Drawer-items">
 				<ListItem onClick={() => handleClick('dashboard')} button>
@@ -66,7 +65,7 @@ export default function TempDrawer({ toggleDrawer, state }) {
 		</Box>
 	);
 	return (
-		<Drawer anchor={'right'} open={state} onClose={toggleDrawer}>
+		<Drawer anchor={'right'} open={drawerOpen} onClose={toggleDrawer}>
 			{list('right')}
 		</Drawer>
 	);

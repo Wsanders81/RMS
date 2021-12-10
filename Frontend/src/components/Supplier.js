@@ -1,11 +1,13 @@
 import { Box, Button, Modal } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
 	getSupplierProducts,
 	addSupplierProduct,
-	deleteSupplierProduct
+	deleteSupplierProduct, 
+	deleteSupplier, 
+	getSupplier
 } from '../actions/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -19,11 +21,15 @@ export default function Supplier() {
 	const [ isOpen, setIsOpen ] = useState(false);
 	const [ isOpen2, setIsOpen2 ] = useState(false);
 	const [ productToDelete, setProductToDelete ] = useState(0);
-	const supplier = useSelector((store) => store.supplierReducer)[id];
+	const [ loading, setLoading ] = useState(true)
+	let backupSupplier = useRef(null)
+	const supplier = useSelector((store) => store.supplierReducer)[id] || backupSupplier.current
 	const user = useSelector((store) => store.userReducer);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	//TODO: Add suppliers to local state. App crashing on refresh
+	
+	console.log(backupSupplier.current)
+	
 	useEffect(
 		() => {
 			const getProducts = async function() {
@@ -35,6 +41,15 @@ export default function Supplier() {
 		},
 		[ id, isOpen2, isOpen ]
 	);
+	useEffect(()=>{
+		const getSupplierById = async function(){
+			const supplier = await getSupplier(id)
+			
+			backupSupplier.current = supplier.supplier;
+			setLoading(false)
+		}; 
+		getSupplierById()
+	}, [id])
 
 	const toggleModal = () => {
 		setIsOpen((isOpen) => !isOpen);
@@ -66,6 +81,14 @@ export default function Supplier() {
 		}
 	};
 
+	const deleteSelectedSupplier = async () => {
+		const res = await deleteSupplier(supplier.id)
+		if(res){
+		 dispatch({type:ALERT, typeOfNotify: "success", message: "Supplier successfully deleted"})
+		 navigate('/suppliers')
+		}
+	}
+	if(loading) return <h1>...Loading</h1>
 	return (
 		<Box className="Suppliers">
 			<h1>Supplier Page</h1>
@@ -75,7 +98,10 @@ export default function Supplier() {
 				</Button>
 			</Box>
 			{user.isAdmin === 'true' ? (
+				<>
 				<Button onClick={toggleModal}>Add Products</Button>
+				<Button onClick={deleteSelectedSupplier}>Delete supplier</Button>
+				</>
 			) : null}
 			<h3>{supplier.name}</h3>
 			<p>
