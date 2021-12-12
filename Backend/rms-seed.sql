@@ -21,7 +21,7 @@ VALUES
     ('food'), 
     ('alcohol'), 
     ('beer'), 
-    ('NA Beverage');
+    ('NABev');
 
 INSERT INTO suppliers (name, address, phone, email)
 VALUES (

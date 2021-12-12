@@ -11,6 +11,7 @@
     "@mui/material": "^5.1.0",
     "@progress/kendo-licensing": "^1.2.1",
     "@progress/kendo-react-charts": "^4.13.0",
+    "@progress/kendo-react-tooltip": "^4.13.0",
     "@progress/kendo-theme-default": "^4.43.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

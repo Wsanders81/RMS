@@ -6,20 +6,12 @@ import {
 	ChartTitle
 } from '@progress/kendo-react-charts';
 import '@progress/kendo-theme-default/dist/all.css';
+import '../../styles/PieChart.css';
 import 'hammerjs';
-const returnCategoryName = (array) => {
-	let nameArray = [];
-	for (let name of array) {
-		const formattedName = name.replace('Sales', '');
-		const capitalizedName =
-			formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
-		nameArray.push(capitalizedName);
-	}
-	return nameArray;
-};
-const PieChart = ({ sales }) => {
+import { returnCategoryName } from '../../helpers/categoryNames';
+import { calculatePercentage } from '../../helpers/groupSales';
+const PieChart = ({ sales, begDate, endDate }) => {
 	const categoryNames = returnCategoryName(Object.keys(sales));
-
 	const series = [
 		{
 			category : categoryNames[0],
@@ -38,21 +30,31 @@ const PieChart = ({ sales }) => {
 			value    : sales.NAbevSales
 		}
 	];
-	
+	const totalSales =
+		sales.foodSales +
+		sales.alcoholSales +
+		sales.beerSales +
+		sales.NAbevSales;
 	const labelContent = (props) => {
-        let formatedNumber = Number(
-            props.dataItem.value
-            ).toLocaleString(undefined, {
-                // style                 : 'percent',
-                minimumFractionDigits : 2
-            });
-            
-            return `${props.dataItem.category} Sales: ${formatedNumber}`;
-	};
+		let formatedNumber = Number(
+			props.dataItem.value
+		).toLocaleString(undefined, {
+			// style                 : 'percent',
+			minimumFractionDigits : 2
+		});
 
+		return `${props.dataItem
+			.category} Sales: $${formatedNumber} / ${calculatePercentage(
+			props.dataItem.value,
+			totalSales
+		)}%`;
+	};
 	return (
-		<Chart>
-			<ChartTitle text="World Population by Broad Age Groups" />
+		<Chart className="PieChart">
+			<ChartTitle
+				text={`Category Sales ${begDate} - ${endDate} \n Total sales : $${totalSales.toLocaleString()}`}
+			/>
+
 			<ChartLegend position="bottom" />
 			<ChartSeries>
 				<ChartSeriesItem

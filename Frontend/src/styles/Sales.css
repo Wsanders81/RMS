@@ -1,26 +1,26 @@
-
 .Sales {
-    padding-top: 5rem; 
+	padding-top: 5rem;
+	padding-bottom: 5rem;
 }
 
 .Sales-modal {
-    background-color: white; 
-    width: 50%; 
-    height: 80%; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    border-radius: 5px;
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .Sales-modal-topText {
-    padding-top: 2rem; 
+	padding-top: 2rem;
 }
 
 .Sales-modal-form {
-    margin: auto; 
+	margin: auto;
 }

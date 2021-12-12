@@ -57,14 +57,14 @@ CREATE TABLE products (
 CREATE TABLE inventories (
     id SERIAL PRIMARY KEY, 
     date DATE NOT NULL , 
-    food_sales INTEGER NOT NULL, 
-    alcohol_sales INTEGER NOT NULL, 
-    beer_sales INTEGER NOT NULL, 
-    na_bev_sales INTEGER NOT NULL, 
-    beg_food INTEGER NOT NULL, 
-    beg_alcohol INTEGER NOT NULL,
-    beg_beer INTEGER NOT NULL,
-    beg_na_bev INTEGER NOT NULL
+    food_sales INTEGER NOT NULL , 
+    alcohol_sales INTEGER NOT NULL , 
+    beer_sales INTEGER NOT NULL , 
+    na_bev_sales INTEGER NOT NULL , 
+    beg_food INTEGER NOT NULL , 
+    beg_alcohol INTEGER NOT NULL ,
+    beg_beer INTEGER NOT NULL ,
+    beg_na_bev INTEGER NOT NULL 
 );
 
 -- This will hold the inventory count 

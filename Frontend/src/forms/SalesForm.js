@@ -14,40 +14,40 @@ export default function SalesForm({
 	invVals,
 	date
 }) {
-	
 	const SALES_INITIAL_STATE = {
-		Food: "", 
-		Alcohol: "", 
-		Beer: "", 
-		NABev: ""
-	}
+		Food    : '',
+		Alcohol : '',
+		Beer    : '',
+		NABev   : ''
+	};
 	const categoryLabels = {
-		Sales: "Sales", 
-		Purchases: "Purchases", 
-		BegInv: "Beginning Inventory"
-	}
+		Sales     : 'Sales',
+		Purchases : 'Purchases',
+		BegInv    : 'Beginning Inventory'
+	};
 	const salesDate = date ? date : null;
-	const [ sales, setSales ] = useState(invVals ? invVals : SALES_INITIAL_STATE);
+	const [ sales, setSales ] = useState(
+		invVals ? invVals : SALES_INITIAL_STATE
+	);
 	
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		
-			setSales((state) => {
-				return {
-					...state,
-					[name] : value
-				};
-			});
-		
+
+		setSales((state) => {
+			return {
+				...state,
+				[name] : value
+			};
+		});
 	};
-	let values = sales
+	let values = sales;
 
 	return (
 		<Box>
 			<FormControl>
 				<TextField
 					type="number"
-					label={"Food " + categoryLabels[category]}
+					label={'Food ' + categoryLabels[category]}
 					value={sales.Food}
 					onChange={handleChange}
 					name="Food"
@@ -60,10 +60,8 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={"Alcohol " + categoryLabels[category]}
-					value={
-						sales.Alcohol
-					}
+					label={'Alcohol ' + categoryLabels[category]}
+					value={sales.Alcohol}
 					onChange={handleChange}
 					name="Alcohol"
 					disabled={submitted[category]}
@@ -75,7 +73,7 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={"Beer " + categoryLabels[category]}
+					label={'Beer ' + categoryLabels[category]}
 					value={sales.Beer}
 					onChange={handleChange}
 					name="Beer"
@@ -88,8 +86,8 @@ export default function SalesForm({
 				/>
 				<TextField
 					type="number"
-					label={"NA Bev " + categoryLabels[category]}
-					value={sales.NABev }
+					label={'NA Bev ' + categoryLabels[category]}
+					value={sales.NABev}
 					onChange={handleChange}
 					name="NABev"
 					disabled={submitted[category]}

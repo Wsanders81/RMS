@@ -68,10 +68,15 @@ const categories = {
 	NABev   : 4
 };
 export async function addSales(sales, date) {
-	const salesArr = Array.from(Object.entries(sales));
+	sales.Food = sales.Food === '' ? (sales.Food = 0) : sales.Food;
+	sales.Alcohol = sales.Alcohol === '' ? (sales.Alcohol = 0) : sales.Alcohol;
+	sales.Beer = sales.Beer === '' ? (sales.Beer = 0) : sales.Beer;
+	sales.NABev = sales.NABev === '' ? (sales.NABev = 0) : sales.NABev;
 
+	const salesArr = Array.from(Object.entries(sales));
 	let promises = [];
 	for (let i = 0; i < salesArr.length; i++) {
+		console.log(parseInt(salesArr[i][1]));
 		promises.push(
 			axios({
 				method : 'post',
@@ -86,6 +91,7 @@ export async function addSales(sales, date) {
 		);
 	}
 	const outputSales = await Promise.all(promises);
+
 	return outputSales;
 }
 

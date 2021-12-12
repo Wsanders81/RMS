@@ -17,12 +17,16 @@ export default function Sales() {
 	const [ isOpen, setIsOpen ] = useState(false);
 	const user = useSelector((store) => store.userReducer);
 	const dispatch = useDispatch();
-	useEffect(() => {
-		const setLocation = () => {
-			dispatch({ type: SET_LOCATION, location: 'Sales' });
-		};
-		setLocation();
-	}, [dispatch]);
+	useEffect(
+		() => {
+			const setLocation = () => {
+				dispatch({ type: SET_LOCATION, location: 'Sales' });
+			};
+			setLocation();
+		},
+		[ dispatch ]
+	);
+
 	const toggleModal = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
@@ -58,16 +62,16 @@ export default function Sales() {
 		const response = await addSales(sales, begDate);
 		if (response[0].data.sales.error) {
 			dispatch({
-				type: ALERT,
-				typeOfNotify: 'error',
-				message: response[0].data.sales.error
+				type         : ALERT,
+				typeOfNotify : 'error',
+				message      : response[0].data.sales.error
 			});
 		}
 		else {
 			dispatch({
-				type: ALERT,
-				typeOfNotify: 'success',
-				message: 'Sales have successfully been added'
+				type         : ALERT,
+				typeOfNotify : 'success',
+				message      : 'Sales have successfully been added'
 			});
 			toggleModal();
 		}
@@ -112,7 +116,7 @@ export default function Sales() {
 			{daySales ? (
 				daySales.map((day) => {
 					return (
-						<Box key={day.id}>
+						<Box key={day[0]}>
 							<h5>{moment(day[0]).format('ddd MMM DD YYYY')}</h5>
 							<p>
 								{day[1].food ? (
@@ -130,8 +134,8 @@ export default function Sales() {
 								) : null}
 							</p>
 							<p>
-								{day[1].alcohol ? (
-									<p>Alcohol Sales: {day[1].alcohol}</p>
+								{day[1]['NA Beverage'] ? (
+									<p>NA Bev Sales: {day[1]['NA Beverage']}</p>
 								) : null}
 							</p>
 						</Box>
@@ -140,7 +144,6 @@ export default function Sales() {
 			) : null}
 		</Box>
 	);
-
 	return (
 		<Box className="Sales">
 			<Box>
