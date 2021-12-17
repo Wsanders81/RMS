@@ -1,4 +1,3 @@
-import { calculatePercentage } from './groupSales';
 
 export const returnCategoryName = (array) => {
 	let nameArray = [];

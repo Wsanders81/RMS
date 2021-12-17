@@ -21,6 +21,7 @@ export default function Inventories() {
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
 	const [ showInvForm, setShowInvForm ] = useState(false);
+	const [ showInvButtons, setShowInvButtons ] = useState(true)
 	const [ loading, setLoading ] = useState(true)
 	const dispatch = useDispatch();
 	useEffect(
@@ -43,7 +44,7 @@ export default function Inventories() {
 			getInventoriesToDisplay();
 			setLocation();
 		},
-		[ dispatch ]
+		[ dispatch, selectedInv ]
 	);
 	const handleChange = (e) => {
 		if (e.target.name === 'begDate') {
@@ -70,13 +71,18 @@ export default function Inventories() {
 		setShowDates((prevState) => !prevState);
 		if (selectedInv) {
 			setSelectedInv(null);
-			setInventories(null);
+			// setInventories(null);
 		}
+		toggleInvButtons()
+		
 	};
+	const toggleInvButtons = ()=> {
+		setShowInvButtons(state=> !state)
+	}
 
 	const toggleInvForm = (reset) => {
 		setShowInvForm((prevState) => !prevState);
-
+		toggleInvButtons()
 		setInventories(null);
 		if (reset === false) {
 			return;
@@ -90,12 +96,15 @@ export default function Inventories() {
 
 		setSelectedInv(res);
 		toggleDatePicker();
+		toggleInvButtons();
+		
 	};
 	const handleDelete = async () => {
 		const res = await deleteInventory(selectedInv.inventory.id);
 		if (res === 'Inventory successfully deleted') {
 			setSelectedInv(null);
 			toggleDatePicker();
+			toggleInvButtons()
 			dispatch({
 				type         : ALERT,
 				typeOfNotify : 'success',
@@ -105,13 +114,17 @@ export default function Inventories() {
 	};
 
 	const inventoryButtons = (
-		<Box>
-			<Button onClick={toggleDatePicker} variant="contained">
+		<Box sx={{transform:"translateY(150%)", display: 'flex', flexDirection:"column"}}>
+			<Button 
+			sx={{width: "10rem", margin:'auto'}}
+			onClick={toggleDatePicker} 
+			variant="contained">
 				Select Inventory
 			</Button>
 			<Button
+				sx={{width: "10rem", margin:'auto', marginTop: '2rem'}}
 				onClick={toggleInvForm}
-				sx={{ marginLeft: '1rem' }}
+				
 				variant="contained"
 			>
 				Start New Inventory
@@ -144,7 +157,7 @@ export default function Inventories() {
 				</>
 			) : null}
 
-			{!showDates && !showInvForm ? inventoryButtons : null}
+			{ showInvButtons ? inventoryButtons : null}
 			{showDates ? (
 				<Box >
 					<UserDatePicker
@@ -199,6 +212,8 @@ export default function Inventories() {
 				<InventoryTable
 					inventory={selectedInv}
 					removeInv={handleDelete}
+					setInv={setSelectedInv}
+					toggleInvButtons={toggleInvButtons}
 				/>
 			) : null}
 			{showInvForm ? (

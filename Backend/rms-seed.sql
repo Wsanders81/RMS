@@ -39,7 +39,25 @@ VALUES (
     '600 Cola Way', 
      505300404, 
     'fizzy@coke.com' 
-); 
+),
+   (
+    'Shamrock',
+    '123 Main Street', 
+     5043530404, 
+    'green@shamrock.com' 
+),
+   (
+    'Southern Glazers',
+    '3495 Genessee Ave', 
+     9594852604, 
+    'green@shamrock.com' 
+)
+   (
+    'Napoli Farms',
+    '3714 Dwight st', 
+     6198406277, 
+    'greg@napolifarms.com' 
+);
 
 INSERT INTO products (name, unit, price, qty_per_unit, supplier_id, category_id)
 VALUES 

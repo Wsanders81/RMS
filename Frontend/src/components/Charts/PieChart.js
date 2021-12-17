@@ -52,7 +52,7 @@ const PieChart = ({ sales, begDate, endDate }) => {
 	return (
 		<Chart className="PieChart">
 			<ChartTitle
-				text={`Category Sales ${begDate} - ${endDate} \n Total sales : $${totalSales.toLocaleString()}`}
+				text={`Category Sales ${begDate} -> ${endDate} \n Total sales : $${totalSales.toLocaleString()}`}
 			/>
 
 			<ChartLegend position="bottom" />

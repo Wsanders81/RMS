@@ -16,6 +16,7 @@
 
 .Inventories-singleInv:hover {
 	cursor: pointer;
+	background-color: beige;
 }
 
 .Inventory-modal {
@@ -54,6 +55,8 @@
 	overflow-x: auto;
 }
 
+
+
 #UserDatePicker-button {
 	margin-top: 1rem;
 }
@@ -61,5 +64,3 @@
 #Inventory-submit-button {
 	margin-top: 1rem;
 }
-
-

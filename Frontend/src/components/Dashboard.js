@@ -1,6 +1,6 @@
 // import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import { SET_LOCATION } from '../actions/types';
@@ -9,7 +9,6 @@ import { groupSales, currentWeekSales } from '../helpers/groupSales';
 import Loader from 'react-loader-spinner';
 import PieChart from './Charts/PieChart';
 import BarChart from './Charts/BarChart';
-import $ from 'jquery';
 
 import '../styles/Dashboard.css';
 export default function Dashboard() {
@@ -39,8 +38,9 @@ export default function Dashboard() {
 				endDateRef.current = formattedEndDate;
 				const getWeeklySales = async () => {
 					const res = await currentWeekSales(salesRef.current);
+					
 					weeklySales.current = res;
-					setLoading(false);
+					if (weeklySales.current) setLoading(false);
 				};
 				getWeeklySales();
 			};
@@ -65,10 +65,7 @@ export default function Dashboard() {
 			/>
 		);
 	}
-	if (window.screen.width < 768) {
-		const chart = $('#chart');
-		console.log(chart);
-	}
+
 	return (
 		<div className="container-fluid Dashboard-main">
 			<div className="row">

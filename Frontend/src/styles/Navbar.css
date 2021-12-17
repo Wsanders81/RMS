@@ -5,6 +5,12 @@
 	z-index: 2;
 }
 
+.Navbar-footer {
+	background-color: rgb(133, 184, 228);
+	width: 100vw;
+	z-index: 2;
+}
+
 .Navbar-link:hover {
 	cursor: pointer;
 }
