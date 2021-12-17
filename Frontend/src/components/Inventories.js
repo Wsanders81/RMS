@@ -12,6 +12,8 @@ import moment from 'moment';
 import { ALERT, SET_LOCATION } from '../actions/types';
 import NewInventoryForm from './NewInventoryForm';
 import InventoryTable from './InventoryTable';
+import Loader from 'react-loader-spinner';
+
 export default function Inventories() {
 	const [ showDates, setShowDates ] = useState(false);
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
@@ -19,12 +21,26 @@ export default function Inventories() {
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
 	const [ showInvForm, setShowInvForm ] = useState(false);
+	const [ loading, setLoading ] = useState(true)
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
 			const setLocation = () => {
 				dispatch({ type: SET_LOCATION, location: 'Inventory' });
 			};
+			const getInventoriesToDisplay = async () => {
+				const endDate = new Date();
+				const begDate = new Date().setDate(endDate.getDate() - 30);
+				const formattedBegDate = moment(begDate).format('YYYY-MM-DD');
+				const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
+				const displayInventories = await getAllInventories(
+					formattedBegDate,
+					formattedEndDate
+				);
+				setInventories(displayInventories);
+				setLoading(false)
+			};
+			getInventoriesToDisplay();
 			setLocation();
 		},
 		[ dispatch ]
@@ -81,9 +97,9 @@ export default function Inventories() {
 			setSelectedInv(null);
 			toggleDatePicker();
 			dispatch({
-				type: ALERT,
-				typeOfNotify: 'success',
-				message: 'Inventory successfully deleted'
+				type         : ALERT,
+				typeOfNotify : 'success',
+				message      : 'Inventory successfully deleted'
 			});
 		}
 	};
@@ -103,20 +119,34 @@ export default function Inventories() {
 		</Box>
 	);
 
+	if (loading) {
+		return (
+			<Loader
+				style={{ transform: 'translateY(300%)' }}
+				type="Puff"
+				color="#00BFFF"
+				height={100}
+				width={100}
+			/>
+		);
+	}	
 	return (
 		<Box className="Inventories">
-			<h1>Inventories</h1>
 			{showInvForm ? (
+				<>
+				
 				<UserDatePicker
 					begDate={begDate}
 					showSubmit={false}
 					handleChange={handleChange}
+					title="Please Enter Inventory Date"
 				/>
+				</>
 			) : null}
 
 			{!showDates && !showInvForm ? inventoryButtons : null}
 			{showDates ? (
-				<Box>
+				<Box >
 					<UserDatePicker
 						showSubmit={true}
 						begDate={begDate}
@@ -158,7 +188,8 @@ export default function Inventories() {
 					<Button
 						sx={{ marginTop: '1rem' }}
 						onClick={toggleDatePicker}
-						variant="contained"
+						variant="outlined"
+						color="error"
 					>
 						Go Back
 					</Button>

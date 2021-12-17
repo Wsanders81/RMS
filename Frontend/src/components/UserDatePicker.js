@@ -1,23 +1,26 @@
-import { Box, Input, FormGroup, Button } from '@mui/material';
+import { Box, Input, FormGroup, Button, Typography } from '@mui/material';
 import '../styles/UserDatePicker.css';
 export default function UserDatePicker({
 	begDate,
 	endDate,
 	handleChange,
-	handleSubmit, 
-	showSubmit
+	handleSubmit,
+	showSubmit,
+	title
 }) {
 	return (
 		<Box
 			sx={{
-				paddingTop     : '5rem',
-				width          : '75%',
-				display        : 'flex',
-				justifyContent : 'space-evenly',
-				margin         : 'auto'
+				paddingTop    : '5rem',
+				width         : '75%',
+				display       : 'flex',
+				flexDirection : 'column',
+				margin        : 'auto',
+				paddingBottom : '1rem'
 			}}
 		>
-			<FormGroup>
+			{title ? <Typography>{title}</Typography> : null}
+			<FormGroup sx={{ margin: 'auto' }}>
 				<Box sx={{ width: '10rem' }}>
 					<Input
 						type="date"
@@ -29,6 +32,7 @@ export default function UserDatePicker({
 				{endDate ? (
 					<Box sx={{ width: '10rem' }}>
 						<Input
+							sx={{ marginTop: '1rem' }}
 							type="date"
 							name="endDate"
 							onChange={handleChange}
@@ -36,9 +40,17 @@ export default function UserDatePicker({
 						/>
 					</Box>
 				) : null}
-				{showSubmit ? <Button onClick={handleSubmit} variant="contained">
-					Submit
-				</Button> : null}
+
+				{showSubmit ? (
+					<Button
+						id="UserDatePicker-button"
+						onClick={handleSubmit}
+						variant="contained"
+						color="success"
+					>
+						Submit
+					</Button>
+				) : null}
 			</FormGroup>
 		</Box>
 	);

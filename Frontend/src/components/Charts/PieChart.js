@@ -61,6 +61,7 @@ const PieChart = ({ sales, begDate, endDate }) => {
 					type="pie"
 					data={series}
 					field="value"
+					autoFit
 					categoryField="category"
 					labels={{
 						visible : true,

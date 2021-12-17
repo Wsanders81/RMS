@@ -17,9 +17,8 @@ export default function InventoryTable ({inventory, removeInv}) {
 	const AlcoholPurchases = inventory.inventory.Purchases.Alcohol.amount
 	const BeerPurchases = inventory.inventory.Purchases.Beer.amount
 	const NABevPurchases = inventory.inventory.Purchases.NABev.amount
-	
     const calculateCost = (begInv, endInv, purchases, sales) => {
-		return ((begInv + purchases - endInv)/sales)*100
+		return (((begInv + purchases - endInv)/sales)*100).toFixed(2)
 	}
 	const calculateTotalCost = () => {
 		const totalBeginningInventory = beg_food + beg_alcohol + beg_beer + beg_na_bev; 
@@ -73,24 +72,21 @@ export default function InventoryTable ({inventory, removeInv}) {
         {user.isAdmin === "true" ? <Button onClick={removeInv} sx={{marginTop: "1rem"}} variant="outlined" color="error">DELETE INVENTORY</Button> : null}
         <table className="table ">
 			<thead className="table-light">
-            <tr>
-                    <th  colSpan="6" >Sales</th>
-                </tr>
+            
 				<tr>
-					<th>Date</th>
-					<th>Food Sales</th>
-					<th>Beer Sales</th>
-					<th>Alcohol Sales</th>
-					<th>NA Bev Sales</th>
-					<th>Total Sales</th>
+					<th></th>
+					<th>Food</th>
+					<th>Beer</th>
+					<th>Alcohol</th>
+					<th>NA Bev</th>
+					<th>Total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>
-						{moment(inventory.inventory.date).format(
-							'ddd MMM DD YY'
-						)}
+						
+						Sales
 					</td>
 					<td>${food_sales}</td>
 					<td>${beer_sales}</td>
@@ -103,26 +99,11 @@ export default function InventoryTable ({inventory, removeInv}) {
 							na_bev_sales}
 					</td>
 				</tr>
-			</tbody>
-			<thead className="table-light">
-            <tr>
-                    <th  colSpan="6" >Purchases</th>
-                </tr>
-				<tr>
-					<th></th>
-					<th>Food Purchases</th>
-					<th>Beer Purchases</th>
-					<th>Alcohol Purchases</th>
-					<th>NA Bev Purchases</th>
-					<th>Total Purchases</th>
-				</tr>
-			</thead>
-			
-			<tbody>
 				<tr>
 					<td>
-						
+						Purchases
 					</td>
+					
 					<td>${FoodPurchases}</td>
 					<td>${AlcoholPurchases}</td>
 					<td>${BeerPurchases}</td>
@@ -133,26 +114,10 @@ export default function InventoryTable ({inventory, removeInv}) {
 							BeerPurchases +
 							NABevPurchases}
 					</td>
-				</tr>
-			</tbody>
-			<thead className="table-light">
-            <tr>
-                    <th  colSpan="6" >Beginning Inventory</th>
-                </tr>
-				<tr>
-					<th></th>
-					<th>Food Inventory</th>
-					<th>Beer Inventory</th>
-					<th>Alcohol Inventory</th>
-					<th>NA Bev Inventory</th>
-					<th>Total Inventory</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr>
+					</tr>
+					<tr>
 					<td>
-						
+						Beginning Inventory
 					</td>
 					<td>${beg_food}</td>
 					<td>${beg_alcohol}</td>
@@ -165,25 +130,9 @@ export default function InventoryTable ({inventory, removeInv}) {
 							beg_na_bev}
 					</td>
 				</tr>
-			</tbody>
-			<thead className="table-light">
-            <tr>
-                    <th  colSpan="6" >Cost of Goods</th>
-                </tr>
-				<tr>
-					<th></th>
-					<th>Food COGS</th>
-					<th>Beer COGS</th>
-					<th>Alcohol COGS</th>
-					<th>NA Bev COGS</th>
-					<th>Total COGS</th>
-				</tr>
-			</thead>
-			
-			<tbody>
 				<tr>
 					<td>
-						
+						COGS
 					</td>
 					<td>{calculateCost(beg_food, totals.food, FoodPurchases ,food_sales)}%</td>
 					<td>{calculateCost(beg_alcohol, totals.alcohol, AlcoholPurchases ,alcohol_sales)}%</td>
@@ -193,6 +142,7 @@ export default function InventoryTable ({inventory, removeInv}) {
 					
 				</tr>
 			</tbody>
+			
             {createCategory('food')}
             {createCategory('alcohol')}
             {createCategory('beer')}

@@ -3,53 +3,63 @@
 }
 
 .Inventories-pick {
-    display: flex; 
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 2rem;
 }
 
 .Inventories-singleInv {
-    padding: 1.5rem;
-    margin: 0.5rem;  
-    
+	padding: 1.5rem;
+	margin: 0.5rem;
 }
 
 .Inventories-singleInv:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-
-
 .Inventory-modal {
-    background-color: white; 
-    width: 50%; 
-    height: 50%; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    border-radius: 5px;
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5px;
 }
 
 .Inventory-modal-topText {
-    padding-top: 2rem;
+	padding-top: 2rem;
 }
 
 .Inventory-modal-warningText {
-    padding-top: 1rem; 
-    color: rgb(255, 89, 89);
-    
+	padding-top: 1rem;
+	color: rgb(255, 89, 89);
 }
 
 .Inventory-modal-button {
-    transform: translateY(2rem) 
+	transform: translateY(2rem);
 }
 
 .InventoryTable-category {
-    height: 2rem; 
+	height: 2rem;
 }
 
 .InventoryTable-list:nth-child(even) {
-    background-color: #dddd; 
+	background-color: #dddd;
 }
+
+.Inventories-tabs {
+	overflow-x: auto;
+}
+
+#UserDatePicker-button {
+	margin-top: 1rem;
+}
+
+#Inventory-submit-button {
+	margin-top: 1rem;
+}
+
+

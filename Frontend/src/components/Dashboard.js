@@ -1,6 +1,6 @@
-import { Box } from '@mui/material';
+// import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import { SET_LOCATION } from '../actions/types';
@@ -9,6 +9,9 @@ import { groupSales, currentWeekSales } from '../helpers/groupSales';
 import Loader from 'react-loader-spinner';
 import PieChart from './Charts/PieChart';
 import BarChart from './Charts/BarChart';
+import $ from 'jquery';
+
+import '../styles/Dashboard.css';
 export default function Dashboard() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -41,20 +44,16 @@ export default function Dashboard() {
 				};
 				getWeeklySales();
 			};
-			// const getWeeklySales = async () => {
-			// 	const res = await currentWeekSales(salesRef.current);
-			// 	weeklySales.current = res;
-			// };
+
 			const setLocation = () => {
 				dispatch({ type: SET_LOCATION, location: 'Dashboard' });
 			};
 			getSalesLast30Days();
-			// getWeeklySales();
 			setLocation();
 		},
 		[ navigate, dispatch ]
 	);
-	
+
 	if (loading) {
 		return (
 			<Loader
@@ -66,22 +65,28 @@ export default function Dashboard() {
 			/>
 		);
 	}
-
+	if (window.screen.width < 768) {
+		const chart = $('#chart');
+		console.log(chart);
+	}
 	return (
-		<Box sx={{ paddingTop: '5rem', display: 'flex', height: '100vh' }}>
-			<Box sx={{ width: '50%' }}>
-				<PieChart
-					begDate={begDateRef.current}
-					endDate={endDateRef.current}
-					sales={groupedSalesRef.current}
-				/>
-			</Box>
-			<Box sx={{ width: '50%', height: '100%' }}>
-				<BarChart
-					weeklySales={weeklySales.current}
-					sales={salesRef.current}
-				/>
-			</Box>
-		</Box>
+		<div className="container-fluid Dashboard-main">
+			<div className="row">
+				<div className="col-sm-12 col-lg-6 Dashboard-chart">
+					<PieChart
+						id="chart"
+						begDate={begDateRef.current}
+						endDate={endDateRef.current}
+						sales={groupedSalesRef.current}
+					/>
+				</div>
+				<div className="col-sm-12 col-lg-6 Dashboard-chart">
+					<BarChart
+						weeklySales={weeklySales.current}
+						sales={salesRef.current}
+					/>
+				</div>
+			</div>
+		</div>
 	);
 }

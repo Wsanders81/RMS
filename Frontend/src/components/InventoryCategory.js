@@ -3,7 +3,8 @@ import {
 	FormControl,
 	TextField,
 	InputAdornment,
-	Button
+	Button,
+	Typography
 } from '@mui/material';
 import { useState } from 'react';
 function InventoryCategory({
@@ -12,14 +13,22 @@ function InventoryCategory({
 	submit,
 	submitted,
 	unsubmit,
-	invVals
+	value
 }) {
 	const [ items, setItems ] = useState(products);
-	const handleChange = (e, i) => {
+	const [ total, setTotal ] = useState(0);
+	const handleChange = (e, i, price) => {
 		const { name, value } = e.target;
-
+		const getPriceAndQuantity = items.map(
+			(item) => item.price * item.quantity
+		);
+		const calculateTotal = getPriceAndQuantity.reduce(
+			(acc, next) => acc + next
+		);
+		setTotal(calculateTotal);
 		setItems((state) => {
 			state[i].quantity = value;
+			state[i].extendedValue = value * price;
 			return state;
 		});
 		return name;
@@ -31,12 +40,13 @@ function InventoryCategory({
 				{products.map((item, i) => {
 					return (
 						<TextField
-							
+							sx={{ marginTop: '1rem' }}
 							key={item.product_id}
 							type="number"
+							autoFocus={i === 0 ? true : false}
 							label={item.name}
 							defaultValue={item.quantity}
-							onChange={(e) => handleChange(e, i)}
+							onChange={(e) => handleChange(e, i, item.price)}
 							name={item.name}
 							disabled={submitted[category]}
 							InputProps={{
@@ -49,15 +59,22 @@ function InventoryCategory({
 						/>
 					);
 				})}
+				<Typography
+					sx={{ marginTop: '1rem' }}
+				>{`Total ${category} Value: ${total} `}</Typography>
 				{submitted[category] === false ? (
 					<Button
-						onClick={(e) => submit(e, category, items)}
+						id="Inventory-submit-button"
+						onClick={(e) => submit(e, category, items, null, value)}
 						variant="contained"
 					>
 						{`Submit ${category} Inventory`}
 					</Button>
 				) : (
-					<Button onClick={() => unsubmit(category)}>
+					<Button
+						color="secondary"
+						onClick={() => unsubmit(category)}
+					>
 						Undo Submit
 					</Button>
 				)}

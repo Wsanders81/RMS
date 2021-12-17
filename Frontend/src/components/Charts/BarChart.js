@@ -14,138 +14,241 @@ import '@progress/kendo-theme-default/dist/all.css';
 const BarChart = ({ weeklySales }) => {
 	const categories = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ];
 	const categoryNames = [ 'Food', 'Alcohol', 'Beer', 'NA Beverage' ];
+	let total = 0;
+	const dailySalesBreakdown = Object.entries(weeklySales).map((day) => {
+		total +=
+			day[1].food +
+			day[1].alcohol +
+			day[1].beer +
+			(day[1]['NA Beverage'] ? day[1]['NA Beverage'] : 0);
+		return (
+			day[1].food +
+			day[1].alcohol +
+			day[1].beer +
+			(day[1]['NA Beverage'] ? day[1]['NA Beverage'] : 0)
+		);
+	});
+
 	const firstSeries = [
 		{
-			category : categoryNames[0],
-			value    : weeklySales.monday.food
+			category   : categoryNames[0],
+			value      : weeklySales.monday.food,
+			percentage : (weeklySales.monday.food /
+				dailySalesBreakdown[0] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.tuesday.food
+			category   : categoryNames[0],
+			value      : weeklySales.tuesday.food,
+			percentage : (weeklySales.tuesday.food /
+				dailySalesBreakdown[1] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.wednesday.food
+			category   : categoryNames[0],
+			value      : weeklySales.wednesday.food,
+			percentage : (weeklySales.wednesday.food /
+				dailySalesBreakdown[2] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.thursday.food
+			category   : categoryNames[0],
+			value      : weeklySales.thursday.food,
+			percentage : (weeklySales.thursday.food /
+				dailySalesBreakdown[3] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.friday.food
+			category   : categoryNames[0],
+			value      : weeklySales.friday.food,
+			percentage : (weeklySales.friday.food /
+				dailySalesBreakdown[4] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.saturday.food
+			category   : categoryNames[0],
+			value      : weeklySales.saturday.food,
+			percentage : (weeklySales.saturday.food /
+				dailySalesBreakdown[5] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[0],
-			value    : weeklySales.sunday.food
+			category   : categoryNames[0],
+			value      : weeklySales.sunday.food,
+			percentage : (weeklySales.sunday.food /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		}
 	];
 
 	const secondSeries = [
 		{
-			category : categoryNames[1],
-			value    : weeklySales.monday.alcohol
+			category   : categoryNames[1],
+			value      : weeklySales.monday.alcohol,
+			percentage : (weeklySales.monday.alcohol /
+				dailySalesBreakdown[0] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.tuesday.alcohol
+			category   : categoryNames[1],
+			value      : weeklySales.tuesday.alcohol,
+			percentage : (weeklySales.tuesday.alcohol /
+				dailySalesBreakdown[1] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.wednesday.alcohol
+			category   : categoryNames[1],
+			value      : weeklySales.wednesday.alcohol,
+			percentage : (weeklySales.wednesday.alcohol /
+				dailySalesBreakdown[2] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.thursday.alcohol
+			category   : categoryNames[4],
+			value      : weeklySales.thursday.alcohol,
+			percentage : (weeklySales.thursday.alcohol /
+				dailySalesBreakdown[3] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.friday.alcohol
+			category   : categoryNames[5],
+			value      : weeklySales.friday.alcohol,
+			percentage : (weeklySales.friday.alcohol /
+				dailySalesBreakdown[4] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.saturday.alcohol
+			category   : categoryNames[1],
+			value      : weeklySales.saturday.alcohol,
+			percentage : (weeklySales.saturday.alcohol /
+				dailySalesBreakdown[5] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[1],
-			value    : weeklySales.sunday.alcohol
+			category   : categoryNames[1],
+			value      : weeklySales.sunday.alcohol,
+			percentage : (weeklySales.sunday.alcohol /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		}
 	];
 	const thirdSeries = [
 		{
-			category : categoryNames[2],
-			value    : weeklySales.monday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.monday.beer,
+			percentage : (weeklySales.monday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.tuesday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.tuesday.beer,
+			percentage : (weeklySales.tuesday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.wednesday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.wednesday.beer,
+			percentage : (weeklySales.wednesday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.thursday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.thursday.beer,
+			percentage : (weeklySales.thursday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.friday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.friday.beer,
+			percentage : (weeklySales.friday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.saturday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.saturday.beer,
+			percentage : (weeklySales.saturday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[2],
-			value    : weeklySales.sunday.beer
+			category   : categoryNames[2],
+			value      : weeklySales.sunday.beer,
+			percentage : (weeklySales.sunday.beer /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		}
 	];
 	const fourthSeries = [
 		{
-			category : categoryNames[3],
-			value    : weeklySales.monday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.monday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[0] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.tuesday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.tuesday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[1] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.wednesday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.wednesday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[2] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.thursday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.thursday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[3] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.friday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.friday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[4] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.saturday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.saturday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[5] *
+				100).toFixed(2)
 		},
 		{
-			category : categoryNames[3],
-			value    : weeklySales.sunday['NA Beverage']
+			category   : categoryNames[3],
+			value      : weeklySales.sunday['NA Beverage'],
+			percentage : (weeklySales.sunday['NA Beverage'] /
+				dailySalesBreakdown[6] *
+				100).toFixed(2)
 		}
 	];
 	const defaultTooltipRender = ({ point }) => {
-		return `${point.series.data[0].category} $${point.value}`;
+		const index = point.categoryIndex;
+		return `${point.series.data[0].category} $${point.value} / ${point
+			.series.data[index].percentage}%`;
 	};
 	return (
 		<Chart>
-			<ChartTitle text={`Current Week Daily Sales`} />
+			<ChartTitle
+				text={`Current Week Daily Sales \n Total: $${total.toLocaleString()} `}
+			/>
 			<ChartCategoryAxis>
 				<ChartCategoryAxisItem categories={categories} />
 			</ChartCategoryAxis>
 			<ChartLegend position="bottom" orientation="horizontal" />
-			<ChartTooltip render={defaultTooltipRender} />
+			<ChartTooltip render={defaultTooltipRender} position="top" />
 			<ChartSeries>
 				<ChartSeriesItem
 					name="Food"

@@ -68,7 +68,7 @@ function NewInventoryForm({toggle, date, setInv}) {
 		setValue(newValue);
 	};
 	
-	const handleSubmit = (e, category, values) => {
+	const handleSubmit = (e, category, values, salesDate, value) => {
         e.preventDefault()
 		setInvVals((state) => {
 			state[category] = values;
@@ -78,7 +78,10 @@ function NewInventoryForm({toggle, date, setInv}) {
 			state[category] = true;
 			return state;
 		});
-        
+		
+        if(value < 6){
+			setValue(value + 1)
+		}
 		setProducts((state) => {
 			return { ...state };
 		});
@@ -137,17 +140,19 @@ function NewInventoryForm({toggle, date, setInv}) {
 	}
 	if (isLoading) return <h1>Loading</h1>;
 	
-	
 	return (
 		<>
-		<Box sx={{ width: '100%' }}>
-            <Button variant='contained' onClick={toggle} color="error">Go Back</Button>
-            <Button variant="contained" onClick={toggleModal}>Submit Inventory</Button>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+		<Box sx={{ width: '100%' }} className="Inventories-tabs">
+            <Button variant='outlined' onClick={toggle} color="error">Go Back</Button>
+            <Button sx={{marginLeft: '1rem'}} variant="contained" onClick={toggleModal}>Submit Inventory</Button>
+			<Box sx={{ borderBottom: 1, borderColor: 'divider', marginTop: "1rem" }}>
 				<Tabs
 					value={value}
 					onChange={handleChange}
 					aria-label="Inventory Categories"
+					variant="scrollable"
+					scrollButtons
+					allowScrollButtonsMobile
 				>
 					<Tab label="Food" {...a11yProps(0)} />
 					<Tab label="Alcohol" {...a11yProps(1)} />
@@ -166,6 +171,10 @@ function NewInventoryForm({toggle, date, setInv}) {
 					category={'Food'}
 					products={products.products.food}
 					submit={handleSubmit}
+					value={value}
+					
+					
+					
 				/>
 			</TabPanel>
 			<TabPanel value={value} index={1}>
@@ -176,6 +185,8 @@ function NewInventoryForm({toggle, date, setInv}) {
 					category={'Alcohol'}
 					products={products.products.alcohol}
 					submit={handleSubmit}
+					value={value}
+
 				/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
@@ -186,6 +197,8 @@ function NewInventoryForm({toggle, date, setInv}) {
 					category={'Beer'}
 					products={products.products.beer}
 					submit={handleSubmit}
+					value={value}
+
 				/>
 			</TabPanel>
 			<TabPanel value={value} index={3}>
@@ -196,6 +209,8 @@ function NewInventoryForm({toggle, date, setInv}) {
 					category={'NABev'}
 					products={products.products.NABev}
 					submit={handleSubmit}
+					value={value}
+
 				/>
 			</TabPanel>
             <TabPanel value={value} index={4}>
@@ -204,6 +219,7 @@ function NewInventoryForm({toggle, date, setInv}) {
                     submitted={submitted}
                     category={'Sales'}
                     submit={handleSubmit}
+					value={value}
                     invVals={invVals.Sales}/>
                     
             </TabPanel>
@@ -213,7 +229,9 @@ function NewInventoryForm({toggle, date, setInv}) {
                     submitted={submitted}
                     category={'Purchases'}
                     submit={handleSubmit}
+					value={value}
                     invVals={invVals.Purchases}/>
+
                     
             </TabPanel>
             <TabPanel value={value} index={6}>
@@ -222,6 +240,7 @@ function NewInventoryForm({toggle, date, setInv}) {
                     submitted={submitted}
                     category={'BegInv'}
                     submit={handleSubmit}
+					value={value}
                     invVals={invVals.BegInv}/>
                     
             </TabPanel>

@@ -12,7 +12,8 @@ export default function SalesForm({
 	submitted,
 	unsubmit,
 	invVals,
-	date
+	date,
+	value
 }) {
 	const SALES_INITIAL_STATE = {
 		Food    : '',
@@ -29,7 +30,7 @@ export default function SalesForm({
 	const [ sales, setSales ] = useState(
 		invVals ? invVals : SALES_INITIAL_STATE
 	);
-	
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
@@ -41,11 +42,11 @@ export default function SalesForm({
 		});
 	};
 	let values = sales;
-
 	return (
 		<Box>
 			<FormControl>
 				<TextField
+					autoFocus
 					type="number"
 					label={'Food ' + categoryLabels[category]}
 					value={sales.Food}
@@ -59,6 +60,7 @@ export default function SalesForm({
 					}}
 				/>
 				<TextField
+					sx={{ marginTop: '1rem' }}
 					type="number"
 					label={'Alcohol ' + categoryLabels[category]}
 					value={sales.Alcohol}
@@ -72,6 +74,7 @@ export default function SalesForm({
 					}}
 				/>
 				<TextField
+					sx={{ marginTop: '1rem' }}
 					type="number"
 					label={'Beer ' + categoryLabels[category]}
 					value={sales.Beer}
@@ -85,6 +88,7 @@ export default function SalesForm({
 					}}
 				/>
 				<TextField
+					sx={{ marginTop: '1rem' }}
 					type="number"
 					label={'NA Bev ' + categoryLabels[category]}
 					value={sales.NABev}
@@ -99,13 +103,20 @@ export default function SalesForm({
 				/>
 				{submitted[category] === false ? (
 					<Button
-						onClick={(e) => submit(e, category, values, salesDate)}
+						sx={{ marginTop: '1rem' }}
+						onClick={(e) =>
+							submit(e, category, values, salesDate, value)}
 						variant="contained"
 					>
-						{`Submit ${category}`}
+						{`Submit ${category === 'BegInv'
+							? 'Beggining Inventory'
+							: category}`}
 					</Button>
 				) : (
-					<Button onClick={() => unsubmit(category)}>
+					<Button
+						sx={{ marginTop: '1rem' }}
+						onClick={() => unsubmit(category)}
+					>
 						Undo Submit
 					</Button>
 				)}

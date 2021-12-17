@@ -76,5 +76,6 @@ export const currentWeekSales = async ({ sales }) => {
 		friday    : formattedWeeklySales[4][1],
 		saturday  : formattedWeeklySales[5][1],
 		sunday    : formattedWeeklySales[6][1]
+		 
 	};
 };

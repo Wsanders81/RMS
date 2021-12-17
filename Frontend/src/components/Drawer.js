@@ -29,10 +29,10 @@ export default function TempDrawer({ toggleDrawer, drawerOpen }) {
 				<ListItem onClick={() => handleClick('dashboard')} button>
 					Dashboard
 				</ListItem>
-				<ListItem onClick={() => handleClick('pos')} button>
+				<ListItem disabled onClick={() => handleClick('pos')} button>
 					POS
 				</ListItem>
-				<ListItem onClick={() => handleClick('orders')} button>
+				<ListItem disabled onClick={() => handleClick('orders')} button>
 					Orders
 				</ListItem>
 				<ListItem onClick={() => handleClick('inventory')} button>
