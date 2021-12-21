@@ -11,7 +11,7 @@ export default function UserDatePicker({
 	return (
 		<Box
 			sx={{
-				paddingTop    : '5rem',
+				paddingTop    : '1rem',
 				width         : '75%',
 				display       : 'flex',
 				flexDirection : 'column',

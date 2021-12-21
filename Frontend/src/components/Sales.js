@@ -8,6 +8,7 @@ import { groupSales, dailySales } from '../helpers/groupSales';
 import { getSales, addSales } from '../actions/actions';
 import LineChart from './Charts/LineChart';
 import SalesModal from './SalesModal';
+import SalesTable from './SalesTable';
 import '../styles/Sales.css';
 export default function Sales() {
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
@@ -88,74 +89,8 @@ export default function Sales() {
 			toggleModal();
 		}
 	};
-	const totalSales = `Total Sales ${moment(begDate.begDate).format(
-		'MM-DD-YYYY'
-	)} to ${moment(endDate.endDate).format('MM-DD-YYYY')}`;
-	const displaySales = (
-		<Box sx={{ paddingLeft: '1rem' }}>
-			<Box>
-				<Typography align="left" variant="h5">
-					{totalSales}
-				</Typography>
-				<Box sx={{ display: 'flex' }}>
-					<h3>Food Sales : </h3>
-					<h3>{sales ? sales.foodSales : null}</h3>
-				</Box>
-			</Box>
-			<Box>
-				<Box sx={{ display: 'flex' }}>
-					<h3>Alcohol Sales : </h3>
-					<h3>{sales ? sales.alcoholSales : null}</h3>
-				</Box>
-			</Box>
-			<Box>
-				<Box sx={{ display: 'flex' }}>
-					<h3>Beer Sales : </h3>
-					<h3>{sales ? sales.beerSales : null}</h3>
-				</Box>
-			</Box>
-			<Box>
-				<Box sx={{ display: 'flex' }}>
-					<h3>NA Bev Sales : </h3>
-					<h3>{sales ? sales.NAbevSales : null}</h3>
-				</Box>
-			</Box>
-		</Box>
-	);
-	const displayDailySales = (
-		<Box>
-			<Typography>Daily Breakdown</Typography>
-			{daySales ? (
-				daySales.map((day) => {
-					return (
-						<Box key={day[0]}>
-							<h5>{moment(day[0]).format('ddd MMM DD YYYY')}</h5>
-							<p>
-								{day[1].food ? (
-									<p>Food Sales: {day[1].food}</p>
-								) : null}
-							</p>
-							<p>
-								{day[1].alcohol ? (
-									<p>Alcohol Sales: {day[1].alcohol}</p>
-								) : null}
-							</p>
-							<p>
-								{day[1].beer ? (
-									<p>Beer Sales: {day[1].beer}</p>
-								) : null}
-							</p>
-							<p>
-								{day[1]['NA Beverage'] ? (
-									<p>NA Bev Sales: {day[1]['NA Beverage']}</p>
-								) : null}
-							</p>
-						</Box>
-					);
-				})
-			) : null}
-		</Box>
-	);
+	
+	
 	return (
 		<Box className="Sales">
 			<Box>
@@ -182,8 +117,15 @@ export default function Sales() {
 				</Box>
 			</Box>
 			<Box>
-				{sales ? displaySales : null}
-				{daySales ? displayDailySales : null}
+				{daySales ? (
+					<SalesTable
+						daySales={daySales}
+						totalSales={sales}
+						begDate={begDate.begDate}
+						endDate={endDate.endDate}
+					/>
+				) : null}
+				
 			</Box>
 			<Modal
 				open={isOpen}
