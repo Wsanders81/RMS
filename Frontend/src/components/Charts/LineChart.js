@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	Chart,
 	ChartSeries,
@@ -20,7 +21,7 @@ const alcoholData = [];
 const beerData = [];
 const NABevData = [];
 
-const LineChart = ({ sales }) => {
+const NonMemoizedChart = ({ sales }) => {
 	sales.map((saleItem) => {
 		dates.push(moment(saleItem[0]).format('MM-DD'));
 
@@ -68,4 +69,5 @@ const LineChart = ({ sales }) => {
 		</Chart>
 	);
 };
+const LineChart = React.memo(NonMemoizedChart);
 export default LineChart;
