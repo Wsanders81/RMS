@@ -17,12 +17,16 @@ export default function UserNavbar({
 		<Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
 			<Typography
 				onClick={toggleModal}
-				sx={{ marginRight: '1rem' }}
+				sx={{ marginRight: '1rem', fontFamily: 'Montserrat' }}
 				className="Navbar-link"
 			>
 				Login
 			</Typography>
-			<Typography onClick={toggleModalTwo} className="Navbar-link">
+			<Typography
+				sx={{ fontFamily: 'Montserrat' }}
+				onClick={toggleModalTwo}
+				className="Navbar-link"
+			>
 				Register
 			</Typography>
 		</Box>
@@ -43,6 +47,7 @@ export default function UserNavbar({
 			<AppBar sx={{ backgroundColor: 'transparent' }} position="static">
 				<Toolbar>
 					<Typography
+						sx={{ fontFamily: 'Montserrat', fontWeight: '600' }}
 						className="Navbar-link"
 						onClick={() => navigate('/')}
 						align="left"
@@ -51,7 +56,10 @@ export default function UserNavbar({
 					>
 						RMS
 					</Typography>
-					<Typography className="Navbar-location">
+					<Typography
+						sx={{ fontFamily: 'Montserrat' }}
+						className="Navbar-location"
+					>
 						{location}
 					</Typography>
 					{user ? logoutButtons : loginButtons}

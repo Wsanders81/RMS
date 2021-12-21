@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 .Sales {
 	padding-top: 5rem;
 	padding-bottom: 5rem;
@@ -23,4 +25,7 @@
 
 .Sales-modal-form {
 	margin: auto;
+}
+.Sales-page-title {
+	font-family: "Montserrat", sans-serif;
 }

@@ -6,6 +6,7 @@ import moment from 'moment';
 import { ALERT, SET_LOCATION } from '../actions/types';
 import { groupSales, dailySales } from '../helpers/groupSales';
 import { getSales, addSales } from '../actions/actions';
+import LineChart from './Charts/LineChart';
 import SalesModal from './SalesModal';
 import '../styles/Sales.css';
 export default function Sales() {
@@ -15,6 +16,7 @@ export default function Sales() {
 	const [ sales, setSales ] = useState(null);
 	const [ daySales, setDaySales ] = useState(null);
 	const [ isOpen, setIsOpen ] = useState(false);
+	const [ thirtyDaySales, setThirtyDaySales ] = useState(null);
 	const user = useSelector((store) => store.userReducer);
 	const dispatch = useDispatch();
 	useEffect(
@@ -22,7 +24,17 @@ export default function Sales() {
 			const setLocation = () => {
 				dispatch({ type: SET_LOCATION, location: 'Sales' });
 			};
+			const getLast30DaysSales = async () => {
+				const endDate = new Date();
+				const begDate = new Date().setDate(endDate.getDate() - 15);
+				const formattedBegDate = moment(begDate).format('YYYY-MM-DD');
+				const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
+				const res = await getSales(formattedBegDate, formattedEndDate);
+				const getDailySales = dailySales(res.sales);
+				setThirtyDaySales(getDailySales);
+			};
 			setLocation();
+			getLast30DaysSales();
 		},
 		[ dispatch ]
 	);
@@ -147,21 +159,29 @@ export default function Sales() {
 	return (
 		<Box className="Sales">
 			<Box>
-				<h3>Sales</h3>
-				<p>current dates with sales: 11/7 - 11/9</p>
-				<UserDatePicker
-					begDate={begDate}
-					endDate={endDate}
-					handleChange={handleChange}
-					handleSubmit={handleSubmit}
-					showSubmit={true}
-				/>
-				{user.isAdmin === 'true' ? (
-					<Button onClick={toggleModal} variant="outlined">
-						Add Sales
-					</Button>
-				) : null}
+				<h3 className="Sales-page-title">Select Sales Dates</h3>
+				<Box>
+					<UserDatePicker
+						begDate={begDate}
+						endDate={endDate}
+						handleChange={handleChange}
+						handleSubmit={handleSubmit}
+						showSubmit={true}
+					/>
 
+					{user.isAdmin === 'true' ? (
+						<Button onClick={toggleModal} variant="outlined">
+							Add Sales
+						</Button>
+					) : null}
+				</Box>
+				<Box>
+					{thirtyDaySales ? (
+						<LineChart sales={thirtyDaySales} />
+					) : null}
+				</Box>
+			</Box>
+			<Box>
 				{sales ? displaySales : null}
 				{daySales ? displayDailySales : null}
 			</Box>

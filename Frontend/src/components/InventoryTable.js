@@ -101,7 +101,7 @@ export default function InventoryTable({
 			{user.isAdmin === 'true' ? (
 				<Button
 					onClick={removeInv}
-					sx={{ marginTop: '1rem' }}
+					sx={{ margin: '1rem 1rem 1rem 0' }}
 					variant="outlined"
 					color="error"
 				>
@@ -109,7 +109,7 @@ export default function InventoryTable({
 				</Button>
 			) : null}
 			<Button
-				sx={{ marginBottom: '1rem' }}
+				sx={{ margin: '1rem 0 1rem 0' }}
 				variant="outlined"
 				color="error"
 				onClick={handleClick}
