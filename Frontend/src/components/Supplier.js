@@ -30,8 +30,6 @@ export default function Supplier() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	console.log(backupSupplier.current);
-
 	useEffect(
 		() => {
 			const getProducts = async function() {
@@ -98,6 +96,14 @@ export default function Supplier() {
 		}
 	};
 	if (loading) return <h1>...Loading</h1>;
+	const phoneNumber =
+		'(' +
+		supplier.phone.slice(0, 3) +
+		') ' +
+		supplier.phone.slice(3, 6) +
+		'-' +
+		supplier.phone.slice(6);
+
 	return (
 		<Box className="Suppliers">
 			<Box>
@@ -111,15 +117,25 @@ export default function Supplier() {
 			</Box>
 			{user.isAdmin === 'true' ? (
 				<Fragment>
-					<Button onClick={toggleModal}>Add Products</Button>
-					<Button onClick={deleteSelectedSupplier}>
+					<Button
+						sx={{ margin: '1rem 1rem 0 0' }}
+						variant="outlined"
+						onClick={toggleModal}
+					>
+						Add Products
+					</Button>
+					<Button
+						sx={{ margin: '1rem 1rem 0 0' }}
+						variant="outlined"
+						onClick={deleteSelectedSupplier}
+					>
 						Delete supplier
 					</Button>
 				</Fragment>
 			) : null}
 			<h3 className="Supplier-name">{supplier.name}</h3>
 			<p className="Supplier-detail">Address: {supplier.address}</p>
-			<p className="Supplier-detail">Phone: {supplier.phone}</p>
+			<p className="Supplier-detail">Phone: {phoneNumber}</p>
 			<p className="Supplier-detail">Email: {supplier.email}</p>
 			<table className="table table-striped">
 				<thead>

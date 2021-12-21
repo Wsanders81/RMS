@@ -27,17 +27,17 @@ INSERT INTO suppliers (name, address, phone, email)
 VALUES (
     'Sysco', 
     '123 Sysco Way', 
-    555451234, 
+    5554512344, 
     'sysco@sysco.com'
 ), (
     'Markstein', 
     '150 Main St.', 
-     123000234, 
+     1235952349, 
     'markstein@markstein.net'
 ), (
     'Coca Cola',
     '600 Cola Way', 
-     505300404, 
+     5053004049, 
     'fizzy@coke.com' 
 ),
    (

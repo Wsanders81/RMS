@@ -148,9 +148,14 @@ export default function MenuItems() {
 
 	return (
 		<Box className="MenuItems">
-			<h1>Menu Items</h1>
 			{user.isAdmin === 'true' ? (
-				<Button onClick={toggleModal}>Add Menu Item</Button>
+				<Button
+					sx={{ marginBottom: '1rem' }}
+					variant="outlined"
+					onClick={toggleModal}
+				>
+					Add Menu Item
+				</Button>
 			) : null}
 			<Box
 				sx={{
@@ -171,7 +176,6 @@ export default function MenuItems() {
 			</Box>
 			<TabPanel value={value} index={0}>
 				{menuItems ? (
-					
 					<MenuItemTable
 						items={menuItems.items.filter(
 							(item) => item.category_id === 1

@@ -53,7 +53,11 @@ export default function Suppliers() {
 	return (
 		<Box className="Suppliers">
 			{user.isAdmin === 'true' ? (
-				<Button onClick={toggleModal} variant="outlined">
+				<Button
+					sx={{ marginBottom: '1rem' }}
+					onClick={toggleModal}
+					variant="outlined"
+				>
 					Add Supplier
 				</Button>
 			) : null}
@@ -62,6 +66,13 @@ export default function Suppliers() {
 			</h4>
 			{suppliers ? (
 				suppliers.map((supplier) => {
+					const phoneNumber =
+						'(' +
+						supplier.phone.slice(0, 3) +
+						') ' +
+						supplier.phone.slice(3, 6) +
+						'-' +
+						supplier.phone.slice(6);
 					return (
 						<Paper
 							onClick={() => handleClick(supplier.id)}
@@ -75,12 +86,11 @@ export default function Suppliers() {
 								Address: {supplier.address}
 							</p>
 							<p className="Supplier-card-text">
-								Phone: {supplier.phone}
+								Phone: {phoneNumber}
 							</p>
 							<p className="Supplier-card-text">
 								Email: {supplier.email}
 							</p>
-							
 						</Paper>
 					);
 				})

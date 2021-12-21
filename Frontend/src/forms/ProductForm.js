@@ -19,7 +19,7 @@ const ProductForm = forwardRef((props, ref) => {
 		unit              : '',
 		quantity_per_unit : '',
 		price             : '',
-		supplier_id       : supplierId,
+		supplier_id       : props.supplierId,
 		category_id       : ''
 	};
 	const dispatch = useDispatch();
@@ -126,10 +126,7 @@ const ProductForm = forwardRef((props, ref) => {
 									<label htmlFor="category_id">
 										Category
 									</label>
-									<Field
-										name="category_id"
-										as={Select}
-									>
+									<Field name="category_id" as={Select}>
 										<MenuItem value={1}>Food</MenuItem>
 										<MenuItem value={2}>Alcohol</MenuItem>
 										<MenuItem value={3}>Beer</MenuItem>
