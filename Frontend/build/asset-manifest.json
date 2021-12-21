@@ -1,25 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.ebe07513.chunk.css",
-    "main.js": "/static/js/main.89342585.chunk.js",
-    "main.js.map": "/static/js/main.89342585.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5ba9aed0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5ba9aed0.js.map",
+    "main.css": "/static/css/main.c3386048.chunk.css",
+    "main.js": "/static/js/main.255a700c.chunk.js",
+    "main.js.map": "/static/js/main.255a700c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fdea20bd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fdea20bd.js.map",
     "static/css/2.467999e3.chunk.css": "/static/css/2.467999e3.chunk.css",
-    "static/js/2.8aa81ced.chunk.js": "/static/js/2.8aa81ced.chunk.js",
-    "static/js/2.8aa81ced.chunk.js.map": "/static/js/2.8aa81ced.chunk.js.map",
-    "static/js/3.338acaf4.chunk.js": "/static/js/3.338acaf4.chunk.js",
-    "static/js/3.338acaf4.chunk.js.map": "/static/js/3.338acaf4.chunk.js.map",
+    "static/js/2.8dd6611f.chunk.js": "/static/js/2.8dd6611f.chunk.js",
+    "static/js/2.8dd6611f.chunk.js.map": "/static/js/2.8dd6611f.chunk.js.map",
+    "static/js/3.18cba697.chunk.js": "/static/js/3.18cba697.chunk.js",
+    "static/js/3.18cba697.chunk.js.map": "/static/js/3.18cba697.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.467999e3.chunk.css.map": "/static/css/2.467999e3.chunk.css.map",
-    "static/css/main.ebe07513.chunk.css.map": "/static/css/main.ebe07513.chunk.css.map",
-    "static/js/2.8aa81ced.chunk.js.LICENSE.txt": "/static/js/2.8aa81ced.chunk.js.LICENSE.txt"
+    "static/css/main.c3386048.chunk.css.map": "/static/css/main.c3386048.chunk.css.map",
+    "static/js/2.8dd6611f.chunk.js.LICENSE.txt": "/static/js/2.8dd6611f.chunk.js.LICENSE.txt",
+    "static/media/Analytics team_Monochromatic.fabb1d7a.svg": "/static/media/Analytics team_Monochromatic.fabb1d7a.svg",
+    "static/media/Startup_Two Color.e2cc6534.svg": "/static/media/Startup_Two Color.e2cc6534.svg",
+    "static/media/Team building _Monochromatic.5925ddec.svg": "/static/media/Team building _Monochromatic.5925ddec.svg",
+    "static/media/Team meeting_Monochromatic.b266f1f0.svg": "/static/media/Team meeting_Monochromatic.b266f1f0.svg",
+    "static/media/domain-registration-website-svgrepo-com.ce29faf4.svg": "/static/media/domain-registration-website-svgrepo-com.ce29faf4.svg",
+    "static/media/github-icon.04ed74f3.svg": "/static/media/github-icon.04ed74f3.svg",
+    "static/media/linkedin-icon.4d2a832d.svg": "/static/media/linkedin-icon.4d2a832d.svg",
+    "static/media/LandingPage.css": "/static/media/patrick-tomasso-GXXYkSwndP4-unsplash.0812674c.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5ba9aed0.js",
+    "static/js/runtime-main.fdea20bd.js",
     "static/css/2.467999e3.chunk.css",
-    "static/js/2.8aa81ced.chunk.js",
-    "static/css/main.ebe07513.chunk.css",
-    "static/js/main.89342585.chunk.js"
+    "static/js/2.8dd6611f.chunk.js",
+    "static/css/main.c3386048.chunk.css",
+    "static/js/main.255a700c.chunk.js"
   ]
 }

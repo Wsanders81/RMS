@@ -22,7 +22,7 @@
 .Inventory-modal {
 	background-color: white;
 	width: 50%;
-	height: 50%;
+	height: 25%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -55,12 +55,17 @@
 	overflow-x: auto;
 }
 
-
-
 #UserDatePicker-button {
 	margin-top: 1rem;
 }
 
 #Inventory-submit-button {
 	margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.Inventory-modal {
+		height: 30%;
+		width: 75%;
+	}
 }

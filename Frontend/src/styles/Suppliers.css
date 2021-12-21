@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 .Suppliers {
-	padding-top: 5rem;
+	padding: 5rem;
 }
 
 table {
@@ -26,4 +28,42 @@ table {
 
 .Supplier-delete:hover {
 	cursor: pointer;
+}
+
+.Supplier-card {
+	width: 50%;
+	margin: auto;
+	margin-top: 1rem;
+	padding: 1rem;
+}
+
+.Supplier-card:hover {
+	cursor: pointer;
+	background-color: cornsilk;
+}
+
+.Supplier-card-text {
+	font-family: "Montserrat", sans-serif;
+}
+
+.Supplier-card-title {
+	font-family: "Montserrat", sans-serif;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.Supplier-name {
+	font-family: "Montserrat", sans-serif;
+	font-size: 2rem;
+	font-weight: 600;
+	margin: 2rem 0 2rem 0;
+}
+
+.Supplier-detail {
+	font-family: "Montserrat", sans-serif;
+	margin-bottom: 1rem;
+}
+
+table {
+	font-family: "Montserrat", sans-serif;
 }

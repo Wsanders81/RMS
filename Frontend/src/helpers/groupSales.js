@@ -50,7 +50,6 @@ export const calculatePercentage = (value, totalSales) => {
 export const currentWeekSales = async ({ sales }) => {
 	var mondayTargetIndex;
 	var targetDate;
-
 	//** find index of first Monday */
 	for (let i = sales.length - 1; i >= 0; i--) {
 		const date = moment(sales[i].date).format('d');
@@ -67,14 +66,15 @@ export const currentWeekSales = async ({ sales }) => {
 		.add(6, 'days')
 		.format('YYYY-MM-DD');
 	const weeklySales = await getSales(formattedDate, formattedEndDate);
+
 	const formattedWeeklySales = dailySales(weeklySales.sales);
 	return {
-		monday    : formattedWeeklySales[0][1],
-		tuesday   : formattedWeeklySales[1][1],
-		wednesday : formattedWeeklySales[2][1],
-		thursday  : formattedWeeklySales[3][1],
-		friday    : formattedWeeklySales[4][1],
-		saturday  : formattedWeeklySales[5][1],
-		sunday    : formattedWeeklySales[6][1]
+		monday    : formattedWeeklySales[0][1] ? formattedWeeklySales[0][1] : 0,
+		tuesday   : formattedWeeklySales[1][1] ? formattedWeeklySales[1][1] : 0,
+		wednesday : formattedWeeklySales[2][1] ? formattedWeeklySales[2][1] : 0,
+		thursday  : formattedWeeklySales[3] ? formattedWeeklySales[3][1] : 0,
+		friday    : formattedWeeklySales[4] ? formattedWeeklySales[4][1] : 0,
+		saturday  : formattedWeeklySales[5] ? formattedWeeklySales[5][1] : 0,
+		sunday    : formattedWeeklySales[6] ? formattedWeeklySales[6][1] : 0
 	};
 };

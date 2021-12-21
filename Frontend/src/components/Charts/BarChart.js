@@ -16,19 +16,14 @@ const BarChart = ({ weeklySales }) => {
 	const categoryNames = [ 'Food', 'Alcohol', 'Beer', 'NA Beverage' ];
 	let total = 0;
 	const dailySalesBreakdown = Object.entries(weeklySales).map((day) => {
-		total +=
-			day[1].food +
-			day[1].alcohol +
-			day[1].beer +
-			(day[1]['NA Beverage'] ? day[1]['NA Beverage'] : 0);
-		return (
-			day[1].food +
-			day[1].alcohol +
-			day[1].beer +
-			(day[1]['NA Beverage'] ? day[1]['NA Beverage'] : 0)
-		);
-	});
+		const food = day[1].food ? day[1].food : 0;
+		const alcohol = day[1].alcohol ? day[1].alcohol : 0;
+		const beer = day[1].beer ? day[1].beer : 0;
+		const NABev = day[1]['NA Beverage'] ? day[1]['NA Beverage'] : 0;
 
+		total += food + alcohol + beer + NABev;
+		return food + alcohol + beer + NABev;
+	});
 	const firstSeries = [
 		{
 			category   : categoryNames[0],
@@ -104,14 +99,14 @@ const BarChart = ({ weeklySales }) => {
 				100).toFixed(2)
 		},
 		{
-			category   : categoryNames[4],
+			category   : categoryNames[1],
 			value      : weeklySales.thursday.alcohol,
 			percentage : (weeklySales.thursday.alcohol /
 				dailySalesBreakdown[3] *
 				100).toFixed(2)
 		},
 		{
-			category   : categoryNames[5],
+			category   : categoryNames[1],
 			value      : weeklySales.friday.alcohol,
 			percentage : (weeklySales.friday.alcohol /
 				dailySalesBreakdown[4] *
@@ -137,42 +132,42 @@ const BarChart = ({ weeklySales }) => {
 			category   : categoryNames[2],
 			value      : weeklySales.monday.beer,
 			percentage : (weeklySales.monday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[0] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[2],
 			value      : weeklySales.tuesday.beer,
 			percentage : (weeklySales.tuesday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[1] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[2],
 			value      : weeklySales.wednesday.beer,
 			percentage : (weeklySales.wednesday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[2] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[2],
 			value      : weeklySales.thursday.beer,
 			percentage : (weeklySales.thursday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[3] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[2],
 			value      : weeklySales.friday.beer,
 			percentage : (weeklySales.friday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[4] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[2],
 			value      : weeklySales.saturday.beer,
 			percentage : (weeklySales.saturday.beer /
-				dailySalesBreakdown[6] *
+				dailySalesBreakdown[5] *
 				100).toFixed(2)
 		},
 		{
@@ -187,42 +182,42 @@ const BarChart = ({ weeklySales }) => {
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.monday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.monday['NA Beverage'] /
 				dailySalesBreakdown[0] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.tuesday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.tuesday['NA Beverage'] /
 				dailySalesBreakdown[1] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.wednesday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.wednesday['NA Beverage'] /
 				dailySalesBreakdown[2] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.thursday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.thursday['NA Beverage'] /
 				dailySalesBreakdown[3] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.friday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.friday['NA Beverage'] /
 				dailySalesBreakdown[4] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
 			value      : weeklySales.saturday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			percentage : (weeklySales.saturday['NA Beverage'] /
 				dailySalesBreakdown[5] *
 				100).toFixed(2)
 		},

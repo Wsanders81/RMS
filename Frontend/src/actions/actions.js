@@ -268,7 +268,7 @@ async function addPurchasesToInventory(purchases, inventoryId) {
 					token        : myToken,
 					inventory_id : inventoryId,
 					category_id  : categories[purchaseArr[i][0]],
-					amount       : parseInt(purchaseArr[i][1])
+					amount       : parseInt(purchaseArr[i][1]) || 0
 				}
 			})
 		);
@@ -290,6 +290,7 @@ async function addPurchasesToInventory(purchases, inventoryId) {
 }
 
 export async function addInventory(data, date) {
+	console.log(data.Food);
 	if (
 		data.Food === '' ||
 		data.Alcohol === '' ||
@@ -301,15 +302,15 @@ export async function addInventory(data, date) {
 	)
 		return 'error';
 	const items = data.Food.concat(data.Beer, data.Alcohol, data.NABev);
-	const food_sales = data.Sales.Food;
-	const alcohol_sales = data.Sales.Alcohol;
-	const beer_sales = data.Sales.Beer;
-	const na_bev_sales = data.Sales.NABev;
+	const food_sales = data.Sales.Food || 0;
+	const alcohol_sales = data.Sales.Alcohol || 0;
+	const beer_sales = data.Sales.Beer || 0;
+	const na_bev_sales = data.Sales.NABev || 0;
 	const inventoryPurchases = data.Purchases;
-	const beg_food = data.BegInv.Food;
-	const beg_alcohol = data.BegInv.Alcohol;
-	const beg_beer = data.BegInv.Beer;
-	const beg_na_bev = data.BegInv.NABev;
+	const beg_food = data.BegInv.Food || 0;
+	const beg_alcohol = data.BegInv.Alcohol || 0;
+	const beg_beer = data.BegInv.Beer || 0;
+	const beg_na_bev = data.BegInv.NABev || 0;
 	const inventory = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/inventories/add`,
@@ -327,6 +328,9 @@ export async function addInventory(data, date) {
 			token         : myToken
 		}
 	});
+	if (inventory.data.message) {
+		return { message: 'Duplicate Inventory Entry' };
+	}
 	const invId = inventory.data.inventory.id;
 	const response = await getInventory(invId);
 	const inventoryId = response.inventory.id;
@@ -335,7 +339,6 @@ export async function addInventory(data, date) {
 		inventoryId
 	);
 	response.inventory.Purchases = purchases.Purchases;
-
 	return response;
 }
 

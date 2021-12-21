@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 .LandingPage {
 	padding: 1rem 0 0 0;
 	width: 100%;
@@ -18,23 +20,31 @@
 	opacity: 0.5;
 	background-size: cover;
 	position: relative;
-
-	/* 
-	filter: blur(3px);
-	-webkit-filter: blur(3px); */
 }
 
 .LandingPage-title-text {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	width: 20rem;
+	width: 50%;
 	height: 10rem;
 	top: 50%;
 	left: 50%;
 	color: white;
+	padding-top: 1rem;
+	border: 10px double white;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 800;
+	text-shadow: 4px 4px #443e3e;
+}
+
+.LandingPage-offer-text {
+	font-family: "Montserrat", sans-serif;
+	padding-top: 4rem;
+	padding-bottom: 2rem;
+	font-size: 3rem;
 }
 .LandingPage-modal-login {
-	width: 70%;
+	width: 50%;
 	height: 50%;
 	position: absolute;
 	top: 50%;
@@ -43,12 +53,12 @@
 }
 
 .LandingPage-modal-register {
-	width: 70%;
+	width: 50%;
 	height: 50%;
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -80%);
 }
 
 .LandingPage-row {
@@ -60,12 +70,25 @@
 	padding-bottom: 5rem;
 }
 
-/* #LandingPage-demo-button {
-	position: fixed;
-	top: 30;
-	right: 5;
-	z-index: 2;
-} */
+.LandingPage-social {
+	padding-top: 1rem;
+}
+
+.LandingPage-text {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 600;
+}
+
+#LandingPage-social {
+	width: 2rem;
+	height: auto;
+	margin: auto;
+	margin-top: 10px;
+}
+
+#LandingPage-social:hover {
+	cursor: pointer;
+}
 
 @media screen and (min-width: 768px) {
 	.LandingPage-text {
@@ -92,5 +115,9 @@
 
 	.LandingPage-text {
 		padding-top: 2rem;
+	}
+	.LandingPage-title-text {
+		width: 95%;
+		height: 15rem;
 	}
 }

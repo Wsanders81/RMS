@@ -1,4 +1,4 @@
-import { Modal, Box, Button, Typography } from '@mui/material';
+import { Modal, Box, Button, Typography, Tooltip } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import LoginForm from '../forms/LoginForm';
 import RegistrationForm from '../forms/RegistrationForm';
@@ -12,7 +12,9 @@ import Analytics from '../assets/svgs/Analytics team_Monochromatic.svg';
 import TeamBuilding from '../assets/svgs/Team building _Monochromatic.svg';
 import TeamMeeting from '../assets/svgs/Team meeting_Monochromatic.svg';
 import Startup from '../assets/svgs/Startup_Two Color.svg';
-import HeroImage from '../assets/images/patrick-tomasso-GXXYkSwndP4-unsplash.jpg';
+import Github from '../assets/svgs/github-icon.svg';
+import LinkedIn from '../assets/svgs/linkedin-icon.svg';
+import Portfolio from '../assets/svgs/domain-registration-website-svgrepo-com.svg';
 export default function LandingPage({
 	toggleModal,
 	open,
@@ -23,7 +25,9 @@ export default function LandingPage({
 	const user = useSelector((store) => store.userReducer.user);
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
-
+	const linkedInURL = 'https://www.linkedin.com/in/williamsanders81/';
+	const portfolioURL = 'https://www.willsanders.dev';
+	const githubRepoURL = 'https://github.com/Wsanders81/RMS';
 	useEffect(
 		() => {
 			const setLocation = () => {
@@ -48,18 +52,28 @@ export default function LandingPage({
 		}
 	};
 	const lgDisplay = (
-		<div className="container-fluid LandingPage-container">
-			<div className="row LandingPage-row">
+		<div className="container-fluid LandingPage-container ">
+			<div className="row LandingPage-row ">
 				<div className="col-md-6 col-sm-12 LandingPage-text">
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={Analytics} alt="Analytics" />
+					<img
+						data-aos="fade-left"
+						data-aos-duration="1000"
+						src={Analytics}
+						alt="Analytics"
+					/>
 				</div>
 			</div>
 			<div className="row LandingPage-row ">
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={TeamBuilding} alt="Team Building" />
+					<img
+						data-aos="fade-right"
+						data-aos-duration="1000"
+						src={TeamBuilding}
+						alt="Team Building"
+					/>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text">
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
@@ -70,7 +84,25 @@ export default function LandingPage({
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={TeamMeeting} alt="Analytics" />
+					<img
+						data-aos="fade-left"
+						data-aos-duration="1000"
+						src={TeamMeeting}
+						alt="Analytics"
+					/>
+				</div>
+			</div>
+			<div className="row LandingPage-row ">
+				<div className="col-md-6 col-sm-12 LandingPage-img">
+					<img
+						data-aos="fade-right"
+						data-aos-duration="1000"
+						src={Startup}
+						alt="Team Building"
+					/>
+				</div>
+				<div className="col-md-6 col-sm-12 LandingPage-text">
+					{loremIpsum({ count: '1', units: 'paragraphs' })}
 				</div>
 			</div>
 		</div>
@@ -79,7 +111,12 @@ export default function LandingPage({
 		<div className="container-fluid">
 			<div className="row LandingPage-row">
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={Analytics} alt="Analytics" />
+					<img
+						data-aos="fade-left"
+						data-aos-duration="1000"
+						src={Analytics}
+						alt="Analytics"
+					/>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text">
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
@@ -87,7 +124,12 @@ export default function LandingPage({
 			</div>
 			<div className="row LandingPage-row ">
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={TeamBuilding} alt="Team Building" />
+					<img
+						data-aos="fade-right"
+						data-aos-duration="1000"
+						src={TeamBuilding}
+						alt="Team Building"
+					/>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text">
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
@@ -95,7 +137,25 @@ export default function LandingPage({
 			</div>
 			<div className="row LandingPage-row LandingPage-bottom">
 				<div className="col-md-6 col-sm-12 LandingPage-img">
-					<img src={TeamMeeting} alt="Analytics" />
+					<img
+						data-aos="fade-left"
+						data-aos-duration="1000"
+						src={TeamMeeting}
+						alt="Analytics"
+					/>
+				</div>
+				<div className="col-md-6 col-sm-12 LandingPage-text">
+					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				</div>
+			</div>
+			<div className="row LandingPage-row ">
+				<div className="col-md-6 col-sm-12 LandingPage-img">
+					<img
+						data-aos="fade-right"
+						data-aos-duration="1000"
+						src={Startup}
+						alt="Team Building"
+					/>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text">
 					{loremIpsum({ count: '1', units: 'paragraphs' })}
@@ -116,15 +176,52 @@ export default function LandingPage({
 				</Button>
 			) : null}
 			<div className="container-fluid LandingPage-hero">
-				<div className="row LandingPage-hero-img">
-					{/* <img src={HeroImage} alt="Title background" /> */}
+				<div className="row LandingPage-hero-img" />
+				<div className="LandingPage-title-text-container">
+					<Typography variant="h3" className="LandingPage-title-text">
+						Restaurant Management Services
+					</Typography>
 				</div>
-				<div className="LandingPage-title-text">Welcome to RMS</div>
 			</div>
+			<h2 className="LandingPage-offer-text" variant="h4">
+				What We Offer{' '}
+			</h2>
 			{window.screen.width >= 768 ? lgDisplay : smDisplay}
 
 			<div className="Navbar-footer">
-				<Typography>Created By: Will Sanders</Typography>
+				<div className="row LandingPage-social">
+					<div className="col">
+						<Tooltip title="Github Repo">
+							<img
+								onClick={() =>
+									(window.location = githubRepoURL)}
+								id="LandingPage-social"
+								src={Github}
+								alt="github"
+							/>
+						</Tooltip>
+					</div>
+					<div className="col">
+						<Tooltip title="LinkedIn">
+							<img
+								onClick={() => (window.location = linkedInURL)}
+								id="LandingPage-social"
+								src={LinkedIn}
+								alt="github"
+							/>
+						</Tooltip>
+					</div>
+					<div className="col">
+						<Tooltip title="Portfolio Website">
+							<img
+								onClick={() => (window.location = portfolioURL)}
+								id="LandingPage-social"
+								src={Portfolio}
+								alt="portfolio"
+							/>
+						</Tooltip>
+					</div>
+				</div>
 			</div>
 			<Modal
 				open={open}

@@ -109,7 +109,7 @@ export default function SalesForm({
 						variant="contained"
 					>
 						{`Submit ${category === 'BegInv'
-							? 'Beggining Inventory'
+							? 'Beginning Inventory'
 							: category}`}
 					</Button>
 				) : (

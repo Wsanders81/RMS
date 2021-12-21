@@ -218,6 +218,7 @@ export default function Inventories() {
 			) : null}
 			{showInvForm ? (
 				<NewInventoryForm
+					toggleInvButtons={toggleInvButtons}
 					setInv={setSelectedInv}
 					date={begDate.begDate}
 					toggle={toggleInvForm}

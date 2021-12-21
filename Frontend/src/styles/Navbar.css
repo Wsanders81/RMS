@@ -9,6 +9,7 @@
 	background-color: rgb(133, 184, 228);
 	width: 100vw;
 	z-index: 2;
+	height: 5rem;
 }
 
 .Navbar-link:hover {

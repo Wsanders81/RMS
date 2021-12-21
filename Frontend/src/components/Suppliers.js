@@ -1,5 +1,5 @@
 import '../styles/Suppliers.css';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, Modal, Paper, Typography } from '@mui/material';
 import { getSuppliers, addSupplier } from '../actions/actions';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -57,20 +57,31 @@ export default function Suppliers() {
 					Add Supplier
 				</Button>
 			) : null}
-
-			<h1>Suppliers</h1>
+			<h4 className="Supplier-card-title">
+				Select Supplier For More Info
+			</h4>
 			{suppliers ? (
 				suppliers.map((supplier) => {
 					return (
-						<Box key={supplier.id}>
-							<h3>{supplier.name} </h3>
-							<p>Address: {supplier.address}</p>
-							<p>Phone: {supplier.phone}</p>
-							<p>Email: {supplier.email}</p>
-							<Button onClick={() => handleClick(supplier.id)}>
-								See More
-							</Button>
-						</Box>
+						<Paper
+							onClick={() => handleClick(supplier.id)}
+							key={supplier.id}
+							className="Supplier-card"
+						>
+							<p className="Supplier-card-title">
+								{supplier.name}{' '}
+							</p>
+							<p className="Supplier-card-text">
+								Address: {supplier.address}
+							</p>
+							<p className="Supplier-card-text">
+								Phone: {supplier.phone}
+							</p>
+							<p className="Supplier-card-text">
+								Email: {supplier.email}
+							</p>
+							
+						</Paper>
 					);
 				})
 			) : null}

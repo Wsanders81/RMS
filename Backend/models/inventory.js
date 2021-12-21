@@ -85,6 +85,13 @@ class Inventory {
 
     //** Get inventory for specified date */
     static async addInventory(data){
+
+        //** Check for dupe inventory */
+        const inventory = await db.query(`
+        SELECT * FROM inventories 
+        WHERE date = $1`, 
+        [data.date])
+        if(inventory.rows[0]) return ({message: "Duplicate Inventory"})
          const res = await db.query(`
          INSERT INTO inventories
          (date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev)
