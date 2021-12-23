@@ -1,13 +1,13 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
 import '../styles/Inventories.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import UserDatePicker from './UserDatePicker';
 import {
 	getAllInventories,
 	getInventory,
 	deleteInventory
 } from '../actions/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { ALERT, SET_LOCATION } from '../actions/types';
 import NewInventoryForm from './NewInventoryForm';
@@ -15,13 +15,14 @@ import InventoryTable from './InventoryTable';
 import Loader from 'react-loader-spinner';
 
 export default function Inventories() {
+	const invStates = useSelector(store => store.viewReducer)
 	const [ showDates, setShowDates ] = useState(false);
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
 	const [ endDate, setEndDate ] = useState({ endDate: new Date() });
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
-	const [ showInvForm, setShowInvForm ] = useState(false);
-	const [ showInvButtons, setShowInvButtons ] = useState(true)
+	const [ showInvForm, setShowInvForm ] = useState(invStates.showInvForm);
+	const [ showInvButtons, setShowInvButtons ] = useState(invStates.showInvButtons)
 	const [ loading, setLoading ] = useState(true)
 	const dispatch = useDispatch();
 	useEffect(

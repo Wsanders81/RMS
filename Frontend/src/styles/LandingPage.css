@@ -90,6 +90,10 @@
 	width: 100%;
 }
 
+.LandingPage-buttons {
+	font-family: "Montserrat", sans-serif;
+}
+
 #LandingPage-social {
 	width: 2rem;
 	height: auto;

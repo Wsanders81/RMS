@@ -20,7 +20,6 @@ const foodData = [];
 const alcoholData = [];
 const beerData = [];
 const NABevData = [];
-
 const NonMemoizedChart = ({ sales }) => {
 	dates.length = 0;
 	foodData.length = 0;

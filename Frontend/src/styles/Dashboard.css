@@ -2,5 +2,27 @@
 	padding-top: 5rem;
 }
 
-@media screen and (max-width: 720px) {
+.Dashboard-buttons-container {
+	position: relative;
+}
+
+.Dashboard-buttons {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+@media screen and (max-width: 769px) {
+	.Dashboard-buttons-container {
+		margin-bottom: 2rem;
+	}
+	.Dashboard-buttons {
+		position: inherit;
+		display: flex;
+	}
+	.Dashboard-chart {
+		margin-bottom: 2rem;
+	}
 }

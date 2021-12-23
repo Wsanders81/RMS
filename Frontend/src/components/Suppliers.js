@@ -51,7 +51,7 @@ export default function Suppliers() {
 	};
 
 	return (
-		<Box className="Suppliers">
+		<div className="container-fluid Suppliers">
 			{user.isAdmin === 'true' ? (
 				<Button
 					sx={{ marginBottom: '1rem' }}
@@ -74,24 +74,26 @@ export default function Suppliers() {
 						'-' +
 						supplier.phone.slice(6);
 					return (
-						<Paper
-							onClick={() => handleClick(supplier.id)}
-							key={supplier.id}
-							className="Supplier-card"
-						>
-							<p className="Supplier-card-title">
-								{supplier.name}{' '}
-							</p>
-							<p className="Supplier-card-text">
-								Address: {supplier.address}
-							</p>
-							<p className="Supplier-card-text">
-								Phone: {phoneNumber}
-							</p>
-							<p className="Supplier-card-text">
-								Email: {supplier.email}
-							</p>
-						</Paper>
+						<div className="row Supplier-Row">
+							<Paper
+								onClick={() => handleClick(supplier.id)}
+								key={supplier.id}
+								className="Supplier-card"
+							>
+								<p className="Supplier-card-title">
+									{supplier.name}{' '}
+								</p>
+								<p className="Supplier-card-text">
+									Address: {supplier.address}
+								</p>
+								<p className="Supplier-card-text">
+									Phone: {phoneNumber}
+								</p>
+								<p className="Supplier-card-text">
+									Email: {supplier.email}
+								</p>
+							</Paper>
+						</div>
 					);
 				})
 			) : null}
@@ -103,6 +105,6 @@ export default function Suppliers() {
 			>
 				<SupplierForm submit={handleSubmit} />
 			</Modal>
-		</Box>
+		</div>
 	);
 }
