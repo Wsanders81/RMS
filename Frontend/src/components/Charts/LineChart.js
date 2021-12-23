@@ -22,11 +22,11 @@ const beerData = [];
 const NABevData = [];
 
 const NonMemoizedChart = ({ sales }) => {
-    dates.length = 0;
-    foodData.length = 0;
-    alcoholData.length = 0;
-    beerData.length = 0;
-    NABevData.length = 0;
+	dates.length = 0;
+	foodData.length = 0;
+	alcoholData.length = 0;
+	beerData.length = 0;
+	NABevData.length = 0;
 	sales.map((saleItem) => {
 		dates.push(moment(saleItem[0]).format('MM-DD'));
 		foodData.push(saleItem[1].food);
@@ -45,7 +45,9 @@ const NonMemoizedChart = ({ sales }) => {
 				text={`Trailing 15 Day Sales Trend `}
 			/>
 			<ChartCategoryAxis>
-				<ChartCategoryAxisItem categories={dates} />
+				<ChartCategoryAxisItem
+					categories={window.screen.width > 768 ? dates : []}
+				/>
 			</ChartCategoryAxis>
 			<ChartLegend position="bottom" orientation="horizontal" />
 			<ChartTooltip render={defaultTooltipRender} position="top" />
@@ -55,6 +57,7 @@ const NonMemoizedChart = ({ sales }) => {
 					name="Food Sales"
 					type="line"
 					data={foodData}
+					autoF
 				/>
 				<ChartSeriesItem
 					name="Alcohol Sales"

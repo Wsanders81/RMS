@@ -51,7 +51,7 @@ VALUES (
     '3495 Genessee Ave', 
      9594852604, 
     'green@shamrock.com' 
-)
+),
    (
     'Napoli Farms',
     '3714 Dwight st', 

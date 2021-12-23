@@ -45,6 +45,7 @@ export default function UserNavbar({
 	return (
 		<Box sx={{ flexGrow: 1 }} className="Navbar">
 			<AppBar sx={{ backgroundColor: 'transparent' }} position="static">
+				<div className="container">
 				<Toolbar>
 					<Typography
 						sx={{ fontFamily: 'Montserrat', fontWeight: '600' }}
@@ -64,6 +65,7 @@ export default function UserNavbar({
 					</Typography>
 					{user ? logoutButtons : loginButtons}
 				</Toolbar>
+				</div>
 			</AppBar>
 		</Box>
 	);

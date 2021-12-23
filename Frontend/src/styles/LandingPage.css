@@ -20,6 +20,8 @@
 	opacity: 0.5;
 	background-size: cover;
 	position: relative;
+	background-position: 25% 50%;
+	margin: 0;
 }
 
 .LandingPage-title-text {
@@ -74,9 +76,18 @@
 	padding-top: 1rem;
 }
 
+.LandingPage-text-container {
+	position: relative;
+}
+
 .LandingPage-text {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 600;
+}
+
+.LandingPage-row img {
+	margin-right: 2rem;
+	width: 100%;
 }
 
 #LandingPage-social {
@@ -92,14 +103,12 @@
 
 @media screen and (min-width: 768px) {
 	.LandingPage-text {
-		padding-top: 3rem;
-		padding-left: 1rem;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
 	}
-}
-
-.LandingPage-container {
-	min-width: 100vw;
-	padding: 0;
 }
 
 @media screen and (max-width: 768px) {

@@ -38,7 +38,7 @@ export default function Dashboard() {
 				endDateRef.current = formattedEndDate;
 				const getWeeklySales = async () => {
 					const res = await currentWeekSales(salesRef.current);
-					
+
 					weeklySales.current = res;
 					if (weeklySales.current) setLoading(false);
 				};
@@ -67,7 +67,7 @@ export default function Dashboard() {
 	}
 
 	return (
-		<div className="container-fluid Dashboard-main">
+		<div className="container-lg Dashboard-main">
 			<div className="row">
 				<div className="col-sm-12 col-lg-6 Dashboard-chart">
 					<PieChart

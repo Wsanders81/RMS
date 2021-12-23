@@ -105,7 +105,7 @@ export default function Supplier() {
 		supplier.phone.slice(6);
 
 	return (
-		<Box className="Suppliers">
+		<div className="container-lg Suppliers">
 			<Box>
 				<Button
 					color="error"
@@ -194,6 +194,6 @@ export default function Supplier() {
 					submit={deleteProduct}
 				/>
 			</Modal>
-		</Box>
+		</div>
 	);
 }

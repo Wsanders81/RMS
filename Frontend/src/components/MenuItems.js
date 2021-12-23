@@ -147,7 +147,7 @@ export default function MenuItems() {
 	}
 
 	return (
-		<Box className="MenuItems">
+		<div className="container-lg MenuItems">
 			{user.isAdmin === 'true' ? (
 				<Button
 					sx={{ marginBottom: '1rem' }}
@@ -246,6 +246,6 @@ export default function MenuItems() {
 					/>
 				)}
 			</Modal>
-		</Box>
+		</div>
 	);
 }

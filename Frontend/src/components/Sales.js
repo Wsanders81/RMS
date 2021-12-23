@@ -89,10 +89,9 @@ export default function Sales() {
 			toggleModal();
 		}
 	};
-	
-	
+
 	return (
-		<Box className="Sales">
+		<div className="container-lg Sales">
 			<Box>
 				<h3 className="Sales-page-title">Select Sales Dates</h3>
 				<Box>
@@ -125,7 +124,6 @@ export default function Sales() {
 						endDate={endDate.endDate}
 					/>
 				) : null}
-				
 			</Box>
 			<Modal
 				open={isOpen}
@@ -139,6 +137,6 @@ export default function Sales() {
 					begDate={adminBegDate}
 				/>
 			</Modal>
-		</Box>
+		</div>
 	);
 }

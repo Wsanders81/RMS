@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import LoginForm from '../forms/LoginForm';
 import RegistrationForm from '../forms/RegistrationForm';
 import { getTokenFromAPI } from '../actions/actions';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_LOCATION } from '../actions/types';
 import { loremIpsum } from 'lorem-ipsum';
@@ -52,10 +52,12 @@ export default function LandingPage({
 		}
 	};
 	const lgDisplay = (
-		<div className="container-fluid LandingPage-container ">
+		<div className="container LandingPage-container ">
 			<div className="row LandingPage-row ">
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
 					<img
@@ -75,13 +77,17 @@ export default function LandingPage({
 						alt="Team Building"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 			<div className="row LandingPage-row LandingPage-bottom">
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
 					<img
@@ -92,6 +98,7 @@ export default function LandingPage({
 					/>
 				</div>
 			</div>
+
 			<div className="row LandingPage-row ">
 				<div className="col-md-6 col-sm-12 LandingPage-img">
 					<img
@@ -101,8 +108,10 @@ export default function LandingPage({
 						alt="Team Building"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -118,8 +127,10 @@ export default function LandingPage({
 						alt="Analytics"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 			<div className="row LandingPage-row ">
@@ -131,8 +142,10 @@ export default function LandingPage({
 						alt="Team Building"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 			<div className="row LandingPage-row LandingPage-bottom">
@@ -144,8 +157,10 @@ export default function LandingPage({
 						alt="Analytics"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 			<div className="row LandingPage-row ">
@@ -157,37 +172,69 @@ export default function LandingPage({
 						alt="Team Building"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text">
-					{loremIpsum({ count: '1', units: 'paragraphs' })}
+				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+					<div className="LandingPage-text">
+						{loremIpsum({ count: '1', units: 'paragraphs' })}
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 	return (
-		<div className="container-fluid LandingPage">
-			{!user ? (
-				<Button
-					sx={{ position: 'fixed', top: 10, right: 200, zIndex: 2 }}
-					id="LandingPage-demo-button"
-					variant="contained"
-					onClick={handleClick}
-				>
-					Demo User
-				</Button>
-			) : null}
-			<div className="container-fluid LandingPage-hero">
-				<div className="row LandingPage-hero-img" />
-				<div className="LandingPage-title-text-container">
-					<Typography variant="h3" className="LandingPage-title-text">
-						Restaurant Management Services
-					</Typography>
+		<Fragment>
+			<div className="container-lg m-auto LandingPage">
+				{!user ? (
+					<Button
+						sx={{
+							position : 'fixed',
+							top      : 10,
+							right    : 200,
+							zIndex   : 2
+						}}
+						id="LandingPage-demo-button"
+						variant="contained"
+						onClick={handleClick}
+					>
+						Demo User
+					</Button>
+				) : null}
+				<div className="container-fluid LandingPage-hero">
+					<div className="row LandingPage-hero-img" />
+					<div className="LandingPage-title-text-container">
+						<Typography
+							variant="h3"
+							className="LandingPage-title-text"
+						>
+							Restaurant Management Services
+						</Typography>
+					</div>
 				</div>
-			</div>
-			<h2 className="LandingPage-offer-text" variant="h4">
-				What We Offer{' '}
-			</h2>
-			{window.screen.width >= 768 ? lgDisplay : smDisplay}
+				<h2 className="LandingPage-offer-text" variant="h4">
+					What We Offer{' '}
+				</h2>
+				{window.screen.width >= 768 ? lgDisplay : smDisplay}
 
+				<Modal
+					open={open}
+					onClose={toggleModal}
+					aria-labelledby="modal-Login"
+					aria-describedby="modal-Login"
+				>
+					<Box className="LandingPage-modal-login">
+						<LoginForm toggle={toggleModal} />
+					</Box>
+				</Modal>
+				<Modal
+					open={openTwo}
+					onClose={toggleModalTwo}
+					aria-labelledby="modal-Register"
+					aria-describedby="modal-Register"
+				>
+					<Box className="LandingPage-modal-register">
+						<RegistrationForm toggle={toggleModalTwo} />
+					</Box>
+				</Modal>
+			</div>
 			<div className="Navbar-footer">
 				<div className="row LandingPage-social">
 					<div className="col">
@@ -223,26 +270,6 @@ export default function LandingPage({
 					</div>
 				</div>
 			</div>
-			<Modal
-				open={open}
-				onClose={toggleModal}
-				aria-labelledby="modal-Login"
-				aria-describedby="modal-Login"
-			>
-				<Box className="LandingPage-modal-login">
-					<LoginForm toggle={toggleModal} />
-				</Box>
-			</Modal>
-			<Modal
-				open={openTwo}
-				onClose={toggleModalTwo}
-				aria-labelledby="modal-Register"
-				aria-describedby="modal-Register"
-			>
-				<Box className="LandingPage-modal-register">
-					<RegistrationForm toggle={toggleModalTwo} />
-				</Box>
-			</Modal>
-		</div>
+		</Fragment>
 	);
 }

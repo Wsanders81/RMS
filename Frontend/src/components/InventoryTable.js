@@ -97,7 +97,7 @@ export default function InventoryTable({
 	};
 
 	return (
-		<div className="container-fluid">
+		<div className="container-lg">
 			{user.isAdmin === 'true' ? (
 				<Button
 					onClick={removeInv}

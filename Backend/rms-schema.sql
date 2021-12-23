@@ -125,4 +125,4 @@ CREATE TABLE purchases (
     amount FLOAT NOT NULL
 );
 
-
+ 

@@ -161,7 +161,7 @@ function NewInventoryForm({ toggle, date, setInv, toggleInvButtons }) {
 	}
 
 	return (
-		<Fragment>
+		<div className="container-lg">
 			<Box sx={{ width: '100%' }} className="Inventories-tabs">
 				<Button variant="outlined" onClick={toggle} color="error">
 					Go Back
@@ -285,7 +285,7 @@ function NewInventoryForm({ toggle, date, setInv, toggleInvButtons }) {
 					submit={submitInventory}
 				/>
 			</Modal>
-		</Fragment>
+		</div>
 	);
 }
 export default NewInventoryForm;
