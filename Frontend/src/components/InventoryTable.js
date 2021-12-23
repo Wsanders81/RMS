@@ -50,7 +50,7 @@ export default function InventoryTable({
 		setInv(null);
 		toggleInvButtons();
 	};
-
+	
 	const createCategory = (catName) => {
 		return (
 			<React.Fragment>
@@ -78,7 +78,9 @@ export default function InventoryTable({
 								<td>{item.price}</td>
 								<td>{item.quantity}</td>
 								<td colSpan="2">
-									{item.quantity * item.price}
+									{(item.quantity * item.price)
+										.toFixed(2)
+										.toLocaleString()}
 								</td>
 							</tr>
 						);
@@ -89,7 +91,7 @@ export default function InventoryTable({
 							.toUpperCase() +
 							catName.slice(1)} inventory : $${totals[
 							catName
-						]}`}</th>
+						].toFixed(2)}`}</th>
 					</tr>
 				</tbody>
 			</React.Fragment>
@@ -130,39 +132,42 @@ export default function InventoryTable({
 				<tbody>
 					<tr>
 						<td>Sales</td>
-						<td>${food_sales}</td>
-						<td>${beer_sales}</td>
-						<td>${alcohol_sales}</td>
-						<td>${na_bev_sales}</td>
+						<td>${food_sales.toLocaleString()}</td>
+						<td>${beer_sales.toLocaleString()}</td>
+						<td>${alcohol_sales.toLocaleString()}</td>
+						<td>${na_bev_sales.toLocaleString()}</td>
 						<td>
-							${food_sales +
+							${(food_sales +
 								beer_sales +
 								alcohol_sales +
-								na_bev_sales}
+								na_bev_sales).toLocaleString()}
 						</td>
 					</tr>
 					<tr>
 						<td>Purchases</td>
 
-						<td>${FoodPurchases}</td>
-						<td>${AlcoholPurchases}</td>
-						<td>${BeerPurchases}</td>
-						<td>${NABevPurchases}</td>
+						<td>${FoodPurchases.toLocaleString()}</td>
+						<td>${AlcoholPurchases.toLocaleString()}</td>
+						<td>${BeerPurchases.toLocaleString()}</td>
+						<td>${NABevPurchases.toLocaleString()}</td>
 						<td>
-							${FoodPurchases +
+							${(FoodPurchases +
 								AlcoholPurchases +
 								BeerPurchases +
-								NABevPurchases}
+								NABevPurchases).toLocaleString()}
 						</td>
 					</tr>
 					<tr>
 						<td>Beginning Inventory</td>
-						<td>${beg_food}</td>
-						<td>${beg_alcohol}</td>
-						<td>${beg_beer}</td>
-						<td>${beg_na_bev}</td>
+						<td>${beg_food.toLocaleString()}</td>
+						<td>${beg_alcohol.toLocaleString()}</td>
+						<td>${beg_beer.toLocaleString()}</td>
+						<td>${beg_na_bev.toLocaleString()}</td>
 						<td>
-							${beg_food + beg_alcohol + beg_beer + beg_na_bev}
+							${(beg_food +
+								beg_alcohol +
+								beg_beer +
+								beg_na_bev).toLocaleString()}
 						</td>
 					</tr>
 					<tr>

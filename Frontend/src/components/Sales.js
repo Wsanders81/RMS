@@ -67,6 +67,7 @@ export default function Sales() {
 		const response = await getSales(begDate.begDate, endDate.endDate);
 
 		const groupedSales = groupSales(response.sales);
+
 		const getDailySales = dailySales(response.sales);
 		setSales(groupedSales);
 		setDaySales(getDailySales);

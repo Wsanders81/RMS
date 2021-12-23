@@ -43,7 +43,7 @@ CREATE TABLE products (
     unit TEXT NOT NULL, 
     qty_per_unit INTEGER NOT NULL, 
     price FLOAT NOT NULL, 
-    quantity INTEGER DEFAULT 0,
+    quantity FLOAT DEFAULT 0,
     supplier_id INTEGER REFERENCES suppliers
         ON DELETE CASCADE, 
     category_id INTEGER REFERENCES categories
@@ -57,14 +57,14 @@ CREATE TABLE products (
 CREATE TABLE inventories (
     id SERIAL PRIMARY KEY, 
     date DATE NOT NULL , 
-    food_sales INTEGER NOT NULL , 
-    alcohol_sales INTEGER NOT NULL , 
-    beer_sales INTEGER NOT NULL , 
-    na_bev_sales INTEGER NOT NULL , 
-    beg_food INTEGER NOT NULL , 
-    beg_alcohol INTEGER NOT NULL ,
-    beg_beer INTEGER NOT NULL ,
-    beg_na_bev INTEGER NOT NULL 
+    food_sales FLOAT NOT NULL , 
+    alcohol_sales FLOAT NOT NULL , 
+    beer_sales FLOAT NOT NULL , 
+    na_bev_sales FLOAT NOT NULL , 
+    beg_food FLOAT NOT NULL , 
+    beg_alcohol FLOAT NOT NULL ,
+    beg_beer FLOAT NOT NULL ,
+    beg_na_bev FLOAT NOT NULL 
 );
 
 -- This will hold the inventory count 
@@ -76,7 +76,7 @@ CREATE TABLE inventory_items (
         ON DELETE CASCADE, 
     product_id INTEGER REFERENCES products 
         ON DELETE CASCADE, 
-    quantity INTEGER DEFAULT 0
+    quantity FLOAT DEFAULT 0
 
 );
 

@@ -252,7 +252,7 @@ export async function getInventory(id) {
 	});
 	const purchases = await getPurchases(id);
 	response.data.inventory.Purchases = purchases.Purchases;
-
+	console.log(response.data);
 	return response.data;
 }
 
@@ -290,7 +290,6 @@ async function addPurchasesToInventory(purchases, inventoryId) {
 }
 
 export async function addInventory(data, date) {
-	console.log(data.Food);
 	if (
 		data.Food === '' ||
 		data.Alcohol === '' ||
@@ -302,6 +301,7 @@ export async function addInventory(data, date) {
 	)
 		return 'error';
 	const items = data.Food.concat(data.Beer, data.Alcohol, data.NABev);
+
 	const food_sales = data.Sales.Food || 0;
 	const alcohol_sales = data.Sales.Alcohol || 0;
 	const beer_sales = data.Sales.Beer || 0;
@@ -333,6 +333,7 @@ export async function addInventory(data, date) {
 	}
 	const invId = inventory.data.inventory.id;
 	const response = await getInventory(invId);
+
 	const inventoryId = response.inventory.id;
 	const purchases = await addPurchasesToInventory(
 		inventoryPurchases,

@@ -52,9 +52,7 @@ export default function SalesTable({ daySales, totalSales, begDate, endDate }) {
 					const foodSales = day[1].food ? day[1].food : 0;
 					const alcoholSales = day[1].alcohol ? day[1].alcohol : 0;
 					const beerSales = day[1].beer ? day[1].beer : 0;
-					const NABevSales = day[1]['NA Beverage']
-						? day[1]['NA Beverage']
-						: 0;
+					const NABevSales = day[1].NABev ? day[1].NABev : 0;
 					const total =
 						foodSales + alcoholSales + beerSales + NABevSales;
 					return (

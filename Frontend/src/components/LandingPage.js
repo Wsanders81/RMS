@@ -56,7 +56,8 @@ export default function LandingPage({
 			<div className="row LandingPage-row ">
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Collaborate with your managers using real time data
+						visualization tools
 					</div>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
@@ -79,14 +80,16 @@ export default function LandingPage({
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Keep track of sales, view supplier information or enter
+						inventory from anywhere using your PC or mobile phone
 					</div>
 				</div>
 			</div>
 			<div className="row LandingPage-row LandingPage-bottom">
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Receive up-to-date sales data to spot areas of
+						opportunity or track current sales trends.
 					</div>
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-img">
@@ -110,7 +113,9 @@ export default function LandingPage({
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Each restaurant has their own private data allowing you
+						to store all the data your business needs in a secure
+						location.
 					</div>
 				</div>
 			</div>
@@ -129,7 +134,8 @@ export default function LandingPage({
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Collaborate with your managers using real time data
+						visualization tools
 					</div>
 				</div>
 			</div>
@@ -144,7 +150,8 @@ export default function LandingPage({
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Keep track of sales, view supplier information or enter
+						inventory from anywhere using your PC or mobile phone
 					</div>
 				</div>
 			</div>
@@ -159,7 +166,8 @@ export default function LandingPage({
 				</div>
 				<div className="col-md-6 col-sm-12 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Receive up-to-date sales data to spot areas of
+						opportunity or track current sales trends.
 					</div>
 				</div>
 			</div>
@@ -172,9 +180,11 @@ export default function LandingPage({
 						alt="Team Building"
 					/>
 				</div>
-				<div className="col-md-6 col-sm-12 LandingPage-text-container">
+				<div className="col-md-6 col-sm-12 pb-5 LandingPage-text-container">
 					<div className="LandingPage-text">
-						{loremIpsum({ count: '1', units: 'paragraphs' })}
+						Each restaurant has their own private data allowing you
+						to store all the data your business needs in a secure
+						location.
 					</div>
 				</div>
 			</div>
@@ -182,6 +192,14 @@ export default function LandingPage({
 	);
 	return (
 		<Fragment>
+			<div className="container-fluid LandingPage-hero">
+				<div className="row LandingPage-hero-img" />
+				<div className="LandingPage-title-text-container">
+					<Typography variant="h3" className="LandingPage-title-text">
+						Restaurant Management Services
+					</Typography>
+				</div>
+			</div>
 			<div className="container-lg m-auto LandingPage">
 				{!user ? (
 					<Button
@@ -198,17 +216,7 @@ export default function LandingPage({
 						Demo User
 					</Button>
 				) : null}
-				<div className="container-fluid LandingPage-hero">
-					<div className="row LandingPage-hero-img" />
-					<div className="LandingPage-title-text-container">
-						<Typography
-							variant="h3"
-							className="LandingPage-title-text"
-						>
-							Restaurant Management Services
-						</Typography>
-					</div>
-				</div>
+
 				<h2 className="LandingPage-offer-text" variant="h4">
 					What We Offer{' '}
 				</h2>

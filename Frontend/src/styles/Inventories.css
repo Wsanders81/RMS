@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 .Inventories {
 	padding-top: 5rem;
 }
@@ -13,7 +15,9 @@
 	padding: 1.5rem;
 	margin: 0.5rem;
 }
-
+.Inventory-total {
+	font-family: "Montserrat", sans-serif;
+}
 .Inventories-singleInv:hover {
 	cursor: pointer;
 	background-color: beige;

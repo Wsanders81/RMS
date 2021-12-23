@@ -14,7 +14,7 @@
 	background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 .LandingPage-hero-img {
-	width: 100%;
+	width: 100vw;
 	height: 28rem;
 	background-image: url('../assets/images/patrick-tomasso-GXXYkSwndP4-unsplash.jpg');
 	opacity: 0.5;
@@ -83,6 +83,7 @@
 .LandingPage-text {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 600;
+	font-size: 1.5rem;
 }
 
 .LandingPage-row img {

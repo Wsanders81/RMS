@@ -15,7 +15,7 @@ export const groupSales = (salesArr) => {
 		if (saleItem.category_name === 'beer') {
 			beerSales += saleItem.sales;
 		}
-		if (saleItem.category_name === 'NA Beverage') {
+		if (saleItem.category_name === 'NABev') {
 			NAbevSales += saleItem.sales;
 		}
 		return null;
@@ -31,7 +31,6 @@ export const groupSales = (salesArr) => {
 
 export const dailySales = (salesArr, day = null, i = 0) => {
 	let daySales = [];
-
 	for (let i = 0; i < salesArr.length; i++) {
 		day = moment(salesArr[i].date).format('ddd');
 

@@ -60,8 +60,9 @@ function InventoryCategory({
 					);
 				})}
 				<Typography
+				className="Inventory-total"
 					sx={{ marginTop: '1rem' }}
-				>{`Total ${category} Value: ${total} `}</Typography>
+				>{`Total ${category} Value: $${total.toFixed(2)} `}</Typography>
 				{submitted[category] === false ? (
 					<Button
 						id="Inventory-submit-button"

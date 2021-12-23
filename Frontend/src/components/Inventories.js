@@ -15,15 +15,19 @@ import InventoryTable from './InventoryTable';
 import Loader from 'react-loader-spinner';
 
 export default function Inventories() {
-	const invStates = useSelector(store => store.viewReducer)
+	const invStates = useSelector((store) => store.viewReducer);
 	const [ showDates, setShowDates ] = useState(false);
 	const [ begDate, setBegDate ] = useState({ begDate: new Date() });
 	const [ endDate, setEndDate ] = useState({ endDate: new Date() });
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
-	const [ showInvForm, setShowInvForm ] = useState(invStates.showInvForm);
-	const [ showInvButtons, setShowInvButtons ] = useState(invStates.showInvButtons)
-	const [ loading, setLoading ] = useState(true)
+	const [ showInvForm, setShowInvForm ] = useState(
+		invStates.showInvForm || false
+	);
+	const [ showInvButtons, setShowInvButtons ] = useState(
+		invStates.showInvButtons || true
+	);
+	const [ loading, setLoading ] = useState(true);
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
@@ -40,7 +44,7 @@ export default function Inventories() {
 					formattedEndDate
 				);
 				setInventories(displayInventories);
-				setLoading(false)
+				setLoading(false);
 			};
 			getInventoriesToDisplay();
 			setLocation();
@@ -74,16 +78,15 @@ export default function Inventories() {
 			setSelectedInv(null);
 			// setInventories(null);
 		}
-		toggleInvButtons()
-		
+		toggleInvButtons();
 	};
-	const toggleInvButtons = ()=> {
-		setShowInvButtons(state=> !state)
-	}
+	const toggleInvButtons = () => {
+		setShowInvButtons((state) => !state);
+	};
 
 	const toggleInvForm = (reset) => {
 		setShowInvForm((prevState) => !prevState);
-		toggleInvButtons()
+		toggleInvButtons();
 		setInventories(null);
 		if (reset === false) {
 			return;
@@ -98,14 +101,13 @@ export default function Inventories() {
 		setSelectedInv(res);
 		toggleDatePicker();
 		toggleInvButtons();
-		
 	};
 	const handleDelete = async () => {
 		const res = await deleteInventory(selectedInv.inventory.id);
 		if (res === 'Inventory successfully deleted') {
 			setSelectedInv(null);
 			toggleDatePicker();
-			toggleInvButtons()
+			toggleInvButtons();
 			dispatch({
 				type         : ALERT,
 				typeOfNotify : 'success',
@@ -115,17 +117,23 @@ export default function Inventories() {
 	};
 
 	const inventoryButtons = (
-		<Box sx={{transform:"translateY(150%)", display: 'flex', flexDirection:"column"}}>
-			<Button 
-			sx={{width: "10rem", margin:'auto'}}
-			onClick={toggleDatePicker} 
-			variant="contained">
+		<Box
+			sx={{
+				transform     : 'translateY(150%)',
+				display       : 'flex',
+				flexDirection : 'column'
+			}}
+		>
+			<Button
+				sx={{ width: '10rem', margin: 'auto' }}
+				onClick={toggleDatePicker}
+				variant="contained"
+			>
 				Select Inventory
 			</Button>
 			<Button
-				sx={{width: "10rem", margin:'auto', marginTop: '2rem'}}
+				sx={{ width: '10rem', margin: 'auto', marginTop: '2rem' }}
 				onClick={toggleInvForm}
-				
 				variant="contained"
 			>
 				Start New Inventory
@@ -143,24 +151,23 @@ export default function Inventories() {
 				width={100}
 			/>
 		);
-	}	
+	}
 	return (
 		<Box className="Inventories">
 			{showInvForm ? (
-				<>
-				
-				<UserDatePicker
-					begDate={begDate}
-					showSubmit={false}
-					handleChange={handleChange}
-					title="Please Enter Inventory Date"
-				/>
-				</>
+				<Fragment>
+					<UserDatePicker
+						begDate={begDate}
+						showSubmit={false}
+						handleChange={handleChange}
+						title="Please Enter Inventory Date"
+					/>
+				</Fragment>
 			) : null}
 
-			{ showInvButtons ? inventoryButtons : null}
+			{showInvButtons ? inventoryButtons : null}
 			{showDates ? (
-				<Box >
+				<Box>
 					<UserDatePicker
 						showSubmit={true}
 						begDate={begDate}

@@ -81,10 +81,12 @@ function NewInventoryForm({ toggle, date, setInv, toggleInvButtons }) {
 			return { ...state };
 		});
 	};
+
 	const toggleModal = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
 	const submitInventory = async () => {
+		
 		const res = await addInventory(invVals, date);
 		if (res.message) {
 			dispatch({
