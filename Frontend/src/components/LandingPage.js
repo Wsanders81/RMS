@@ -203,12 +203,6 @@ export default function LandingPage({
 			<div className="container-lg m-auto LandingPage">
 				{!user ? (
 					<Button
-						sx={{
-							position : 'fixed',
-							top      : 10,
-							right    : 200,
-							zIndex   : 2
-						}}
 						id="LandingPage-demo-button"
 						variant="contained"
 						onClick={handleClick}

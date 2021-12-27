@@ -21,13 +21,12 @@ export default function Inventories() {
 	const [ endDate, setEndDate ] = useState({ endDate: new Date() });
 	const [ inventories, setInventories ] = useState(null);
 	const [ selectedInv, setSelectedInv ] = useState(null);
-	const [ showInvForm, setShowInvForm ] = useState(
-		invStates.showInvForm || false
-	);
+	const [ showInvForm, setShowInvForm ] = useState(invStates.showInvForm);
 	const [ showInvButtons, setShowInvButtons ] = useState(
-		invStates.showInvButtons || true
+		invStates.showInvButtons
 	);
 	const [ loading, setLoading ] = useState(true);
+
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
@@ -43,13 +42,15 @@ export default function Inventories() {
 					formattedBegDate,
 					formattedEndDate
 				);
+
 				setInventories(displayInventories);
-				setLoading(false);
+				if (displayInventories) setLoading(false);
 			};
+
 			getInventoriesToDisplay();
 			setLocation();
 		},
-		[ dispatch, selectedInv ]
+		[ dispatch, selectedInv, invStates ]
 	);
 	const handleChange = (e) => {
 		if (e.target.name === 'begDate') {
@@ -87,7 +88,7 @@ export default function Inventories() {
 	const toggleInvForm = (reset) => {
 		setShowInvForm((prevState) => !prevState);
 		toggleInvButtons();
-		setInventories(null);
+		// setInventories(null);
 		if (reset === false) {
 			return;
 		}
