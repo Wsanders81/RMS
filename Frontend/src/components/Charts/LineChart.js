@@ -31,7 +31,7 @@ const NonMemoizedChart = ({ sales }) => {
 		foodData.push(saleItem[1].food);
 		alcoholData.push(saleItem[1].alcohol);
 		beerData.push(saleItem[1].beer);
-		NABevData.push(saleItem[1]['NA Beverage']);
+		NABevData.push(saleItem[1].NABev);
 		return null;
 	});
 	const defaultTooltipRender = ({ point }) => {

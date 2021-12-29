@@ -1,9 +1,6 @@
 import { START_NEW_INVENTORY } from '../actions/types';
 
-const DEFAULT_STATE = {
-	showInvForm    : false,
-	showInvButtons : true
-};
+
 export default function viewReducer(
 	state = {
 		showInvForm    : false,

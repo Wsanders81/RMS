@@ -181,50 +181,50 @@ const BarChart = ({ weeklySales }) => {
 	const fourthSeries = [
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.monday['NA Beverage'],
-			percentage : (weeklySales.monday['NA Beverage'] /
+			value      : weeklySales.monday.NABev,
+			percentage : (weeklySales.monday.NABev /
 				dailySalesBreakdown[0] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.tuesday['NA Beverage'],
-			percentage : (weeklySales.tuesday['NA Beverage'] /
+			value      : weeklySales.tuesday.NABev,
+			percentage : (weeklySales.tuesday.NABev /
 				dailySalesBreakdown[1] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.wednesday['NA Beverage'],
-			percentage : (weeklySales.wednesday['NA Beverage'] /
+			value      : weeklySales.wednesday.NABev,
+			percentage : (weeklySales.wednesday.NABev /
 				dailySalesBreakdown[2] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.thursday['NA Beverage'],
-			percentage : (weeklySales.thursday['NA Beverage'] /
+			value      : weeklySales.thursday.NABev,
+			percentage : (weeklySales.thursday.NABev /
 				dailySalesBreakdown[3] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.friday['NA Beverage'],
-			percentage : (weeklySales.friday['NA Beverage'] /
+			value      : weeklySales.friday.NABev,
+			percentage : (weeklySales.friday.NABev /
 				dailySalesBreakdown[4] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.saturday['NA Beverage'],
-			percentage : (weeklySales.saturday['NA Beverage'] /
+			value      : weeklySales.saturday.NABev,
+			percentage : (weeklySales.saturday.NABev /
 				dailySalesBreakdown[5] *
 				100).toFixed(2)
 		},
 		{
 			category   : categoryNames[3],
-			value      : weeklySales.sunday['NA Beverage'],
-			percentage : (weeklySales.sunday['NA Beverage'] /
+			value      : weeklySales.sunday.NABev,
+			percentage : (weeklySales.sunday.NABev /
 				dailySalesBreakdown[6] *
 				100).toFixed(2)
 		}
