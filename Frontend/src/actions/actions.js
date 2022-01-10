@@ -217,13 +217,15 @@ export async function getProductsForInventory() {
 }
 
 export async function getAllInventories(begDate, endDate) {
+	const restaurant_id = window.localStorage.getItem('restaurantId')
 	const response = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/inventories/all`,
 		data   : {
 			begDate,
 			endDate,
-			token   : myToken
+			token   : myToken, 
+			restaurant_id
 		}
 	});
 
@@ -328,6 +330,7 @@ export async function addInventory(data, date) {
 	const beg_alcohol = data.BegInv.Alcohol || 0;
 	const beg_beer = data.BegInv.Beer || 0;
 	const beg_na_bev = data.BegInv.NABev || 0;
+	const restaurant_id = window.localStorage.getItem('restaurantId');
 	const inventory = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/inventories/add`,
@@ -342,7 +345,8 @@ export async function addInventory(data, date) {
 			beg_beer,
 			beg_na_bev,
 			items,
-			token         : myToken
+			token         : myToken,
+			restaurant_id
 		}
 	});
 	if (inventory.data.message) {
@@ -357,6 +361,7 @@ export async function addInventory(data, date) {
 		inventoryId
 	);
 	response.inventory.Purchases = purchases.Purchases;
+	console.log(response);
 	return response;
 }
 
@@ -372,12 +377,12 @@ export async function deleteInventory(id) {
 }
 
 export async function getMenuItems() {
-	const restaurantId = window.localStorage.getItem('restaurantId')
+	const restaurantId = window.localStorage.getItem('restaurantId');
 	const response = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/menuItems`,
 		data   : {
-			token : myToken, 
+			token        : myToken,
 			restaurantId
 		}
 	});

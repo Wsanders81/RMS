@@ -41,10 +41,7 @@ function ensureLoggedIn(req, res, next) {
 
 function ensureAdmin(req, res, next) {
 	try {
-		// const token = req.body.token
-		// console.log(token)
-		// req.user = jwt.verify(token, SECRET_KEY);
-		// console.log(req.user)
+		
 		if (!req.user || !req.user.isAdmin) {
 			throw new UnauthorizedError();
 		}

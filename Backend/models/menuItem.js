@@ -33,10 +33,7 @@ class MenuItem {
 		SELECT FROM menu_items WHERE name = $1`,
 			[ data.name ]
 		);
-		console.log('**************');
-		console.log('**************');
-		console.log('**************');
-		console.log(check.rows);
+		
 		if (check.rows[0]) return 'error';
 		const item = await db.query(
 			`

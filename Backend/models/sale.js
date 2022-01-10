@@ -3,8 +3,7 @@ const db = require('../db');
 class Sale {
 	//** GET sales within specified dates */
 	static async getSales({ begDate, endDate, restaurantId }) {
-		console.log(restaurantId);
-		console.log('((***U)(*U)()');
+		
 		const res = await db.query(
 			`
         SELECT s.id, s.date, s.sales, c.category_name FROM sales AS s

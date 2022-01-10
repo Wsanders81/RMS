@@ -2,11 +2,11 @@ const db = require('../db');
 
 class Inventory {
 	//** Get all inventories within specific dates */
-	static async getAllInventories({ begDate, endDate }) {
+	static async getAllInventories({ begDate, endDate, restaurant_id }) {
 		const res = await db.query(
 			`
-        SELECT * FROM inventories WHERE date >= $1 AND date <= $2`,
-			[ begDate, endDate ]
+        SELECT * FROM inventories WHERE date >= $1 AND date <= $2 AND restaurant_id = $3 `,
+			[ begDate, endDate, restaurant_id ]
 		);
 		if (!res.rows) return 'error';
 		return res.rows;
@@ -99,9 +99,9 @@ class Inventory {
 		const res = await db.query(
 			`
          INSERT INTO inventories
-         (date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-         RETURNING id, date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev`,
+         (date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev, restaurant_id)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+         RETURNING id, date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev, restaurant_id`,
 			[
 				data.date,
 				data.food_sales,
@@ -111,7 +111,8 @@ class Inventory {
 				data.beg_food,
 				data.beg_alcohol,
 				data.beg_beer,
-				data.beg_na_bev
+				data.beg_na_bev,
+				data.restaurant_id
 			]
 		);
 		return res.rows[0];

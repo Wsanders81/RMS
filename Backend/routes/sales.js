@@ -26,7 +26,6 @@ router.post('/add', async function(req, res, next) {
 
 router.delete('/:id', async function(req, res, next) {
 	try {
-		console.log(req.params.id);
 		const message = await Sales.removeSales(req.params.id);
 		if (message === 'error') {
 			throw new BadRequestError(
