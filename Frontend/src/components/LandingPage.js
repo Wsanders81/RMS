@@ -6,7 +6,6 @@ import { getTokenFromAPI } from '../actions/actions';
 import { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_LOCATION } from '../actions/types';
-import { loremIpsum } from 'lorem-ipsum';
 import '../styles/LandingPage.css';
 import Analytics from '../assets/svgs/Analytics team_Monochromatic.svg';
 import TeamBuilding from '../assets/svgs/Team building _Monochromatic.svg';

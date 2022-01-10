@@ -9,17 +9,27 @@ export default function userReducer(state = {}, action) {
 			SetUserLocalStorage(
 				action.username,
 				action.token.token,
-				action.isAdmin
+				action.isAdmin,
+				action.restaurantId,
+				action.restaurantName
 			);
 			return {
 				...state,
-				token   : action.token.token,
-				user    : action.username,
-				isAdmin : action.isAdmin
+				token          : action.token.token,
+				user           : action.username,
+				isAdmin        : action.isAdmin,
+				restaurantId   : action.restaurantId,
+				restaurantName : action.restaurantName
 			};
 		case LOGOUT:
 			deleteUserLocalStorage();
-			return { ...state, token: null, user: null };
+			return {
+				...state,
+				token          : null,
+				user           : null,
+				restaurantId   : null,
+				restaurantName : null
+			};
 		default:
 			return state;
 	}

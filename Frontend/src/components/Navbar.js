@@ -10,6 +10,7 @@ export default function UserNavbar({
 	toggleDrawer
 }) {
 	const user = useSelector((store) => store.userReducer.user);
+	const restName = useSelector((store) => store.userReducer.restaurantName);
 	const location = useSelector((store) => store.locationReducer.location);
 	const navigate = useNavigate();
 
@@ -46,25 +47,25 @@ export default function UserNavbar({
 		<Box sx={{ flexGrow: 1 }} className="Navbar">
 			<AppBar sx={{ backgroundColor: 'transparent' }} position="static">
 				<div className="container">
-				<Toolbar>
-					<Typography
-						sx={{ fontFamily: 'Montserrat', fontWeight: '600' }}
-						className="Navbar-link"
-						onClick={() => navigate('/')}
-						align="left"
-						variant="h6"
-						component="div"
-					>
-						RMS
-					</Typography>
-					<Typography
-						sx={{ fontFamily: 'Montserrat' }}
-						className="Navbar-location"
-					>
-						{location}
-					</Typography>
-					{user ? logoutButtons : loginButtons}
-				</Toolbar>
+					<Toolbar>
+						<Typography
+							sx={{ fontFamily: 'Montserrat', fontWeight: '600' }}
+							className="Navbar-link"
+							onClick={() => navigate('/')}
+							align="left"
+							variant="h6"
+							component="div"
+						>
+							RMS {restName ? `- ${restName}` : null}
+						</Typography>
+						<Typography
+							sx={{ fontFamily: 'Montserrat' }}
+							className="Navbar-location"
+						>
+							{location}
+						</Typography>
+						{user ? logoutButtons : loginButtons}
+					</Toolbar>
 				</div>
 			</AppBar>
 		</Box>

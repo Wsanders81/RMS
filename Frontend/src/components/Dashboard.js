@@ -99,7 +99,7 @@ export default function Dashboard() {
 						>
 							<button
 								type="button"
-								class="btn btn-outline-success"
+								className="btn btn-outline-success"
 								onClick={(e) =>
 									handleNavigateClick(e, '/sales')}
 							>
@@ -107,7 +107,7 @@ export default function Dashboard() {
 							</button>
 							<button
 								type="button"
-								class="btn btn-outline-success"
+								className="btn btn-outline-success"
 								onClick={(e) =>
 									handleNavigateClick(e, '/inventory')}
 							>
@@ -115,7 +115,7 @@ export default function Dashboard() {
 							</button>
 							<button
 								type="button"
-								class="btn btn-outline-success"
+								className="btn btn-outline-success"
 								onClick={(e) =>
 									handleNavigateClick(e, '/menu-items')}
 							>
@@ -123,7 +123,7 @@ export default function Dashboard() {
 							</button>
 							<button
 								type="button"
-								class="btn btn-outline-success"
+								className="btn btn-outline-success"
 								onClick={(e) =>
 									handleNavigateClick(e, '/suppliers')}
 							>

@@ -1,15 +1,11 @@
-
-
-
-
-const User = require('../models/user')
-const jsonschema = require("jsonschema")
-const express = require("express")
-const router = new express.Router()
-const { createToken } = require("../helpers/tokens")
-const userAuthSchema = require('../schemas/userAuth.json')
-const userRegisterSchema = require('../schemas/userRegister.json')
-const { BadRequestError } = require('../expressError')
+const User = require('../models/user');
+const jsonschema = require('jsonschema');
+const express = require('express');
+const router = new express.Router();
+const { createToken } = require('../helpers/tokens');
+const userAuthSchema = require('../schemas/userAuth.json');
+const userRegisterSchema = require('../schemas/userRegister.json');
+const { BadRequestError } = require('../expressError');
 
 /** POST /auth/token:  { username, password } => { token }
  *
@@ -18,23 +14,24 @@ const { BadRequestError } = require('../expressError')
  * Authorization required: none
  */
 
-router.post('/token', async function(req, res, next){
-    try {
-        
-        const validator = jsonschema.validate(req.body, userAuthSchema)
-        if(!validator.valid){
-            const errs = validator.errors.map(e=> e.stack)
-            throw new BadRequestError(errs)
-        }
-        const { username, password } = req.body; 
-        const user = await User.authenticate(username, password)
-        const isAdmin = user.is_admin
-        const token = createToken(user)
-        return res.json({ token , isAdmin})
-    } catch(err) {
-        return next(err)
-    }
-})
+router.post('/token', async function(req, res, next) {
+	try {
+		const validator = jsonschema.validate(req.body, userAuthSchema);
+		if (!validator.valid) {
+			const errs = validator.errors.map((e) => e.stack);
+			throw new BadRequestError(errs);
+		}
+		const { username, password } = req.body;
+		const user = await User.authenticate(username, password);
+		const isAdmin = user.is_admin;
+		const restaurant_id = user.restaurant_id;
+		const restaurant_name = user.restaurant_name;
+		const token = createToken(user);
+		return res.json({ token, isAdmin, restaurant_id, restaurant_name });
+	} catch (err) {
+		return next(err);
+	}
+});
 
 /** POST /auth/register:   { user } => { token }
  *
@@ -44,24 +41,23 @@ router.post('/token', async function(req, res, next){
  *
  * Authorization required: none
  */
-router.post('/register', async function(req, res, next){
-    
-    try {
-        const validator = jsonschema.validate(req.body, userRegisterSchema)
-        if(!validator.valid){
-            const errs = validator.errors.map(e=> e.stack)
-            throw new BadRequestError(errs)
-        }
-        const newUser = await User.register({...req.body, isAdmin: false}); 
-        
-        const token = createToken(newUser)
-        return res.status(201).json({token})
-    } catch(err) {
-        return next(err)
-    }
-})
+router.post('/register', async function(req, res, next) {
+	try {
+		const validator = jsonschema.validate(req.body, userRegisterSchema);
+		if (!validator.valid) {
+			const errs = validator.errors.map((e) => e.stack);
+			throw new BadRequestError(errs);
+		}
+		const newUser = await User.register({ ...req.body, isAdmin: false });
 
-router.get("/", function(req, res, next){
-    return {request: "received"}
-})
- module.exports = router; 
+		const token = createToken(newUser);
+		return res.status(201).json({ token });
+	} catch (err) {
+		return next(err);
+	}
+});
+
+router.get('/', function(req, res, next) {
+	return { request: 'received' };
+});
+module.exports = router;

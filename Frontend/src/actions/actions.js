@@ -4,12 +4,14 @@ import { GET_USER } from './types';
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
 
-function getUser(token, username, isAdmin) {
+function getUser(token, username, isAdmin, restaurantId, restaurantName) {
 	return {
-		type     : GET_USER,
+		type           : GET_USER,
 		token,
 		username,
-		isAdmin  : isAdmin
+		isAdmin        : isAdmin,
+		restaurantId,
+		restaurantName
 	};
 }
 
@@ -23,9 +25,14 @@ export function getTokenFromAPI(username, password) {
 				password : `${password}`
 			}
 		});
-
 		return dispatch(
-			getUser(response.data, username, response.data.isAdmin)
+			getUser(
+				response.data,
+				username,
+				response.data.isAdmin,
+				response.data.restaurant_id,
+				response.data.restaurant_name
+			)
 		);
 	};
 }
@@ -76,7 +83,6 @@ export async function addSales(sales, date) {
 	const salesArr = Array.from(Object.entries(sales));
 	let promises = [];
 	for (let i = 0; i < salesArr.length; i++) {
-		console.log(parseInt(salesArr[i][1]));
 		promises.push(
 			axios({
 				method : 'post',
@@ -252,7 +258,6 @@ export async function getInventory(id) {
 	});
 	const purchases = await getPurchases(id);
 	response.data.inventory.Purchases = purchases.Purchases;
-	console.log(response.data);
 	return response.data;
 }
 

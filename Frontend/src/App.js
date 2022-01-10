@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import TempDrawer from './components/Drawer';
 function App() {
 	CheckLocalStorage();
+
 	const drawerState = useSelector((store) => store.locationReducer.open);
 	const toastNotify = useSelector((store) => store.toastifyReducer);
 	const [ isOpen, setIsOpen ] = useState(false);
@@ -32,10 +33,8 @@ function App() {
 		},
 		[ toastNotify ]
 	);
-	
 
 	const toggleDrawer = () => {
-		
 		setDrawerOpen((state) => !state);
 	};
 	const toggleModal = () => setIsOpen((isOpen) => !isOpen);
@@ -49,7 +48,7 @@ function App() {
 				toggleModalTwo={toggleModalTwo}
 			/>
 			<TempDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
-			<ToastContainer position="top-left" />
+			<ToastContainer position="top-left" autoClose={1500} />
 			<UserRoutes
 				toggleModal={toggleModal}
 				open={isOpen}

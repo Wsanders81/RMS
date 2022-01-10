@@ -1,14 +1,20 @@
-DROP TABLE IF EXISTS users; 
-DROP TABLE IF EXISTS sales; 
-DROP TABLE IF EXISTS inventory_items; 
-DROP TABLE IF EXISTS menu_item_ingredients; 
-DROP TABLE IF EXISTS order_items;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS menu_items; 
-DROP TABLE IF EXISTS products; 
-DROP TABLE IF EXISTS inventories;
-DROP TABLE IF EXISTS suppliers; 
-DROP TABLE IF EXISTS categories; 
+-- DROP TABLE IF EXISTS users; 
+-- DROP TABLE IF EXISTS sales; 
+-- DROP TABLE IF EXISTS inventory_items; 
+-- DROP TABLE IF EXISTS menu_item_ingredients; 
+-- DROP TABLE IF EXISTS order_items;
+-- DROP TABLE IF EXISTS orders;
+-- DROP TABLE IF EXISTS menu_items; 
+-- DROP TABLE IF EXISTS products; 
+-- DROP TABLE IF EXISTS inventories;
+-- DROP TABLE IF EXISTS suppliers; 
+-- DROP TABLE IF EXISTS categories; 
+
+CREATE TABLE restaurants (
+    id SERIAL PRIMARY KEY, 
+    name TEXT UNIQUE NOT NULL
+
+);
 
 CREATE TABLE users (
     username VARCHAR(25) PRIMARY KEY, 
@@ -16,6 +22,7 @@ CREATE TABLE users (
     first_name TEXT NOT NULL, 
     last_name TEXT NOT NULL, 
     email TEXT NOT NULL, 
+    restaurant_id INTEGER REFERENCES restaurants, 
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 ); 
 
@@ -32,6 +39,7 @@ CREATE TABLE suppliers (
     phone VARCHAR(15) NOT NULL, 
     email TEXT NOT NULL 
         CHECK (position('@' IN email) > 1), 
+    restaurant_id INTEGER REFERENCES restaurants, 
     notes TEXT
 );
 
@@ -47,7 +55,8 @@ CREATE TABLE products (
     supplier_id INTEGER REFERENCES suppliers
         ON DELETE CASCADE, 
     category_id INTEGER REFERENCES categories
-        ON DELETE CASCADE
+        ON DELETE CASCADE, 
+    restaurant_id INTEGER REFERENCES restaurants
 
 );
 
@@ -64,7 +73,8 @@ CREATE TABLE inventories (
     beg_food FLOAT NOT NULL , 
     beg_alcohol FLOAT NOT NULL ,
     beg_beer FLOAT NOT NULL ,
-    beg_na_bev FLOAT NOT NULL 
+    beg_na_bev FLOAT NOT NULL, 
+    restaurant_id INTEGER REFERENCES restaurants 
 );
 
 -- This will hold the inventory count 
@@ -85,7 +95,8 @@ CREATE TABLE sales (
     date DATE DEFAULT CURRENT_DATE, 
     category_id INTEGER REFERENCES categories 
         ON DELETE CASCADE,
-    sales FLOAT NOT NULL
+    sales FLOAT NOT NULL, 
+    restaurant_id INTEGER REFERENCES restaurants
 ); 
 
 CREATE TABLE menu_items (
@@ -93,7 +104,8 @@ CREATE TABLE menu_items (
     name VARCHAR(25) UNIQUE NOT NULL, 
     category_id INTEGER REFERENCES categories
         ON DELETE CASCADE,
-    price FLOAT
+    price FLOAT, 
+    restaurant_id INTEGER REFERENCES restaurants
 );
 
 CREATE TABLE menu_item_ingredients (
@@ -113,7 +125,8 @@ CREATE TABLE orders (
     sales FLOAT NOT NULL, 
     category_id INTEGER REFERENCES categories
         ON DELETE CASCADE, 
-    date DATE NOT NULL DEFAULT CURRENT_DATE
+    date DATE NOT NULL DEFAULT CURRENT_DATE, 
+    restaurant_id INTEGER REFERENCES restaurants
 ); 
 
 CREATE TABLE purchases (
@@ -122,7 +135,8 @@ CREATE TABLE purchases (
         ON DELETE CASCADE, 
     category_id INTEGER REFERENCES categories
         ON DELETE CASCADE,
-    amount FLOAT NOT NULL
+    amount FLOAT NOT NULL, 
+    restaurant_id INTEGER REFERENCES restaurants
 );
 
  

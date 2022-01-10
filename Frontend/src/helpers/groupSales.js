@@ -68,9 +68,9 @@ export const currentWeekSales = async ({ sales }) => {
 
 	const formattedWeeklySales = dailySales(weeklySales.sales);
 	return {
-		monday    : formattedWeeklySales[0][1] ? formattedWeeklySales[0][1] : 0,
-		tuesday   : formattedWeeklySales[1][1] ? formattedWeeklySales[1][1] : 0,
-		wednesday : formattedWeeklySales[2][1] ? formattedWeeklySales[2][1] : 0,
+		monday    : formattedWeeklySales[0] ? formattedWeeklySales[0][1] : 0,
+		tuesday   : formattedWeeklySales[1] ? formattedWeeklySales[1][1] : 0,
+		wednesday : formattedWeeklySales[2] ? formattedWeeklySales[2][1] : 0,
 		thursday  : formattedWeeklySales[3] ? formattedWeeklySales[3][1] : 0,
 		friday    : formattedWeeklySales[4] ? formattedWeeklySales[4][1] : 0,
 		saturday  : formattedWeeklySales[5] ? formattedWeeklySales[5][1] : 0,
