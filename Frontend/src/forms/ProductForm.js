@@ -23,7 +23,7 @@ const ProductForm = forwardRef((props, ref) => {
 		category_id       : ''
 	};
 	const dispatch = useDispatch();
-	const { submit, supplierId } = props;
+	const { submit } = props;
 	return (
 		<div className="Supplier-modal">
 			<Card sx={{ margin: 'auto', height: '100%' }}>

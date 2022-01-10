@@ -1,5 +1,5 @@
 import UserDatePicker from './UserDatePicker';
-import { Box, Typography, Button, Modal } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';

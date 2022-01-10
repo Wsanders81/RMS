@@ -2,9 +2,12 @@ const db = require('../db');
 
 class Supplier {
 	//** Get all suppliers */
-	static async getSuppliers() {
-		const res = await db.query(`
-        SELECT * FROM suppliers`);
+	static async getSuppliers(restaurant_id) {
+		const res = await db.query(
+			`
+        SELECT * FROM suppliers WHERE restaurant_id = $1`,
+			[ restaurant_id ]
+		);
 		if (!res) return 404;
 		return res.rows;
 	}

@@ -3,7 +3,6 @@ import { GET_USER } from './types';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 let myToken = window.localStorage.getItem('token');
-
 function getUser(token, username, isAdmin, restaurantId, restaurantName) {
 	return {
 		type           : GET_USER,
@@ -43,27 +42,38 @@ export function registerUser(data) {
 			method : 'post',
 			url    : `${BASE_URL}/auth/register`,
 			data   : {
-				username  : data.username,
-				password  : data.password,
-				firstName : data.firstName,
-				lastName  : data.lastName,
-				email     : data.email
+				username       : data.username,
+				password       : data.password,
+				firstName      : data.firstName,
+				lastName       : data.lastName,
+				email          : data.email,
+				restaurantName : data.restaurantName
 			}
 		});
 
-		return dispatch(getUser(response.data, data.username));
+		return dispatch(
+			getUser(
+				response.data,
+				response.data.newUser.username,
+				response.data.newUser.isAdmin,
+				response.data.newUser.restaurant_id,
+				data.restaurantName
+			)
+		);
 	};
 }
 
 export async function getSales(begDate, endDate) {
+	const restaurantId = window.localStorage.getItem('restaurantId');
 	const response = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/sales`,
 
 		data   : {
-			begDate : begDate,
-			endDate : endDate,
-			token   : myToken
+			begDate      : begDate,
+			endDate      : endDate,
+			token        : myToken,
+			restaurantId
 		}
 	});
 	return response.data;
@@ -102,11 +112,13 @@ export async function addSales(sales, date) {
 }
 
 export async function getSuppliers() {
+	const restaurantId = window.localStorage.getItem('restaurantId');
 	const response = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/suppliers`,
 		data   : {
-			token : myToken
+			token        : myToken,
+			restaurantId
 		}
 	});
 	return response.data;

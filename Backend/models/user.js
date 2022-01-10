@@ -44,7 +44,8 @@ class User {
 		firstName,
 		lastName,
 		email,
-		isAdmin
+		isAdmin,
+		restaurantName
 	}) {
 		const duplicateCheck = await db.query(
 			`SELECT username
@@ -57,6 +58,13 @@ class User {
 		}
 
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+		// ** insert restaurant name into restaurants table 1st
+		const restName = await db.query(
+			`INSERT INTO restaurants 
+		(name) VALUES ($1) RETURNING id`,
+			[ restaurantName ]
+		);
+		const restaurant_id = restName.rows[0].id;
 
 		const result = await db.query(
 			`INSERT INTO users 
@@ -65,13 +73,24 @@ class User {
                  first_name, 
                  last_name, 
                  email, 
-                 is_admin)
-                 VALUES ($1, $2, $3, $4, $5, $6)
+                 is_admin, 
+				 restaurant_id)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)
                  RETURNING username, first_name AS "firstName", 
-                    last_name AS "lastName", email, is_admin AS "isAdmin"`,
-			[ username, hashedPassword, firstName, lastName, email, isAdmin ]
+                    last_name AS "lastName", email, is_admin AS "isAdmin", restaurant_id`,
+			[
+				username,
+				hashedPassword,
+				firstName,
+				lastName,
+				email,
+				isAdmin,
+				restaurant_id
+			]
 		);
 		const user = result.rows[0];
+		user.isAdmin = false;
+		user.restaurant_id = restaurant_id;
 		return user;
 	}
 	static async deleteUser(username) {

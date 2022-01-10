@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { getProductsForInventory } from '../actions/actions';
 import { useDispatch } from 'react-redux';
 import { Box, Typography, Button, Tabs, Tab, Modal } from '@mui/material';
@@ -86,7 +86,6 @@ function NewInventoryForm({ toggle, date, setInv, toggleInvButtons }) {
 		setIsOpen((isOpen) => !isOpen);
 	};
 	const submitInventory = async () => {
-		
 		const res = await addInventory(invVals, date);
 		if (res.message) {
 			dispatch({

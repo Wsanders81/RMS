@@ -4,8 +4,9 @@ const router = new express.Router();
 const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth');
 const Supplier = require('../models/supplier');
 router.post('/', async function(req, res, next) {
+	const restaurant_id = req.body.restaurantId;
 	try {
-		const suppliers = await Supplier.getSuppliers();
+		const suppliers = await Supplier.getSuppliers(restaurant_id);
 		return res.json({ suppliers });
 	} catch (err) {
 		return next(err);

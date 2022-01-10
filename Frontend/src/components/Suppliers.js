@@ -1,5 +1,5 @@
 import '../styles/Suppliers.css';
-import { Box, Button, Modal, Paper, Typography } from '@mui/material';
+import { Button, Modal, Paper } from '@mui/material';
 import { getSuppliers, addSupplier } from '../actions/actions';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

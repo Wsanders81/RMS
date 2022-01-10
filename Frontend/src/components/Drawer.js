@@ -25,7 +25,7 @@ export default function TempDrawer({ toggleDrawer, drawerOpen }) {
 			onClick={toggleDrawer}
 			onKeyDown={toggleDrawer}
 		>
-			<List className="Drawer-items">
+			<List sx={{ paddingTop: '3rem' }} className="Drawer-items">
 				<ListItem onClick={() => handleClick('dashboard')} button>
 					Dashboard
 				</ListItem>
