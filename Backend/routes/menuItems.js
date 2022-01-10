@@ -4,8 +4,9 @@ const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth');
 const MenuItem = require('../models/menuItem');
 
 router.post('/',  async function(req, res, next) {
+	const restaurant_id = req.body.restaurantId
 	try {
-		const items = await MenuItem.getAll();
+		const items = await MenuItem.getAll(restaurant_id);
 		
 		return res.json({ items });
 	} catch (err) {

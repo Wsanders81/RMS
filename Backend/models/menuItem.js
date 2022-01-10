@@ -2,10 +2,13 @@ const db = require('../db');
 const MenuItemIngredient = require('../models/MenuItemIngredients');
 class MenuItem {
 	//** Get all menu items */
-	static async getAll() {
-		const menuItems = await db.query(`
-        SELECT * FROM menu_items; 
-        `);
+	static async getAll(restaurant_id) {
+		const menuItems = await db.query(
+			`
+        SELECT * FROM menu_items WHERE restaurant_id = $1; 
+        `,
+			[ restaurant_id ]
+		);
 
 		return menuItems.rows;
 	}

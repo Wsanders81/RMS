@@ -372,11 +372,13 @@ export async function deleteInventory(id) {
 }
 
 export async function getMenuItems() {
+	const restaurantId = window.localStorage.getItem('restaurantId')
 	const response = await axios({
 		method : 'post',
 		url    : `${BASE_URL}/menuItems`,
 		data   : {
-			token : myToken
+			token : myToken, 
+			restaurantId
 		}
 	});
 	let promises = [];
