@@ -98,7 +98,6 @@ export default function Inventories() {
 	};
 	const handleSelect = async (id) => {
 		const res = await getInventory(id);
-
 		setSelectedInv(res);
 		toggleDatePicker();
 		toggleInvButtons();

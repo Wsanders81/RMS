@@ -65,7 +65,7 @@ class User {
 			[ restaurantName ]
 		);
 		const restaurant_id = restName.rows[0].id;
-
+			
 		const result = await db.query(
 			`INSERT INTO users 
                 (username, 

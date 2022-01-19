@@ -1,4 +1,5 @@
 const db = require('../db');
+const { BadRequestError } = require('../expressError');
 
 class Supplier {
 	//** Get all suppliers */
@@ -22,14 +23,31 @@ class Supplier {
 	}
 
 	//** Add new supplier */
-	static async addSupplier(name, address, phone, email, notes) {
+	static async addSupplier(
+		name,
+		address,
+		phone,
+		email,
+		restaurant_id,
+		notes
+	) {
+		
+		const dupeCheck = await db.query(
+			`SELECT * FROM suppliers WHERE name = $1
+		`,
+			[ name ]
+		);
+		
+		if (dupeCheck.rows[0]) {
+			throw new BadRequestError('Duplicate Supplier');
+		}
 		const res = await db.query(
 			`
-        INSERT INTO suppliers(name, address, phone, email, notes)
+        INSERT INTO suppliers(name, address, phone, email, restaurant_id)
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING id, name, address, phone, email, notes
+        RETURNING id, name, address, phone, email, restaurant_id
         `,
-			[ name, address, phone, email, notes ]
+			[ name, address, phone, email, restaurant_id ]
 		);
 
 		return res.rows[0];

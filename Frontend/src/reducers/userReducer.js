@@ -8,14 +8,14 @@ export default function userReducer(state = {}, action) {
 		case GET_USER:
 			SetUserLocalStorage(
 				action.username,
-				action.token.token,
+				action.token,
 				action.isAdmin,
 				action.restaurantId,
 				action.restaurantName
 			);
 			return {
 				...state,
-				token          : action.token.token,
+				token          : action.token,
 				user           : action.username,
 				isAdmin        : action.isAdmin,
 				restaurantId   : action.restaurantId,

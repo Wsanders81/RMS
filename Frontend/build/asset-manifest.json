@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.4a7a2428.chunk.css",
-    "main.js": "/static/js/main.5f4cf175.chunk.js",
-    "main.js.map": "/static/js/main.5f4cf175.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.fc7fdb37.js",
-    "runtime-main.js.map": "/static/js/runtime-main.fc7fdb37.js.map",
+    "main.css": "/static/css/main.36d17c80.chunk.css",
+    "main.js": "/static/js/main.4a62a9d7.chunk.js",
+    "main.js.map": "/static/js/main.4a62a9d7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.84e20c87.js",
+    "runtime-main.js.map": "/static/js/runtime-main.84e20c87.js.map",
     "static/css/2.467999e3.chunk.css": "/static/css/2.467999e3.chunk.css",
-    "static/js/2.1e65f8d9.chunk.js": "/static/js/2.1e65f8d9.chunk.js",
-    "static/js/2.1e65f8d9.chunk.js.map": "/static/js/2.1e65f8d9.chunk.js.map",
-    "static/js/3.4d1b0af2.chunk.js": "/static/js/3.4d1b0af2.chunk.js",
-    "static/js/3.4d1b0af2.chunk.js.map": "/static/js/3.4d1b0af2.chunk.js.map",
+    "static/js/2.f7f48cc6.chunk.js": "/static/js/2.f7f48cc6.chunk.js",
+    "static/js/2.f7f48cc6.chunk.js.map": "/static/js/2.f7f48cc6.chunk.js.map",
+    "static/js/3.2fb1667d.chunk.js": "/static/js/3.2fb1667d.chunk.js",
+    "static/js/3.2fb1667d.chunk.js.map": "/static/js/3.2fb1667d.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.467999e3.chunk.css.map": "/static/css/2.467999e3.chunk.css.map",
-    "static/css/main.4a7a2428.chunk.css.map": "/static/css/main.4a7a2428.chunk.css.map",
-    "static/js/2.1e65f8d9.chunk.js.LICENSE.txt": "/static/js/2.1e65f8d9.chunk.js.LICENSE.txt",
+    "static/css/main.36d17c80.chunk.css.map": "/static/css/main.36d17c80.chunk.css.map",
+    "static/js/2.f7f48cc6.chunk.js.LICENSE.txt": "/static/js/2.f7f48cc6.chunk.js.LICENSE.txt",
     "static/media/Analytics team_Monochromatic.fabb1d7a.svg": "/static/media/Analytics team_Monochromatic.fabb1d7a.svg",
     "static/media/Startup_Two Color.e2cc6534.svg": "/static/media/Startup_Two Color.e2cc6534.svg",
     "static/media/Team building _Monochromatic.5925ddec.svg": "/static/media/Team building _Monochromatic.5925ddec.svg",
@@ -24,10 +24,10 @@
     "static/media/LandingPage.css": "/static/media/patrick-tomasso-GXXYkSwndP4-unsplash.0812674c.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.fc7fdb37.js",
+    "static/js/runtime-main.84e20c87.js",
     "static/css/2.467999e3.chunk.css",
-    "static/js/2.1e65f8d9.chunk.js",
-    "static/css/main.4a7a2428.chunk.css",
-    "static/js/main.5f4cf175.chunk.js"
+    "static/js/2.f7f48cc6.chunk.js",
+    "static/css/main.36d17c80.chunk.css",
+    "static/js/main.4a62a9d7.chunk.js"
   ]
 }

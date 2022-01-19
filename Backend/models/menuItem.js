@@ -38,12 +38,12 @@ class MenuItem {
 		const item = await db.query(
 			`
         INSERT INTO menu_items
-        (name, category_id, price)
+        (name, category_id, price, restaurant_id)
         VALUES
-        ($1, $2, $3)
+        ($1, $2, $3, $4)
         RETURNING id, name, category_id, price
         `,
-			[ data.name, data.category_id, data.price ]
+			[ data.name, data.category_id, data.price, data.restaurant_id ]
 		);
 		const itemId = item.rows[0].id;
 		const ingredients = await MenuItemIngredient.addIngredients(

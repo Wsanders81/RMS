@@ -1,6 +1,6 @@
 import UserDatePicker from './UserDatePicker';
 import { Box, Button, Modal } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { ALERT, SET_LOCATION } from '../actions/types';
@@ -74,11 +74,11 @@ export default function Sales() {
 	};
 	const handleSalesSubmit = async (e, category, sales, { begDate }) => {
 		const response = await addSales(sales, begDate);
-		if (response[0].data.sales.error) {
+		if (response[0].sales.error) {
 			dispatch({
 				type         : ALERT,
 				typeOfNotify : 'error',
-				message      : response[0].data.sales.error
+				message      : 'Sales already exist for that day'
 			});
 		}
 		else {
@@ -119,6 +119,7 @@ export default function Sales() {
 			<Box>
 				{daySales ? (
 					<SalesTable
+						
 						daySales={daySales}
 						totalSales={sales}
 						begDate={begDate.begDate}

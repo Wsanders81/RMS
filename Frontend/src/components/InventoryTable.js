@@ -9,7 +9,6 @@ export default function InventoryTable({
 	toggleInvButtons
 }) {
 	const user = useSelector((store) => store.userReducer);
-
 	const totals = {
 		food    : 0,
 		alcohol : 0,
@@ -23,6 +22,7 @@ export default function InventoryTable({
 		alcohol_sales,
 		na_bev_sales
 	} = inventory.inventory;
+	console.log(inventory)
 	const FoodPurchases = inventory.inventory.Purchases.Food.amount;
 	const AlcoholPurchases = inventory.inventory.Purchases.Alcohol.amount;
 	const BeerPurchases = inventory.inventory.Purchases.Beer.amount;

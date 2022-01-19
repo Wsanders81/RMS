@@ -145,6 +145,7 @@ export default function MenuItems() {
 			'aria-controls' : `simple-tabpanel-${index}`
 		};
 	}
+	console.log(menuItems);
 
 	return (
 		<div className="container-lg MenuItems">

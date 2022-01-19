@@ -2,8 +2,7 @@ const db = require('../db');
 
 class Sale {
 	//** GET sales within specified dates */
-	static async getSales({ begDate, endDate, restaurantId }) {
-		
+	static async getSales({ begDate, endDate, restaurant_id }) {
 		const res = await db.query(
 			`
         SELECT s.id, s.date, s.sales, c.category_name FROM sales AS s
@@ -13,7 +12,7 @@ class Sale {
         AND date <= $2
         AND restaurant_id = $3
         ORDER BY s.date, c.category_name`,
-			[ begDate, endDate, restaurantId ]
+			[ begDate, endDate, restaurant_id ]
 		);
 		if (!res) return 500;
 
@@ -23,13 +22,12 @@ class Sale {
 	//** Add sales */
 	static async addSales({ date, categoryId, sales }) {
 		//** check if sales already exist for that day */
-		const dateObject = {
-			begDate : date,
-			endDate : date
-		};
-		const check = await this.getSales(dateObject);
-
-		if (check.length > 1)
+		
+		const check = await db.query(`SELECT * FROM sales WHERE date = $1`, [
+			date
+		]);
+		
+		if (check.rows.length > 1)
 			return { error: 'Sales already exist for that day' };
 		const res = await db.query(
 			`
@@ -38,7 +36,7 @@ class Sale {
         RETURNING id, date, category_id, sales`,
 			[ date, categoryId, sales ]
 		);
-		// return res.rows[0];
+		
 		return res.rows[0];
 	}
 

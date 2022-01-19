@@ -3,12 +3,12 @@ const router = new express.Router();
 const Inventory = require('../models/inventory');
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin, ensureLoggedIn } = require('../middleware/auth');
-router.post('/', async function(req, res, next) {
+router.get('/:id', ensureLoggedIn, async function(req, res, next) {
 	try {
-		const inventory = await Inventory.getInventory(req.body.id);
+		const inventory = await Inventory.getInventory(req.params.id);
 		if (inventory === 'error')
 			throw new BadRequestError(
-				`Inventory not found with date ${req.body.id}`
+				`Inventory not found with date ${req.params.id}`
 			);
 		return res.status(200).json({ inventory });
 	} catch (err) {
@@ -16,15 +16,21 @@ router.post('/', async function(req, res, next) {
 	}
 });
 
-router.post('/all', async function(req, res, next) {
+router.get('/all/:begDate/:endDate/:id', async function(req, res, next) {
 	try {
-		const inventories = await Inventory.getAllInventories(req.body);
+		const inventoryObj = {
+			begDate       : req.params.begDate,
+			endDate       : req.params.endDate,
+			restaurant_id : req.params.id
+		};
+		const inventories = await Inventory.getAllInventories(inventoryObj);
 		if (inventories === 'error') {
 			throw new BadRequestError(
-				`No inventories found within the dates ${req.body
-					.begDate} - ${req.body.endDate}`
+				`No inventories found within the dates ${req.params
+					.begDate} - ${req.params.endDate}`
 			);
 		}
+
 		return res.json(inventories);
 	} catch (err) {
 		return next(err);
@@ -46,8 +52,9 @@ router.post('/add', async function(req, res, next) {
 	}
 });
 
-router.delete('/:id', async function(req, res, next) {
+router.delete('/:id', ensureAdmin, async function(req, res, next) {
 	try {
+		console.log(req.params.id);
 		const message = await Inventory.deleteInventory(req.params.id);
 
 		if (message === 'error')

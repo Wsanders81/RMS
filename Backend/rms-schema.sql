@@ -22,7 +22,8 @@ CREATE TABLE users (
     first_name TEXT NOT NULL, 
     last_name TEXT NOT NULL, 
     email TEXT NOT NULL, 
-    restaurant_id INTEGER REFERENCES restaurants, 
+    restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE, 
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 ); 
 
@@ -39,7 +40,8 @@ CREATE TABLE suppliers (
     phone VARCHAR(15) NOT NULL, 
     email TEXT NOT NULL 
         CHECK (position('@' IN email) > 1), 
-    restaurant_id INTEGER REFERENCES restaurants, 
+    restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE, 
     notes TEXT
 );
 
@@ -55,6 +57,7 @@ CREATE TABLE products (
     category_id INTEGER REFERENCES categories
         ON DELETE CASCADE, 
     restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE
 
 );
 
@@ -73,6 +76,7 @@ CREATE TABLE inventories (
     beg_beer FLOAT NOT NULL ,
     beg_na_bev FLOAT NOT NULL, 
     restaurant_id INTEGER REFERENCES restaurants 
+        ON DELETE CASCADE
 );
 
 -- This will hold the inventory count 
@@ -95,6 +99,7 @@ CREATE TABLE sales (
         ON DELETE CASCADE,
     sales FLOAT NOT NULL, 
     restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE
 ); 
 
 CREATE TABLE menu_items (
@@ -104,6 +109,7 @@ CREATE TABLE menu_items (
         ON DELETE CASCADE,
     price FLOAT, 
     restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE
 );
 
 CREATE TABLE menu_item_ingredients (
@@ -125,6 +131,7 @@ CREATE TABLE orders (
         ON DELETE CASCADE, 
     date DATE NOT NULL DEFAULT CURRENT_DATE, 
     restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE
 ); 
 
 CREATE TABLE purchases (
@@ -135,6 +142,7 @@ CREATE TABLE purchases (
         ON DELETE CASCADE,
     amount FLOAT NOT NULL, 
     restaurant_id INTEGER REFERENCES restaurants
+        ON DELETE CASCADE
 );
 
  

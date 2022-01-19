@@ -3,45 +3,46 @@ const router = new express.Router();
 const { ensureLoggedIn, ensureAdmin } = require('../middleware/auth');
 const MenuItem = require('../models/menuItem');
 
-router.post('/',  async function(req, res, next) {
-	const restaurant_id = req.body.restaurantId
+router.get('/:id', ensureLoggedIn, async function(req, res, next) {
+	const restaurant_id = req.params.id;
 	try {
 		const items = await MenuItem.getAll(restaurant_id);
-		
+
 		return res.json({ items });
 	} catch (err) {
 		return next(err);
 	}
 });
-router.post('/ingredients',  async function(req, res, next) {
+router.get('/ingredients/:id', ensureLoggedIn, async function(req, res, next) {
 	try {
-		const items = await MenuItem.getMenuItemIngredients(req.body.id);
-		
+		const items = await MenuItem.getMenuItemIngredients(req.params.id);
+		console.log(items, 'FROM MENU INGREDIENTS');
 		return res.json({ items });
 	} catch (err) {
 		return next(err);
 	}
 });
 
-router.post('/new',  async function(req, res, next) {
+router.post('/new', ensureAdmin, async function(req, res, next) {
 	try {
-		const item = await MenuItem.createItem(req.body.item);
+		console.log(req.body);
+		const item = await MenuItem.createItem(req.body);
 		return res.json({ item });
 	} catch (err) {
 		return next(err);
 	}
 });
 
-router.delete('/:id', async function(req, res, next){
-    try {
-        const deleteItem = await MenuItem.deleteMenuItem(req.params.id)
-        if(deleteItem === 'success') {
-            return res.json({message: "Item has been deleted"})
-        }
-        else return res.json({message: "Error, item does not exist"})
-    } catch(err) {
-        return next(err)
-    }
-})
+router.delete('/:id', ensureAdmin, async function(req, res, next) {
+	try {
+		const deleteItem = await MenuItem.deleteMenuItem(req.params.id);
+		if (deleteItem === 'success') {
+			return res.json({ message: 'Item has been deleted' });
+		}
+		else return res.json({ message: 'Error, item does not exist' });
+	} catch (err) {
+		return next(err);
+	}
+});
 
 module.exports = router;

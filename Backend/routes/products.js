@@ -11,18 +11,21 @@ const router = new express.Router();
 
 //** Create new product */
 router.post('/', async function(req, res, next) {
-	const {
-		name,
-		unit,
-		supplier_id,
-		category_id
-	} = req.body.data;
-    const price = parseInt(req.body.data.price)
-    const quantity_per_unit = parseInt(req.body.data.quantity_per_unit)
-	
+	const { name, unit, supplier_id, category_id } = req.body;
+	console.log('*********');
+	console.log(req.body);
+	const price = parseInt(req.body.price);
+	const quantity_per_unit = parseInt(req.body.quantity_per_unit);
+
 	try {
-		
-		const product = await Product.create(name, unit, quantity_per_unit, price, supplier_id, category_id);
+		const product = await Product.create(
+			name,
+			unit,
+			quantity_per_unit,
+			price,
+			supplier_id,
+			category_id
+		);
 		return res.status(201).json({ product });
 	} catch (err) {
 		return next(err);
@@ -30,7 +33,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //** Get all products */
-router.post('/all',  async function(req, res, next) {
+router.get('/all', async function(req, res, next) {
 	try {
 		const products = await Product.getAllProducts();
 		return res.status(200).json({ products });
@@ -39,7 +42,7 @@ router.post('/all',  async function(req, res, next) {
 	}
 });
 
-router.post('/:supplier_id', async function(req, res, next) {
+router.get('/:supplier_id', ensureLoggedIn, async function(req, res, next) {
 	try {
 		const products = await Product.getProductsBySupplier(
 			req.params.supplier_id

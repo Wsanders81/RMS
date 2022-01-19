@@ -3,9 +3,13 @@ const express = require('express');
 const router = new express.Router();
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin, ensureLoggedIn } = require('../middleware/auth');
-router.post('/', async function(req, res, next) {
+router.get('/:begDate/:endDate/:restaurant_id', ensureLoggedIn, async function(
+	req,
+	res,
+	next
+) {
 	try {
-		const sales = await Sales.getSales(req.body);
+		const sales = await Sales.getSales(req.params);
 		if (sales === 500) {
 			throw new BadRequestError('Invalid request');
 		}
@@ -15,16 +19,17 @@ router.post('/', async function(req, res, next) {
 	}
 });
 
-router.post('/add', async function(req, res, next) {
+router.post('/add', ensureAdmin, async function(req, res, next) {
 	try {
 		const sales = await Sales.addSales(req.body);
+		
 		return res.json({ sales });
 	} catch (err) {
 		return next(err);
 	}
 });
 
-router.delete('/:id', async function(req, res, next) {
+router.delete('/:id',ensureAdmin,  async function(req, res, next) {
 	try {
 		const message = await Sales.removeSales(req.params.id);
 		if (message === 'error') {

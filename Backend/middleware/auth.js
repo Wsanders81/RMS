@@ -9,10 +9,15 @@ const { UnauthorizedError } = require('../expressError');
  *
  * It's not an error if no token was provided or if the token is not valid.
  */
+var user;
 function authenticateJWT(req, res, next) {
 	try {
-			const token = req.body.token
-			req.user = jwt.verify(token, SECRET_KEY);
+		const authHeader = req.headers && req.headers.authorization;
+		if (authHeader) {
+			const token = authHeader.replace(/^[Bb]earer /, '').trim();
+			res.locals.user = jwt.verify(token, SECRET_KEY);
+		}
+
 		return next();
 	} catch (err) {
 		return next();
@@ -25,15 +30,13 @@ function authenticateJWT(req, res, next) {
  */
 
 function ensureLoggedIn(req, res, next) {
-	
 	try {
-		if (!req.user) throw new UnauthorizedError();
+		if (!res.locals.user) throw new UnauthorizedError();
 		return next();
 	} catch (err) {
 		return next(err);
 	}
 }
-
 /** Middleware to use when they be logged in as an admin user.
  *
  *  If not, raises Unauthorized.
@@ -41,28 +44,7 @@ function ensureLoggedIn(req, res, next) {
 
 function ensureAdmin(req, res, next) {
 	try {
-		
-		if (!req.user || !req.user.isAdmin) {
-			throw new UnauthorizedError();
-		}
-		return next();
-	} catch (err) {
-		return next(err);
-	}
-}
-
-/** Middleware to use when they must provide a valid token & be user matching
- *  username provided as route param.
- *
- *  If not, raises Unauthorized.
- */
-
-function ensureCorrectUserOrAdmin(req, res, next) {
-	try {
-		const user = req.user;
-		if (
-			!(user && (user.isAdmin || user.username === req.params.username))
-		) {
+		if (!res.locals.user || !res.locals.user.isAdmin) {
 			throw new UnauthorizedError();
 		}
 		return next();
@@ -74,6 +56,5 @@ function ensureCorrectUserOrAdmin(req, res, next) {
 module.exports = {
 	authenticateJWT,
 	ensureLoggedIn,
-	ensureAdmin,
-	ensureCorrectUserOrAdmin
+	ensureAdmin
 };
