@@ -28,16 +28,14 @@ class Supplier {
 		address,
 		phone,
 		email,
-		restaurant_id,
-		notes
+		restaurant_id
 	) {
-		
 		const dupeCheck = await db.query(
 			`SELECT * FROM suppliers WHERE name = $1
 		`,
 			[ name ]
 		);
-		
+
 		if (dupeCheck.rows[0]) {
 			throw new BadRequestError('Duplicate Supplier');
 		}
@@ -49,7 +47,6 @@ class Supplier {
         `,
 			[ name, address, phone, email, restaurant_id ]
 		);
-
 		return res.rows[0];
 	}
 	//** Delete supplier with given id */

@@ -16,7 +16,7 @@ router.get('/:id', ensureLoggedIn, async function(req, res, next) {
 	}
 });
 
-router.get('/all/:begDate/:endDate/:id', async function(req, res, next) {
+router.get('/all/:begDate/:endDate/:id',ensureLoggedIn , async function(req, res, next) {
 	try {
 		const inventoryObj = {
 			begDate       : req.params.begDate,
@@ -54,7 +54,6 @@ router.post('/add', async function(req, res, next) {
 
 router.delete('/:id', ensureAdmin, async function(req, res, next) {
 	try {
-		console.log(req.params.id);
 		const message = await Inventory.deleteInventory(req.params.id);
 
 		if (message === 'error')

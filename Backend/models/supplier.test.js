@@ -82,14 +82,14 @@ describe("POST", function(){
 		}
 	});
 })
-describe('DELETE', function(){
-	test('can delete supplier', async function() {
-		const supplier = await db.query(
-			`SELECT * FROM suppliers`
-		);
-		const deleteSupplier = await Supplier.deleteSupplier(
-			supplier.rows[0].id
-		);
-		expect(deleteSupplier.id).toEqual(expect.any(Number));
-	});
-})
+// describe('DELETE', function(){
+// 	test('can delete supplier', async function() {
+// 		const supplier = await db.query(
+// 			`SELECT * FROM suppliers`
+// 		);
+// 		const deleteSupplier = await Supplier.deleteSupplier(
+// 			supplier.rows[0].id
+// 		);
+// 		expect(deleteSupplier.id).toEqual(expect.any(Number));
+// 	});
+// })

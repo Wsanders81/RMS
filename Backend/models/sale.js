@@ -20,7 +20,7 @@ class Sale {
 	}
 
 	//** Add sales */
-	static async addSales({ date, categoryId, sales }) {
+	static async addSales({ date, categoryId, sales, restaurant_id }) {
 		//** check if sales already exist for that day */
 		
 		const check = await db.query(`SELECT * FROM sales WHERE date = $1`, [
@@ -31,10 +31,10 @@ class Sale {
 			return { error: 'Sales already exist for that day' };
 		const res = await db.query(
 			`
-        INSERT INTO sales(date, category_id, sales)
-        VALUES ($1, $2, $3)
+        INSERT INTO sales(date, category_id, sales, restaurant_id)
+        VALUES ($1, $2, $3, $4)
         RETURNING id, date, category_id, sales`,
-			[ date, categoryId, sales ]
+			[ date, categoryId, sales, restaurant_id ]
 		);
 		
 		return res.rows[0];

@@ -47,6 +47,8 @@ class User {
 		isAdmin,
 		restaurantName
 	}) {
+		
+
 		const duplicateCheck = await db.query(
 			`SELECT username
             FROM users 
