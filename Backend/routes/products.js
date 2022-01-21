@@ -10,10 +10,9 @@ const createProductSchema = require('../schemas/productCreate.json');
 const router = new express.Router();
 
 //** Create new product */
-router.post('/', async function(req, res, next) {
+router.post('/', ensureAdmin,  async function(req, res, next) {
 	const { name, unit, supplier_id, category_id } = req.body;
-	console.log('*********');
-	console.log(req.body);
+	
 	const price = parseInt(req.body.price);
 	const quantity_per_unit = parseInt(req.body.quantity_per_unit);
 
@@ -33,7 +32,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //** Get all products */
-router.get('/all', async function(req, res, next) {
+router.get('/all',ensureLoggedIn, async function(req, res, next) {
 	try {
 		const products = await Product.getAllProducts();
 		return res.status(200).json({ products });
@@ -54,7 +53,7 @@ router.get('/:supplier_id', ensureLoggedIn, async function(req, res, next) {
 });
 
 //** Delete product */
-router.delete('/:productId', async function(req, res, next) {
+router.delete('/:productId',ensureAdmin,  async function(req, res, next) {
 	try {
 		const message = await Product.deleteProduct(req.params.productId);
 		if (message === 'error') {

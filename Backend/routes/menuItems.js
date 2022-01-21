@@ -16,7 +16,6 @@ router.get('/:id', ensureLoggedIn, async function(req, res, next) {
 router.get('/ingredients/:id', ensureLoggedIn, async function(req, res, next) {
 	try {
 		const items = await MenuItem.getMenuItemIngredients(req.params.id);
-		console.log(items, 'FROM MENU INGREDIENTS');
 		return res.json({ items });
 	} catch (err) {
 		return next(err);
@@ -25,7 +24,6 @@ router.get('/ingredients/:id', ensureLoggedIn, async function(req, res, next) {
 
 router.post('/new', ensureAdmin, async function(req, res, next) {
 	try {
-		console.log(req.body);
 		const item = await MenuItem.createItem(req.body);
 		return res.json({ item });
 	} catch (err) {

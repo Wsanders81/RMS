@@ -6,7 +6,7 @@ const Supplier = require('../models/supplier');
 router.get('/:id', ensureLoggedIn, async function(req, res, next) {
 	try {
 		const suppliers = await Supplier.getSuppliers(req.params.id);
-		
+
 		return res.json({ suppliers });
 	} catch (err) {
 		return next(err);
@@ -25,7 +25,6 @@ router.get('/:id', ensureLoggedIn, async function(req, res, next) {
 router.post('/new', ensureAdmin, async function(req, res, next) {
 	const { name, address, phone, email, notes } = req.body.data;
 	const restaurantId = req.body.restaurantId;
-	
 	try {
 		const newSupplier = await Supplier.addSupplier(
 			name,
@@ -45,9 +44,7 @@ router.post('/new', ensureAdmin, async function(req, res, next) {
 router.delete('/:id', ensureAdmin, async function(req, res, next) {
 	try {
 		const response = await Supplier.deleteSupplier(req.params.id);
-		console.log("*********")
-		console.log(req.params.id)
-		console.log(response)
+		
 		return res.json({ response });
 	} catch (err) {
 		return next(err);

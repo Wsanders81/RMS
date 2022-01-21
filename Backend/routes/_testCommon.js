@@ -15,10 +15,11 @@ const { createToken } = require('../helpers/tokens');
 async function commonBeforeAll() {
 	await db.query('DELETE FROM users');
 	await db.query('DELETE FROM inventories');
-	// await db.query('DELETE FROM menu_items');
-	// await db.query('DELETE FROM products');
-	// await db.query('DELETE FROM sales');
-	// await db.query('DELETE FROM suppliers');
+	await db.query('DELETE FROM menu_items');
+	await db.query('DELETE FROM categories');
+	await db.query('DELETE FROM purchases');
+	await db.query('DELETE FROM suppliers');
+
 	const rest = await db.query(`select * from restaurants`);
 	await db.query(
 		`
@@ -38,7 +39,7 @@ async function commonBeforeAll() {
 			rest.rows[0].id
 		]
 	);
-	await db.query(
+	const inventory = await db.query(
 		`INSERT INTO inventories(date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev, restaurant_id )
     VALUES(
         '2022-01-18', 
@@ -51,9 +52,20 @@ async function commonBeforeAll() {
         500,
         250,
         $1
-    )`,
+    ) RETURNING id`,
 		[ rest.rows[0].id ]
 	);
+	const inventory_id = inventory.rows[0].id;
+	const category = await db.query(
+		`INSERT INTO categories(category_name) VALUES('beer') RETURNING id`
+	);
+	const category_id = category.rows[0].id;
+	await db.query(
+		`INSERT INTO purchases(inventory_id, category_id, restaurant_id, amount) VALUES($1, $2, 1, 1) RETURNING *`,
+		[ inventory_id, category_id ]
+	);
+	await db.query(`INSERT INTO sales(date, category_id, sales, restaurant_id)
+	VALUES('2022-01-12', ${category_id}, 1, 1)`);
 }
 
 async function commonBeforeEach() {

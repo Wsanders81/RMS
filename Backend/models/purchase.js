@@ -15,13 +15,16 @@ class Purchase {
 		return res.rows[0];
 	}
 
-    //** Get purchases with Inventory ID */
-    static async getPurchases(id){
-        const res = await db.query(`
+	//** Get purchases with Inventory ID */
+	static async getPurchases(id) {
+		const res = await db.query(
+			`
         SELECT * FROM purchases
-        WHERE inventory_id = $1`, [id])
-        return res.rows
-    }
+        WHERE inventory_id = $1`,
+			[ id ]
+		);
+		return res.rows;
+	}
 }
 
 module.exports = Purchase;

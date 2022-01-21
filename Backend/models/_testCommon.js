@@ -30,7 +30,7 @@ async function commonBeforeAll() {
 		]
 	);
 
-	await db.query(
+	const inventory = await db.query(
 		`INSERT INTO inventories(date, food_sales, alcohol_sales, beer_sales, na_bev_sales, beg_food, beg_alcohol, beg_beer, beg_na_bev, restaurant_id )
     VALUES(
         '2022-01-18', 
@@ -43,10 +43,11 @@ async function commonBeforeAll() {
         500,
         250,
         $1
-    )`,
+    ) RETURNING id`,
 		[ rest.rows[0].id ]
 	);
-
+	
+	
 	
 }
 

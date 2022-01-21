@@ -141,7 +141,6 @@ class Inventory {
 
 	//** Delete inventory */
 	static async deleteInventory(id) {
-		console.log(id, "INVENTORY ID DELETE MODEL")
 		const res = await db.query(
 			`
         DELETE FROM inventories WHERE id = $1

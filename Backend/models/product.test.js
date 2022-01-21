@@ -1,4 +1,5 @@
 const db = require('../db');
+
 const app = require('../app');
 const Product = require('../models/product');
 const Supplier = require('../models/supplier');

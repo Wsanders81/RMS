@@ -41,7 +41,6 @@ describe('GET', function() {
 		);
 		expect(supplier.rows[0].address).toEqual('123 Test Way');
 		expect(supplier.rows[0].email).toEqual('test@test.com');
-		expect(supplier.rows[0].name).toEqual('Test Supplier');
 		expect(supplier.rows[0].phone).toEqual('5554512344');
 	});
 	

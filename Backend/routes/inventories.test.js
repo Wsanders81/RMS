@@ -61,7 +61,7 @@ describe('GET', function() {
 describe('POST', function() {
 	test('Can add new inventory', async function() {
 		const supplier = await Supplier.addSupplier(
-			'Tester Supplier',
+			'Fake Supplier',
 			'123 abcdefg ast',
 			1234567890,
 			'blah@blah.com',
@@ -217,6 +217,8 @@ describe('DELETE', function() {
 			.delete(`/inventories/${resp.body.inventory.id}`)
 			.set('authorization', `Bearer ${adminToken}`);
 		expect(deleteAdmin.statusCode).toEqual(201);
-		expect(deleteAdmin.body.message).toEqual("Inventory successfully deleted");
+		expect(deleteAdmin.body.message).toEqual(
+			'Inventory successfully deleted'
+		);
 	});
 });
